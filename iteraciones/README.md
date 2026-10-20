@@ -57,7 +57,7 @@ iteraciones/
 - Diagrama de circuito en imagen.
 
 ### Versión 3 – Versión Final
-Pendiente (ver `Iteración 3 - Versión Final`).
+Pendiente (ver `iteraciones/iteracion_3/`).
 
 ---
 

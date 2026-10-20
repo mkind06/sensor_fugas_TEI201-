@@ -17,11 +17,11 @@ El modelo `ensamble_componentes.step` incluye la caja con los componentes intern
 ## Carpetas / archivos
 | Archivo | Contenido |
 |---|---|
-| `encapsulado/ensamble_componentes.step` | Modelo 3D con componentes (para mostrar) |
-| `encapsulado/caja_base.step`, `caja_tapa.step` | Piezas separadas |
-| `encapsulado/caja_impresion.3mf` / `.stl` | Archivos para imprimir |
-| `encapsulado/caja_planos.dxf` | Planos acotados |
-| `renders/` | Imágenes (ver `Renders de Alta Calidad`) |
+| `diseno_3d/fusion360/ensamble_componentes.step` | Modelo 3D con componentes (para mostrar) |
+| `diseno_3d/fusion360/caja_base.step`, `caja_tapa.step` | Piezas separadas |
+| `diseno_3d/fusion360/caja_impresion.3mf` / `.stl` | Archivos para imprimir |
+| `diseno_3d/planos/caja_planos.dxf` | Planos acotados |
+| `renders/` | Imágenes (ver `diseno_3d/renders/`) |
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## Archivos Principales
 
-### `firmware/PruebaSensor/PruebaSensor.ino`
+### `software/src/PruebaSensor/PruebaSensor.ino`
 Archivo único del proyecto (equivale al `main.ino` de la plantilla). Está escrito para el núcleo Arduino-ESP32 y **no usa librerías externas**.
 
 **Estructura:**
@@ -68,4 +68,4 @@ Q1: 1.48 | Q2: 0.00 L/min | Dif: 100.0 % | Tot1: 1276 | Tot2: 996 | Razon T2/T1:
 | `Razon T2/T1` | Calibración relativa: con la llave cerrada debe ser ≈ 0,955 |
 
 ### Prueba de ruido
-Con la bomba apagada, `Tot1` y `Tot2` no deben aumentar. Si aumentan, la bomba está compartiendo tierra con el PC (ver `Hardware - Documentación`).
+Con la bomba apagada, `Tot1` y `Tot2` no deben aumentar. Si aumentan, la bomba está compartiendo tierra con el PC (ver `hardware/`).

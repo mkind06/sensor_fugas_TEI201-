@@ -3,7 +3,7 @@
 ## Contenido
 
 ### Diagramas de Flujo
-El diagrama de flujo del programa está en `Software - Documentación` (sección *Arquitectura del Software*). Pendiente: exportarlo como imagen (draw.io → PNG).
+El diagrama de flujo del programa está en `software/` (sección *Arquitectura del Software*). Pendiente: exportarlo como imagen (draw.io → PNG).
 
 ### Documentación de Funciones
 
@@ -42,9 +42,9 @@ luces(false, true, false);   // posible fuga: solo amarillo
 ---
 
 ## Manual de Instalación
-1. Instalar Arduino IDE y el soporte para ESP32 (ver `Software - Documentación`).
+1. Instalar Arduino IDE y el soporte para ESP32 (ver `software/`).
 2. Placa **ESP32S3 Dev Module**, **USB CDC On Boot: Enabled**.
-3. Abrir `firmware/PruebaSensor/PruebaSensor.ino`, compilar y subir.
+3. Abrir `software/src/PruebaSensor/PruebaSensor.ino`, compilar y subir.
 4. Abrir Monitor Serie a 115200.
 
 ---

@@ -33,7 +33,7 @@
    Bomba 3–6 V ── cargador USB independiente (sin conexión eléctrica con la ESP32)
 ```
 
-Las conexiones exactas en cada protoboard están en `Hardware - Documentación`.
+Las conexiones exactas en cada protoboard están en `hardware/`.
 
 ---
 

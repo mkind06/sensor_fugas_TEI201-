@@ -5,13 +5,13 @@ Documentación técnica del hardware del detector de fugas.
 
 ### 📁 Carpetas
 #### `esquemas/`
-Diagramas del circuito (ver `Esquemas de Circuito`).
+Diagramas del circuito (ver `hardware/esquemas/`).
 
 #### `bom/`
-Lista de materiales (ver `Bill of Materials (BOM)`).
+Lista de materiales (ver `hardware/bom/`).
 
 #### `fotos/`
-Fotografías del prototipo (ver `Fotografías del Prototipo`).
+Fotografías del prototipo (ver `hardware/fotos/`).
 
 ---
 
@@ -62,7 +62,7 @@ Fotografías del prototipo (ver `Fotografías del Prototipo`).
 
 4. Unir las tierras de ambas protoboards y de la ESP32 (tierra común).
 5. Conectar la ESP32 por USB y la bomba a **su propio cargador**.
-6. Subir el firmware y verificar en el Monitor Serie (ver `Documentación de Software`).
+6. Subir el firmware y verificar en el Monitor Serie (ver `software/docs/`).
 
 ### Precauciones
 - ⚠️ **No alimentar la bomba desde el mismo PC que la ESP32:** el motor mete ruido por la tierra USB (se midieron ~1300 pulsos/s falsos sin agua).

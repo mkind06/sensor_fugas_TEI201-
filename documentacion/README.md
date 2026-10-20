@@ -10,14 +10,14 @@ Documentación del **Detector de fugas con dos sensores de flujo para riego agr�
 ### Avance #2 (actual)
 | Requisito | Estado | Dónde |
 |---|---|---|
-| Sensor capturando datos en tiempo real | ✅ | `Testing y Validación` |
-| Actuador respondiendo (LED) | ✅ | `Hardware - Documentación` |
+| Sensor capturando datos en tiempo real | ✅ | `testing/` |
+| Actuador respondiendo (LED) | ✅ | `hardware/` |
 | Conectividad WiFi/Bluetooth | ❌ Pendiente | — |
 | Estabilidad ≥ 5 min | ⚠️ Por medir | — |
-| Modelo 3D con justificación | ✅ | `Diseño 3D - Documentación` |
-| Código comentado | ✅ | `firmware/PruebaSensor/PruebaSensor.ino` |
-| Diagrama de circuito | ⚠️ En texto | `Esquemas de Circuito` |
-| Registro de iteraciones | ✅ | `Historial de Iteraciones` |
+| Modelo 3D con justificación | ✅ | `diseno_3d/` |
+| Código comentado | ✅ | `software/src/PruebaSensor/PruebaSensor.ino` |
+| Diagrama de circuito | ⚠️ En texto | `hardware/esquemas/` |
+| Registro de iteraciones | ✅ | `iteraciones/` |
 
 ### Preparación de la demo (Avance #2)
 - Duración: **5–7 min** + 2 de feedback; participan todos.
@@ -29,8 +29,8 @@ Documentación del **Detector de fugas con dos sensores de flujo para riego agr�
 ---
 
 ## Documentos Principales (Avance #3)
-1. **Reporte final** – `reporte_final_v3.pdf` (máx. 15 páginas). Ver `Reporte Final del Proyecto`.
-2. **Presentación final** – `presentacion_avance3.pdf/.pptx` (10 min). Ver `Presentación Final`.
+1. **Reporte final** – `reporte_final_v3.pdf` (máx. 15 páginas). Ver `documentacion/reporte_final/`.
+2. **Presentación final** – `presentacion_avance3.pdf/.pptx` (10 min). Ver `documentacion/presentacion/`.
 
 ---
 
@@ -39,7 +39,7 @@ Documentación del **Detector de fugas con dos sensores de flujo para riego agr�
 ### Documentos
 - [ ] Reporte final PDF
 - [ ] Presentación PDF/PPTX
-- [ ] Manual de usuario (base en `Documentación de Software`)
+- [ ] Manual de usuario (base en `software/docs/`)
 
 ### Contenido del Reporte
 - [x] Contexto y problemática ODS (README)

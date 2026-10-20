@@ -26,4 +26,4 @@
 ## Nomenclatura
 - Numerar según orden: `01_`, `02_`, etc.
 - Incluir versión si hay varias: `v2_01_vista_general.jpg`.
-- Guardar en `docs/fotos/`.
+- Guardar en `hardware/fotos/`.
