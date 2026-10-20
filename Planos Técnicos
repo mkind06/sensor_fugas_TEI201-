@@ -1,86 +1,59 @@
 # Planos Técnicos
 
-## Planos Requeridos
+## Planos disponibles
+- `encapsulado/caja_planos.dxf` – planos acotados de la caja (base y tapa).
+- `plano_conjunto_v2.pdf` – ⏳ pendiente: exportar el DXF a PDF con cajetín.
 
 ### 1. Plano de Conjunto
-`plano_conjunto_v3.pdf`
-
-Incluir:
-- Vistas principales (frontal, lateral, superior)
-- Escala apropiada
-- Cotas principales externas
-- Tabla de piezas
+Debe incluir:
+- Vistas frontal, superior, lateral derecha e isométrica.
+- Cotas exteriores: **120 × 85 × 43 mm**.
+- Tabla de piezas: base, tapa, ESP32-S3, 2 protoboards, 3 LED + portaLED, 2 prensaestopas PG7, burlete, 4 tornillos M3.
 
 ### 2. Planos de Detalle
-Para cada componente crítico del encapsulado:
-- Cotas completas
-- Tolerancias importantes
-- Notas de fabricación
+**Base:**
+- Interior útil 115 × 80 × 37 mm, paredes 2,5 mm.
+- 4 postes de 5 mm para la ESP32.
+- Ventana USB-C 12 × 7 mm alineada con el conector.
+- 2 agujeros para prensaestopas PG7.
+
+**Tapa:**
+- Espesor 3 mm.
+- 3 agujeros de 5 mm para portaLED (verde, amarillo, rojo).
+- 4 agujeros para tornillos M3.
+- Labio con alojamiento para burlete de 2 mm.
 
 ---
 
-## Estándares de Planos
-
-### Vistas Ortogonales Requeridas
-- Vista Frontal
-- Vista Superior
-- Vista Lateral Derecha
-- Vista Isométrica (referencia)
-
-### Cortes
-- Corte A-A: Sección transversal mostrando interior
-- Corte B-B: (si es necesario para claridad)
+## Cortes
+- **Corte A-A:** sección transversal mostrando la ESP32 sobre sus postes, las protoboards al fondo y el espacio hacia la tapa.
 
 ---
 
 ## Formato de Planos
+**Tamaño de hoja:** A4 o A3
+**Escala:** 1:1 (la caja cabe en A4 a 1:1)
+**Unidades:** mm
 
-**Tamaño de hoja:** A4 o A3  
-**Orientación:** Según convenga  
-**Escala:** 1:1, 1:2, o según sea necesario  
-**Unidades:** Milímetros (mm)
-
-### Información en Cajetín
-- Título del proyecto
-- Nombre de la pieza/ensamble
-- Escala
-- Material
-- Fecha
-- Versión
-- Integrantes del equipo
+### Cajetín
+- Proyecto: Detector de fugas para riego agrícola – TEI201
+- Pieza: Caja base / Caja tapa / Conjunto
+- Escala: 1:1
+- Material: PETG
+- Fecha: [completar]
+- Versión: v1
+- Integrantes: [completar]
 
 ---
 
-## Acotación
-
-### Reglas Generales
-- Cotas en milímetros sin unidad
-- Líneas de cota finas
-- Texto legible (mín. 2.5mm de altura)
-- Cotas críticas resaltadas
-
-### Tolerancias
-Indicar tolerancias para:
-- Orificios de tornillos: ±0.1mm
-- Encajes: +0.2mm / +0.0mm
-- Dimensiones generales: ±0.5mm
+## Tolerancias
+- Agujeros de tornillos M3: ±0,1 mm
+- Ventana USB-C y agujeros de LED: +0,2 / +0,0 mm
+- Dimensiones generales: ±0,5 mm
 
 ---
 
-## Exportación desde Fusion 360
-
-```
-Opción 1: Drawing (Plano tradicional)
-1. Create Drawing
-2. Configurar vistas y cotas
-3. Export como PDF
-
-Opción 2: Export directo
-File > Export > Formato PDF/DWG
-```
-
----
-
-## Archivos a Entregar
-
-- `plano_conjunto_v3.pdf` - Plano principal
+## Exportación desde AutoCAD
+1. Abrir `caja_planos.dxf`.
+2. Configurar presentación (layout) A4 con cajetín.
+3. *Trazar → DWG To PDF* → guardar como `plano_conjunto_v2.pdf`.

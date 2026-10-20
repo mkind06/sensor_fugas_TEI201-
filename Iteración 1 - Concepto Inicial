@@ -1,107 +1,105 @@
 # Iteración 1 - Concepto Inicial
 
 ## Información General
-
-**Fecha:** [XX/XX/2025]  
-**Versión:** v1.0  
-**Estado:** Prototipo alpha - Prueba de concepto  
-**Avance asociado:** Planificación inicial / Avance #1
+**Fecha:** [completar]
+**Versión:** v1.0
+**Estado:** Prueba de concepto en protoboard
+**Avance asociado:** Avance #1 / inicio del Avance #2
 
 ---
 
 ## Descripción
-
-Primera versión del prototipo, enfocada en validar la factibilidad técnica del concepto.
+Primer montaje del detector: dos sensores de flujo en serie con una llave de paso entre ellos, para comprobar que comparar caudal de entrada y salida permite detectar una fuga.
 
 **Objetivo de esta iteración:**
-- Probar conexión de sensores básicos
-- Validar comunicación con microcontrolador
-- Demostrar concepto de actuación
-- Circuito básico en protoboard
+- Leer los pulsos de dos FS400A con la ESP32-S3.
+- Convertir pulsos a caudal.
+- Encender LED según la diferencia entre sensores.
+- Armar el circuito hidráulico: bomba → sensor 1 → llave → sensor 2 → recipiente.
 
 ---
 
 ## Componentes Utilizados
 
 ### Hardware
-- Microcontrolador: [Modelo]
-- Sensores:
-  - [Sensor 1]
-  - [Sensor 2]
-- Actuadores:
-  - [Actuador 1]
-- Otros: [Lista]
+- Microcontrolador: ESP32-S3 Super Mini
+- Sensores: 2 × FS400A (1″, 1–60 L/min)
+- Actuadores: 3 LED (verde, amarillo, rojo) con 330 Ω
+- Otros: divisores 10k/20k, bomba sumergible USB, llave de paso, mangueras, 2 mini protoboards
 
 ### Software
-- IDE: Arduino IDE
-- Librerías: [Lista]
-- Versión código: v1.0
+- IDE: Arduino IDE 1.8.19
+- Librerías: ninguna externa
+- Versión código: v1.0 (conteo de pulsos sin filtro, ventana de 3 s)
 
 ---
 
 ## Fotos del Prototipo
-
-Incluir en esta carpeta:
-- `v1_circuito_protoboard.jpg`
-- `v1_vista_general.jpg`
-- `v1_detalle_conexiones.jpg`
+- `v1_circuito_protoboard.jpg` – pendiente
+- `v1_vista_general.jpg` – pendiente
 
 ---
 
 ## Resultados de Testing Inicial
 
 ### Funcionalidad Lograda
-✅ [Función 1]  
-✅ [Función 2]  
-❌ [Función 3 - no funcionó]
+✅ Lectura de pulsos de ambos sensores
+✅ Circuito hidráulico armado
+❌ LED: el rojo encendía con la salida apagada
+❌ Lecturas confiables: pulsos falsos y caudales irreales
 
 ### Problemas Identificados
 
-1. **Problema 1:**
-   - Descripción: [Detalles]
-   - Causa probable: [Análisis]
-   - Solución propuesta: [Plan]
+1. **LED rojo encendido con la salida apagada**
+   - Causa: cable de GND conectado a 3V3 y LED invertido.
+   - Solución: cable al pin GND y LED girado.
 
-2. **Problema 2:**
-   - Descripción: [Detalles]
-   - Causa probable: [Análisis]
-   - Solución propuesta: [Plan]
+2. **Error al compilar (`setup()` redefinido)**
+   - Causa: dos programas en pestañas del mismo proyecto.
+   - Solución: proyecto separado con una sola pestaña.
+
+3. **~1300 pulsos/s sin agua circulando**
+   - Causa: ruido del motor de la bomba por la tierra USB compartida con el PC.
+   - Solución: bomba con cargador propio + filtro por software.
+
+4. **Caudales irreales (hasta 49 L/min)**
+   - Causa: ruido + flujo irregular.
+   - Solución: las mismas del punto 3.
+
+5. **Turbinas detenidas**
+   - Causa: la bomba se sostenía con la mano y el agua escapaba.
+   - Solución: boquilla sellada dentro de la manguera con cinta.
 
 ---
 
 ## Aprendizajes
 
 ### Técnicos
-- [Aprendizaje 1]
-- [Aprendizaje 2]
+- Un motor comparte ruido por la tierra USB: hay que separar su alimentación.
+- Un número "posible" en pantalla no es necesariamente real: 49 L/min con una bomba pequeña indicaba ruido.
 
 ### De Diseño
-- [Aprendizaje 1]
-- [Aprendizaje 2]
+- El circuito hidráulico necesita uniones selladas para que el caudal supere el mínimo del sensor.
 
 ---
 
 ## Plan para Iteración 2
 
-### Mejoras Planificadas
-
 **Hardware:**
-- [ ] [Mejora 1]
-- [ ] [Mejora 2]
+- [x] Alimentar la bomba por separado
+- [x] Corregir cableado de LED
+- [x] Sellar la boquilla de la bomba
 
 **Software:**
-- [ ] [Mejora 1]
-- [ ] [Mejora 2]
+- [x] Filtro anti-ruido por software
+- [x] Calibrar los sensores entre sí
+- [x] Ajustar la ventana de medición
 
 **Diseño:**
-- [ ] Iniciar diseño de encapsulado
-- [ ] Mejorar ruteo de cables
+- [x] Iniciar diseño de encapsulado
 
 ---
 
 ## Archivos en esta Carpeta
-
-- `v1_codigo.ino` - Código de esta versión
-- `v1_esquema.png` - Esquema del circuito
-- `v1_fotos/` - Fotografías del prototipo
-- `v1_notas.txt` - Notas adicionales del equipo
+- `v1_codigo.ino` – pendiente (si se conserva la versión sin filtro)
+- `v1_fotos/` – pendiente

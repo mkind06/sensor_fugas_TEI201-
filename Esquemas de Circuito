@@ -1,25 +1,62 @@
 # Esquemas de Circuito
 
+## Esquema del circuito (texto)
+
+```
+                       +5V (pin 5V ESP32)
+                        │
+          ┌─────────────┴─────────────┐
+          │                           │
+     ┌────┴────┐                 ┌────┴────┐
+     │ FS400A  │ Sensor 1        │ FS400A  │ Sensor 2
+     │ (rojo)  │ entrada         │ (rojo)  │ salida
+     │ (negro)─┼──GND            │ (negro)─┼──GND
+     │(amarillo)                 │(amarillo)
+     └────┬────┘                 └────┬────┘
+          │ señal 5 V                 │ señal 5 V
+         [10 kΩ]                     [10 kΩ]
+          │                           │
+          ├────────► GPIO1            ├────────► GPIO2
+          │                           │
+         [20 kΩ]                     [20 kΩ]
+          │                           │
+         GND                         GND
+
+   V_GPIO = 5 V × 20k / (10k + 20k) ≈ 3,3 V
+
+
+   GPIO4 ──[330 Ω]──►|── GND    LED verde    (normal)
+   GPIO5 ──[330 Ω]──►|── GND    LED amarillo (posible fuga)
+   GPIO6 ──[330 Ω]──►|── GND    LED rojo     (fuga)
+
+   ESP32-S3 Super Mini ── USB-C ── PC / cargador
+   Bomba 3–6 V ── cargador USB independiente (sin conexión eléctrica con la ESP32)
+```
+
+Las conexiones exactas en cada protoboard están en `Hardware - Documentación`.
+
+---
+
 ## Archivos Requeridos
 
 ### Formato Fritzing
-- `circuito_completo.fzz` - Archivo fuente Fritzing
-- `esquema_circuito.png` - Exportación del esquema
-- `pcb_layout.png` - (opcional) Layout de PCB
+- `circuito_completo.fzz` – **pendiente**
+- `esquema_circuito.png` – **pendiente** (exigido por la guía: no basta con tablas)
 
 ### Formato Wokwi
-- `wokwi_diagram.json` - Archivo de proyecto Wokwi
-- `wokwi_screenshot.png` - Captura del circuito
-- `wokwi_link.txt` - URL del proyecto online
+- `wokwi_diagram.json`, `wokwi_screenshot.png`, `wokwi_link.txt` – **pendiente** (alternativa a Fritzing; Wokwi no tiene el FS400A, se puede representar con un generador de pulsos o un botón).
 
 ---
 
 ## Nomenclatura de Archivos
-- Usar nombres descriptivos
-- Incluir versión: `v3_esquema_final.fzz`
-- Fecha en formato: `YYYYMMDD_descripcion`
+- Nombres descriptivos con versión: `v2_esquema_circuito.png`, `v2_circuito_completo.fzz`.
+- Fecha en formato `YYYYMMDD_descripcion`.
 
 ---
 
 ## Notas de Diseño
-[Explicar decisiones importantes de diseño del circuito]
+1. **Divisor de tensión 10k/20k:** los FS400A trabajan y entregan pulsos a 5 V, pero los GPIO de la ESP32-S3 toleran 3,3 V. El divisor deja ~3,3 V en el pin. Por eso los pines de sensores se configuran como `INPUT` sin pull-up: el divisor ya fija el nivel.
+2. **Resistencias de 330 Ω en los LED:** limitan la corriente desde 3,3 V a pocos mA, seguro para los GPIO.
+3. **Alimentación separada de la bomba:** el motor es una carga inductiva que inyectaba picos por la tierra USB compartida y generaba pulsos falsos. Con cargador propio, 0 pulsos sin flujo.
+4. **Dos protoboards:** la negra agrupa los LED (van hacia la tapa de la caja); la blanca agrupa los divisores y se ubica cerca de los prensaestopas para acortar los cables de los sensores.
+5. **Tierra común:** GND de la ESP32, ambas protoboards y los sensores están unidos (puente H7 negra → B11 blanca).

@@ -1,56 +1,52 @@
 # Documentación del Proyecto
 
 ## Contenido
-
-Esta carpeta contiene la documentación final del proyecto para la entrega del Avance #3.
-
----
-
-##  Carpetas
-
-#### `reporte_final/`
-Reporte completo del proyecto (máximo 15 páginas)
-
-#### `presentacion/`
-Slides de la presentación final
+Documentación del **Detector de fugas con dos sensores de flujo para riego agrícola** (TEI201). Resumen general en `README.md`.
 
 ---
 
-## Documentos Principales
+## Estado de entregas
 
-### 1. Reporte Final del Proyecto
-`reporte_final_v3.pdf`
+### Avance #2 (actual)
+| Requisito | Estado | Dónde |
+|---|---|---|
+| Sensor capturando datos en tiempo real | ✅ | `Testing y Validación` |
+| Actuador respondiendo (LED) | ✅ | `Hardware - Documentación` |
+| Conectividad WiFi/Bluetooth | ❌ Pendiente | — |
+| Estabilidad ≥ 5 min | ⚠️ Por medir | — |
+| Modelo 3D con justificación | ✅ | `Diseño 3D - Documentación` |
+| Código comentado | ✅ | `firmware/PruebaSensor/PruebaSensor.ino` |
+| Diagrama de circuito | ⚠️ En texto | `Esquemas de Circuito` |
+| Registro de iteraciones | ✅ | `Historial de Iteraciones` |
 
-Máximo 15 páginas, formato profesional
-
-### 2. Presentación Final
-`presentacion_avance3.pdf` o `.pptx`
-
-Duración: 10 minutos de presentación
+### Preparación de la demo (Avance #2)
+- Duración: **5–7 min** + 2 de feedback; participan todos.
+- Orden: overview (30 s) → demo en vivo abriendo la llave (verde → amarillo → rojo) → conectividad → modelo 3D → iteraciones → cierre con el ODS.
+- **Bomba siempre con su propio cargador**.
+- Probar el sistema 3 veces y dejarlo **5 minutos seguidos**.
+- Plan B: cables y resistencias de repuesto, fotos y video del sistema, modelo 3D abierto en el laptop.
 
 ---
 
-## Checklist de Entrega
+## Documentos Principales (Avance #3)
+1. **Reporte final** – `reporte_final_v3.pdf` (máx. 15 páginas). Ver `Reporte Final del Proyecto`.
+2. **Presentación final** – `presentacion_avance3.pdf/.pptx` (10 min). Ver `Presentación Final`.
 
-### Documentos Obligatorios
-- [ ] Reporte final PDF (máx. 15 páginas)
+---
+
+## Checklist de Entrega (Avance #3)
+
+### Documentos
+- [ ] Reporte final PDF
 - [ ] Presentación PDF/PPTX
-- [ ] Manual de usuario (puede estar integrado en reporte)
+- [ ] Manual de usuario (base en `Documentación de Software`)
 
 ### Contenido del Reporte
-- [ ] Contexto y problemática ODS
-- [ ] Solución propuesta (descripción técnica)
-- [ ] Proceso de diseño e iteraciones
-- [ ] Documentación técnica (resumen)
-- [ ] Resultados de testing y validación
-- [ ] Análisis de impacto ODS
+- [x] Contexto y problemática ODS (README)
+- [x] Solución propuesta (README, Hardware, Software)
+- [x] Proceso de diseño e iteraciones (Historial)
+- [x] Documentación técnica
+- [ ] Resultados de testing con usuarios
+- [ ] Análisis de impacto ODS cuantificado
 - [ ] Conclusiones y trabajo futuro
-- [ ] Referencias bibliográficas
-
-### Contenido de Presentación
-- [ ] Problema y contexto ODS (2 min)
-- [ ] Solución técnica (3 min)
-- [ ] Iteraciones y refinamiento (2 min)
-- [ ] Validación con usuarios (2 min)
-- [ ] Demo en vivo (3 min)
-- [ ] Conclusiones (1 min)
+- [ ] Referencias (datasheets FS400A y ESP32-S3, fuentes ODS 6)

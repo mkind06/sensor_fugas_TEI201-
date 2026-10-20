@@ -2,106 +2,70 @@
 
 ## Archivos de Datos
 
-### `datos_cuantitativos.xlsx`
-Hoja de cálculo con todos los datos recolectados durante testing
+### `datos_sensores_testing.csv` (formato del prototipo)
+El firmware imprime una línea cada 10 s por el Monitor Serie. Para generar el CSV, copiar el Monitor Serie (o usar un registrador serie) y convertir a columnas:
 
-**Estructura sugerida:**
+```csv
+timestamp, q1_lmin, q2_lmin, dif_pct, tot1, tot2, razon_t2_t1, led, evento
+[hh:mm:ss], 1.48, 0.00, 100.0, 1276, 996, 0.781, ROJO, llave_abierta
+```
 
-#### Sheet 1: Datos de Usuarios
-| ID Usuario | Edad | Género | Perfil | Fecha Testing |
-|------------|------|--------|--------|---------------|
-| U01 | [edad] | [M/F/Otro] | [descripción] | [fecha] |
-
-#### Sheet 2: Métricas de Usabilidad
-| ID Usuario | Facilidad Uso (1-5) | Satisfacción (1-5) | Tiempo Tarea (seg) | Errores |
-|------------|---------------------|--------------------|--------------------|---------|
-| U01 | 4 | 5 | 45 | 0 |
-
-#### Sheet 3: Métricas de Impacto ODS
-| ID Usuario | Métrica 1 | Métrica 2 | Métrica 3 | Observaciones |
-|------------|-----------|-----------|-----------|---------------|
-| U01 | [valor] | [valor] | [valor] | [texto] |
-
-#### Sheet 4: Feedback Cualitativo
-| ID Usuario | ¿Qué te gustó? | ¿Qué mejorarías? | Otros comentarios |
-|------------|----------------|------------------|-------------------|
-| U01 | [texto] | [texto] | [texto] |
+Ejemplo de línea real del Monitor Serie:
+```
+Q1: 1.48 | Q2: 0.00 L/min | Dif: 100.0 % | Tot1: 1276 | Tot2: 996 | Razon T2/T1: 0.781
+```
 
 ---
 
-### `datos_sensores_testing.csv`
-Datos capturados por el prototipo durante sesiones de testing
+### Datos medidos en banco (Avance #2)
 
-**Formato:**
-```csv
-timestamp, sensor_1, sensor_2, actuador_1, evento
-2024-11-20 10:15:23, 23.5, 65, ON, usuario_inicio
-2024-11-20 10:15:24, 23.6, 65, ON, normal
-```
+#### Ruido eléctrico
+| Condición | Pulsos sin flujo |
+|---|---|
+| Bomba desenchufada | 0 |
+| Bomba en el mismo PC (filtro 2 ms) | ~330 /s |
+| Sin filtro, bomba en el mismo PC | ~1300 /s |
+| Bomba con cargador propio + filtro 1 ms | 0 |
+
+#### Calibración (llave cerrada, sin fuga)
+| Variable | Rango medido |
+|---|---|
+| Q1 | 1,53 – 1,60 L/min |
+| Q2 | 1,46 – 1,53 L/min |
+| Razón de pulsos T2/T1 | 0,953 – 0,956 |
+| K1 (fabricante) | 288 pulsos/L |
+| K2 (calibrado) | 288 × 0,955 ≈ 275 pulsos/L |
+
+#### Fuga simulada
+| Llave | Q1 | Q2 | Dif | LED |
+|---|---|---|---|---|
+| Cerrada | 1,53–1,60 L/min | 1,46–1,53 L/min (antes de calibrar; tras calibrar K2 ambos marcan lo mismo) | — | Verde |
+| Apertura gradual | — | — | 10–25 % | Amarillo |
+| Abierta por completo | 1,48 L/min | 0 | 100 % | Rojo |
+
+> Pendiente: registrar valores numéricos de varias aperturas intermedias y de una corrida continua ≥ 5 min.
+
+---
+
+### `datos_cuantitativos.xlsx` (testing con usuarios)
+Pendiente. Hojas sugeridas: Datos de usuarios · Métricas de usabilidad · Métricas ODS (tiempo de detección, fuga mínima detectable) · Feedback cualitativo.
 
 ---
 
 ### `comparativa_versiones.xlsx`
-Comparación de métricas entre iteraciones v1, v2, v3
-
-| Métrica | v1 | v2 | v3 | Mejora (%) |
-|---------|-----|-----|-----|------------|
-| Facilidad de uso | 3.2 | 3.8 | 4.5 | +40.6% |
-| Satisfacción | 3.5 | 4.0 | 4.6 | +31.4% |
-| Errores promedio | 2.3 | 1.2 | 0.4 | -82.6% |
+| Métrica | v1 | v2 | v3 |
+|---|---|---|---|
+| Pulsos falsos sin flujo | ~1300 /s | 0 | — |
+| Diferencia sin fuga | 0–4,5 % | Ambos sensores marcan lo mismo | — |
+| Ventana de medición | 3 s | 10 s | — |
 
 ---
 
 ## Análisis Estadístico
-
-### Estadísticos Básicos
-Para cada métrica calcular:
-- Media (promedio)
-- Mediana
-- Desviación estándar
-- Mínimo y máximo
-- Percentiles (25%, 50%, 75%)
-
-### Ejemplo de Tabla de Resumen
-```
-Métrica: Facilidad de Uso (1-5)
-N = 5 usuarios
-Media: 4.2
-Mediana: 4.0
-Desv. Est.: 0.8
-Mín: 3, Máx: 5
-```
-
----
-
-## Datos de Impacto ODS
-
-### Baseline vs. Resultado
-
-**Antes de la intervención (baseline):**
-- [Indicador 1]: [Valor inicial]
-- [Indicador 2]: [Valor inicial]
-
-**Después de la intervención:**
-- [Indicador 1]: [Valor medido con prototipo]
-- [Indicador 2]: [Valor medido con prototipo]
-
-**Mejora:**
-- [Indicador 1]: [% de mejora]
-- [Indicador 2]: [% de mejora]
+Para la corrida continua y las pruebas con usuarios calcular media, mediana, desviación estándar, mínimo y máximo de Q1, Q2 y Dif.
 
 ---
 
 ## Visualización de Datos
-
-Incluir gráficos generados (exportar desde Excel como PNG):
-
-- `grafico_usabilidad.png`
-- `grafico_satisfaccion.png`
-- `grafico_impacto_ods.png`
-- `grafico_comparativa_versiones.png`
-
-**Herramientas recomendadas:**
-- Excel / Google Sheets
-- Python (matplotlib, seaborn)
-- R / RStudio
+- `grafico_q1_q2_tiempo.png` – Q1 y Q2 vs. tiempo al abrir la llave (pendiente)
+- `grafico_dif_tiempo.png` – diferencia % con líneas en 10 % y 25 % (pendiente)

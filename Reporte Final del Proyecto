@@ -1,162 +1,68 @@
 # Reporte Final del Proyecto
 
 ## Formato del Documento
-
-**Archivo:** `reporte_final_v3.pdf`
-
-**Especificaciones:**
-- Formato: PDF
-- Páginas: Máximo 15 páginas
-- Tamaño: A4
-- Márgenes: 2.5 cm todos los lados
-- Fuente: Arial o Times New Roman, 11-12 pt
-- Interlineado: 1.5
-- Incluir numeración de páginas
-- Incluir encabezado con nombre del proyecto
+**Archivo:** `reporte_final_v3.pdf` · A4 · máx. 15 páginas · márgenes 2,5 cm · Arial/Times 11–12 pt · interlineado 1,5 · numeración y encabezado con el nombre del proyecto.
 
 ---
 
-## Estructura Sugerida
+## Estructura con contenido base
 
-### Portada (1 página)
-- Título del proyecto
-- Logo Universidad/Curso
-- Integrantes del equipo
-- Profesor
-- Fecha
-- ODS Seleccionado
+### Portada
+- **Título:** Detector de fugas con dos sensores de flujo para riego agrícola
+- **Curso:** TEI201 – Taller de Diseño en Ingeniería
+- **Integrantes / Profesor / Fecha:** [completar]
+- **ODS:** 6 – Agua limpia y saneamiento (meta 6.4)
 
-### Resumen Ejecutivo (0.5 páginas)
-- Problema abordado
-- Solución desarrollada
-- Resultados principales
-- Conclusión clave
+### Resumen Ejecutivo
+En líneas de riego largas de huertos, las fugas por roturas o uniones sueltas pasan inadvertidas y desperdician agua. Se desarrolló un detector que mide el caudal al inicio y al final de un tramo con dos sensores FS400A; una ESP32-S3 compara ambos caudales cada 10 s y enciende un LED verde, amarillo o rojo según el porcentaje de agua que no llega a la salida. En banco, el sistema eliminó el ruido eléctrico, calibró los sensores entre sí para que marquen lo mismo sin fuga y detectó una fuga simulada en 10–20 s. [Completar con resultados de v3.]
 
-### 1. Introducción (1 página)
-- Contexto general
-- Problemática ODS específica
-- Objetivos del proyecto
-- Alcance
+### 1. Introducción
+- Contexto: uso de agua en riego agrícola.
+- Problema: fugas no detectadas en tramos largos.
+- Objetivo: detectar automáticamente fugas comparando caudal de entrada y salida.
+- Alcance: un tramo, demostración en banco con bomba y llave de paso.
 
-### 2. Marco Teórico/Estado del Arte (1-1.5 páginas)
-- ODS seleccionado - descripción
-- Problemática local/nacional
-- Soluciones existentes (breve revisión)
-- Justificación de la propuesta
+### 2. Marco Teórico / Estado del Arte
+- ODS 6, meta 6.4; relación con ODS 2.
+- Principio de balance de masa: en un tramo sin fugas, Q_entrada = Q_salida.
+- Sensores de flujo de turbina (salida de pulsos proporcional al caudal).
+- Soluciones existentes: [completar con revisión breve].
 
-### 3. Metodología (1 página)
-- Proceso de diseño seguido
-- Herramientas utilizadas
-- Enfoque de desarrollo
+### 3. Metodología
+- Diseño iterativo: montaje → prueba → identificación de causa → corrección → registro (ver `Historial de Iteraciones`).
+- Herramientas: Arduino IDE, AutoCAD (STEP), impresión 3D en PETG.
 
-### 4. Diseño y Desarrollo (3-4 páginas)
+### 4. Diseño y Desarrollo
+- **4.1 Arquitectura:** diagrama de bloques del `README`.
+- **4.2 Hardware:** `Hardware - Documentación`, `Esquemas de Circuito`, `Bill of Materials (BOM)`.
+- **4.3 Software:** `Software - Documentación` (flujo, ventana de 10 s, filtro anti-ruido, umbrales 10 % / 25 %).
+- **4.4 Diseño 3D:** caja PETG 120 × 85 × 43 mm, LED en la tapa, USB-C, prensaestopas PG7, burlete (`Diseño 3D - Documentación`).
 
-#### 4.1 Arquitectura del Sistema
-- Diagrama de bloques general
-- Componentes principales
+### 5. Proceso de Iteraciones
+Tabla de 7 problemas con causa, solución y resultado; métricas v1 → v2 (ver `Historial de Iteraciones`).
 
-#### 4.2 Hardware
-- Esquema del circuito (imagen)
-- Componentes seleccionados y justificación
-- BOM (tabla resumida)
+### 6. Testing y Validación
+- 6.1 Protocolo de banco y con usuarios (`Testing y Validación`).
+- 6.2 Resultados cuantitativos (`Datos de Testing`).
+- 6.3 Resultados cualitativos: [completar].
+- 6.4 Impacto ODS: tiempo de detección, fuga mínima detectable, agua evitada: [completar].
 
-#### 4.3 Software
-- Arquitectura del software
-- Diagrama de flujo principal
-- Librerías utilizadas
+### 7. Conclusiones
+- Logros: detección confiable de fuga simulada; eliminación del ruido; calibración relativa.
+- Limitaciones: caudal cercano al mínimo del sensor; K1 sin calibrar con volumen; respuesta 10–20 s; [conectividad si sigue pendiente].
+- Aprendizajes: separar alimentación de motores; filtrar señales de pulsos; validar lecturas contra lo físicamente posible; calibrar sensores entre sí.
+- Trabajo futuro: conectividad remota, varios tramos, alimentación solar, sensores acordes al caudal real.
 
-#### 4.4 Diseño Mecánico/3D
-- Renders del modelo (2-3 imágenes)
-- Consideraciones de diseño
-- Especificaciones
+### 8. Referencias
+- Datasheet sensor de flujo FS400A.
+- Documentación ESP32-S3 (Espressif).
+- Naciones Unidas, ODS 6.
+- [Completar en formato APA o IEEE.]
 
-### 5. Proceso de Iteraciones (2 páginas)
-- Versión 1: Concepto inicial
-- Versión 2: Primera iteración (Avance #2)
-- Versión 3: Versión final (Avance #3)
-- Tabla comparativa de mejoras
-- Justificación de cambios
-
-### 6. Testing y Validación (2-3 páginas)
-
-#### 6.1 Metodología de Testing
-- Protocolo aplicado
-- Perfil de usuarios
-
-#### 6.2 Resultados Cuantitativos
-- Tablas y gráficos
-- Análisis estadístico
-
-#### 6.3 Resultados Cualitativos
-- Feedback de usuarios
-- Observaciones
-
-#### 6.4 Validación de Impacto ODS
-- Métricas de impacto
-- Comparación baseline vs. resultado
-- Proyección de escalabilidad
-
-### 7. Conclusiones (1 página)
-- Logros alcanzados
-- Limitaciones identificadas
-- Aprendizajes del equipo
-- Trabajo futuro y mejoras potenciales
-
-### 8. Referencias (0.5 páginas)
-- Bibliografía
-- Datasheets consultados
-- Recursos web
-
-### Anexos (opcional, no cuenta para 15 páginas)
-- Código completo
-- Datos raw de testing
-- Documentación extendida
-
----
-
-## Calidad del Contenido
-
-### Texto
-- Redacción clara y profesional
-- Sin errores ortográficos ni gramaticales
-- Evitar lenguaje coloquial
-- Uso correcto de terminología técnica
-
-### Figuras y Tablas
-- Todas las figuras numeradas: "Figura 1: ..."
-- Todas las tablas numeradas: "Tabla 1: ..."
-- Alta resolución y legibles
-- Referencias en el texto: "como se muestra en la Figura 3..."
-
-### Referencias
-Formato APA o IEEE consistente:
-```
-[1] Apellido, N. (Año). Título. Editorial.
-[2] Autor. "Título del artículo". Revista, vol. X, pp. XX-XX, Año.
-```
+### Anexos
+Código completo (`PruebaSensor.ino`), datos crudos del Monitor Serie, tablas de conexiones.
 
 ---
 
 ## Checklist de Calidad
-
-Antes de entregar, verificar:
-
-**Contenido:**
-- [ ] Todas las secciones completas
-- [ ] Figuras de alta calidad
-- [ ] Tablas con datos reales
-- [ ] Referencias correctamente citadas
-- [ ] Máximo 15 páginas (sin contar anexos)
-
-**Formato:**
-- [ ] PDF exportado correctamente
-- [ ] Numeración de páginas
-- [ ] Encabezados consistentes
-- [ ] Márgenes correctos
-- [ ] Sin imágenes pixeladas
-
-**Revisión:**
-- [ ] Sin errores ortográficos
-- [ ] Redacción clara y coherente
-- [ ] Todos los integrantes revisaron
-- [ ] Cumple con rúbrica de evaluación
+- [ ] Todas las secciones completas · [ ] Figuras y tablas numeradas · [ ] Máx. 15 páginas · [ ] Revisado por todos los integrantes

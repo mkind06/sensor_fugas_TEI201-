@@ -1,23 +1,21 @@
 # Iteración 2 - Primera Mejora Significativa
 
 ## Información General
-
-**Fecha:** [XX/XX/2025]  
-**Versión:** v2.0  
-**Estado:** Prototipo funcional mejorado  
+**Fecha:** [completar – fecha del Avance #2]
+**Versión:** v2.0 (Prototipo Alpha IoT)
+**Estado:** Prototipo funcional en banco de pruebas
 **Avance asociado:** Avance #2
 
 ---
 
 ## Descripción
-
-Segunda versión del prototipo, incorporando feedback de la iteración 1 y del Avance #1. Incluye mejoras significativas en funcionalidad y primeros pasos en diseño de encapsulado.
+Versión que corrige los problemas de v1: lecturas sin ruido, sensores calibrados entre sí, diferencia estable y LED que cambian de verde a amarillo a rojo al abrir la llave de fuga. Incluye el primer modelo 3D del encapsulado.
 
 **Objetivos de esta iteración:**
-- Corregir problemas identificados en v1
-- Agregar funcionalidades adicionales
-- Iniciar diseño 3D del encapsulado
-- Realizar primeras pruebas con usuarios
+- Eliminar los pulsos falsos.
+- Lograr que ambos sensores marquen lo mismo sin fuga.
+- Clasificar el estado en normal / posible fuga / fuga.
+- Diseñar el encapsulado.
 
 ---
 
@@ -25,129 +23,128 @@ Segunda versión del prototipo, incorporando feedback de la iteración 1 y del A
 
 ### Hardware
 **Agregado:**
-- [Componente nuevo 1]
-- [Componente nuevo 2]
+- Cargador independiente para la bomba.
 
 **Modificado:**
-- [Cambio 1] - Razón: [Justificación]
-- [Cambio 2] - Razón: [Justificación]
-
-**Removido:**
-- [Componente removido] - Razón: [Justificación]
+- Cableado de LED corregido – Razón: GND estaba en 3V3 y un LED invertido.
+- Boquilla de la bomba sellada dentro de la manguera – Razón: el agua escapaba y las turbinas se detenían.
 
 ### Software
 **Nuevas funcionalidades:**
-- [Feature 1]
-- [Feature 2]
+- Filtro de estabilidad: muestreo cada 0,2 ms; un cambio de nivel solo se acepta si dura 5 lecturas (1 ms).
+- Clasificación por umbrales: < 10 % verde, 10–25 % amarillo, ≥ 25 % rojo; LED apagados si Q1 < 0,5 L/min.
+- Reporte serie con totales acumulados y razón T2/T1 para calibrar.
 
 **Optimizaciones:**
-- [Optimización 1]
-- [Optimización 2]
+- Ventana de medición de 3 s → 10 s (más pulsos por ventana, diferencia estable).
+- Calibración relativa K2 = 288 × 0,955 ≈ 275.
 
 **Bugs corregidos:**
-- [Bug 1 de v1]
-- [Bug 2 de v1]
+- `setup()` redefinido (dos pestañas en el proyecto).
+- Pulsos falsos por ruido del motor.
 
 ### Diseño Mecánico
-- Primer diseño de encapsulado en Fusion 360
-- Prototipo impreso en 3D
-- Integración de componentes en carcasa
+- Caja PETG de 120 × 85 × 43 mm modelada en AutoCAD (STEP) con todos los componentes internos.
+- LED en la tapa, ventana USB-C, 2 prensaestopas PG7, tapa con 4 tornillos M3 y burlete.
 
 ---
 
 ## Fotos del Prototipo v2
-
-Incluir en esta carpeta:
-- `v2_prototipo_completo.jpg`
-- `v2_circuito_integrado.jpg`
-- `v2_encapsulado_inicial.jpg`
-- `v2_testing_usuario.jpg`
+- `v2_prototipo_completo.jpg` – pendiente
+- `v2_circuito_integrado.jpg` – pendiente
+- `v2_led_verde/amarillo/rojo.jpg` – pendiente
+- `v2_monitor_serie.png` – pendiente
 
 ---
 
 ## Resultados de Testing
 
 ### Funcionalidad Lograda
-✅ [Función 1]  
-✅ [Función 2]  
-✅ [Función 3]  
-⚠️ [Función 4 - parcial]
+✅ Sensores capturando datos en tiempo real
+✅ LED respondiendo al estado del tramo
+✅ Detección de fuga simulada (verde → amarillo → rojo)
+✅ Modelo 3D del encapsulado
+⚠️ Estabilidad de 5 minutos: por medir
+❌ Conectividad WiFi: pendiente
+
+### Pruebas de banco
+| Prueba | Resultado |
+|---|---|
+| Bomba desenchufada | 0 pulsos |
+| Bomba en el mismo PC (filtro de 2 ms) | ~330 pulsos/s falsos |
+| Bomba con cargador propio | 0 pulsos sin flujo |
+| Llave cerrada (sin fuga) | Q1 ≈ 1,53–1,60 L/min, Q2 ≈ 1,46–1,53 L/min, razón 0,953–0,956 → verde |
+| Llave abierta por completo | Q1 ≈ 1,48 L/min, Q2 = 0, Dif = 100 % → rojo |
+| Apertura gradual | Verde → amarillo → rojo de forma consistente |
 
 ### Feedback del Avance #2
+1. [Completar tras la presentación]
+   - Acción: [plan para v3]
 
-**Comentarios del profesor/ayudante:**
-1. [Comentario 1]
-   - Acción: [Plan de mejora para v3]
-
-2. [Comentario 2]
-   - Acción: [Plan de mejora para v3]
-
-### Testing con Usuarios (2-3 personas)
-
-**Resultados cuantitativos:**
-- Facilidad de uso promedio: [X/5]
-- Satisfacción promedio: [X/5]
-
-**Feedback cualitativo:**
-- Positivo: [Comentarios]
-- A mejorar: [Comentarios]
+### Testing con Usuarios
+Aún no realizado.
 
 ---
 
 ## Problemas Pendientes
 
-1. **Problema 1:**
-   - Descripción: [Detalles]
-   - Prioridad: Alta/Media/Baja
-   - Plan para v3: [Solución propuesta]
+1. **Conectividad WiFi**
+   - Prioridad: **Alta** (obligatoria en la guía)
+   - Plan: página web local en la ESP32 con Q1, Q2, diferencia y estado, o envío a la nube.
 
-2. **Problema 2:**
-   - Descripción: [Detalles]
-   - Prioridad: Alta/Media/Baja
-   - Plan para v3: [Solución propuesta]
+2. **Caudal cercano al mínimo del sensor**
+   - Descripción: la bomba da ~1,5 L/min y el FS400A mide desde 1 L/min; con fugas medianas el sensor 2 se detiene y no se gradúa bien el tamaño de la fuga.
+   - Prioridad: Media
+   - Plan: bomba de mayor caudal o sensores de menor rango.
+
+3. **K1 sin calibrar con volumen real**
+   - Prioridad: Media
+   - Plan: medir litros reales en un recipiente graduado y ajustar K1 (el fabricante da 280 o 288 pulsos/L).
+
+4. **Respuesta en 10–20 s**
+   - Prioridad: Baja (aceptable para riego)
+
+5. **Diagrama de circuito en imagen y prueba de 5 minutos**
+   - Prioridad: Alta (rúbrica)
 
 ---
 
 ## Comparación v1 vs v2
 
 | Aspecto | v1 | v2 | Mejora |
-|---------|----|----|--------|
-| Sensores funcionales | 2/3 | 3/3 | ✅ |
-| Tiempo de respuesta | 500ms | 200ms | ↓60% |
-| Consumo energético | 250mA | 180mA | ↓28% |
-| Encapsulado | ❌ | Prototipo | ✅ |
-| Usuarios testeados | 0 | 2 | ✅ |
+|---|---|---|---|
+| Pulsos falsos sin flujo | ~1300 /s | 0 | ✅ |
+| Caudal leído | hasta 49 L/min (irreal) | ~1,5 L/min (real) | ✅ |
+| Diferencia sin fuga | 0–4,5 % variable | Ambos sensores marcan lo mismo | ✅ |
+| LED | Fallas | 3 estados correctos | ✅ |
+| Encapsulado | ❌ | Modelo 3D | ✅ |
+| Conectividad | ❌ | ❌ | Pendiente |
 
 ---
 
-## Plan para Iteración 3 (Versión Final)
-
-### Mejoras Críticas
+## Plan para Iteración 3
 
 **Hardware:**
-- [ ] [Mejora crítica 1]
-- [ ] [Mejora crítica 2]
+- [ ] Bomba/sensores con caudal acorde
+- [ ] Alimentación autónoma (evaluar solar)
 
 **Software:**
-- [ ] [Optimización 1]
-- [ ] [Feature faltante]
+- [ ] WiFi + página web o nube
+- [ ] Calibrar K1 con volumen real
 
 **Diseño:**
-- [ ] Refinar encapsulado
-- [ ] Mejorar accesibilidad
-- [ ] Finalizar sistema de montaje
+- [ ] Imprimir el encapsulado y montar los componentes
+- [ ] Sistema de montaje sobre la línea de riego
 
 **Testing:**
-- [ ] Testear con 5+ usuarios
-- [ ] Validar métricas ODS
-- [ ] Instalación en contexto real
+- [ ] Prueba continua ≥ 5 min (ideal más tiempo)
+- [ ] Prueba con usuarios (agricultores / encargados de riego)
+- [ ] Estimar agua ahorrada (métrica ODS)
 
 ---
 
 ## Archivos en esta Carpeta
-
-- `v2_codigo.ino` - Código de esta versión
-- `v2_esquema.png` - Esquema del circuito actualizado
-- `v2_modelo3d.f3d` - Primer diseño en Fusion 360
-- `v2_fotos/` - Fotografías del prototipo
-- `v2_feedback.pdf` - Compilación de comentarios recibidos
+- `v2_codigo.ino` → `firmware/PruebaSensor/PruebaSensor.ino`
+- `v2_modelo3d` → `encapsulado/ensamble_componentes.step`
+- `v2_esquema.png` – pendiente
+- `v2_fotos/` – pendiente

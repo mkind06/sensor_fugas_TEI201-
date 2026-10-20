@@ -1,51 +1,93 @@
 # Hardware - Documentación
 
 ## Contenido
-Esta carpeta contiene toda la documentación técnica del hardware del proyecto.
+Documentación técnica del hardware del detector de fugas.
 
 ### 📁 Carpetas
-
 #### `esquemas/`
-Diagramas de circuitos y esquemáticos del sistema
+Diagramas del circuito (ver `Esquemas de Circuito`).
 
 #### `bom/`
-Bill of Materials (Lista de materiales)
+Lista de materiales (ver `Bill of Materials (BOM)`).
 
 #### `fotos/`
-Fotografías de alta resolución del prototipo ensamblado
+Fotografías del prototipo (ver `Fotografías del Prototipo`).
 
 ---
 
 ## Instrucciones de Ensamble
 
 ### Componentes Principales
-1. [Componente 1] - Función
-2. [Componente 2] - Función
-3. [Componente 3] - Función
+1. **ESP32-S3 Super Mini** – procesa los pulsos, calcula caudales y controla los LED (tiene WiFi para la conectividad).
+2. **2 × Sensor de flujo FS400A** (rosca 1″, 1–60 L/min, 5 V, salida de pulsos) – caudal de entrada (Q1) y salida (Q2).
+3. **3 × LED + 330 Ω** – indicador de estado (verde, amarillo, rojo).
+4. **2 divisores de tensión 10 kΩ / 20 kΩ** – bajan la señal de 5 V de los sensores a ~3,3 V para la ESP32.
+5. **Bomba sumergible 3–6 V USB** – simula la línea de riego.
+6. **Llave de paso** – simula la fuga entre los sensores.
+7. **2 mini protoboards** – negra: LED; blanca: divisores.
+
+### Pines utilizados
+| GPIO | Función |
+|---|---|
+| 1 | Sensor 1 (entrada), vía divisor 10k/20k |
+| 2 | Sensor 2 (salida), vía divisor 10k/20k |
+| 4 | LED verde (330 Ω) |
+| 5 | LED amarillo (330 Ω) |
+| 6 | LED rojo (330 Ω) |
+| 5V / GND | Alimentación de los sensores |
 
 ### Pasos de Ensamblaje
-1. [Paso 1]
-2. [Paso 2]
-3. [Paso 3]
+1. **Circuito hidráulico:** bomba → sensor 1 → llave de paso → sensor 2 → recipiente. Respetar la flecha de sentido de flujo de cada sensor. Sellar la boquilla de la bomba dentro de la manguera con cinta.
+2. **Protoboard blanca (divisores):** para cada sensor, señal (cable amarillo) → 10 kΩ → nodo GPIO → 20 kΩ → GND.
+
+   | Elemento | Sensor 1 | Sensor 2 |
+   |---|---|---|
+   | Amarillo (señal) | A3 | J3 |
+   | 10 kΩ | D3–D7 | G3–G7 |
+   | 20 kΩ | C7–C11 | H7–H11 |
+   | GPIO | GPIO1 en B7 | GPIO2 en I7 |
+   | Negro (GND) | A11 | J11 |
+   | Rojo (5 V) | A15 | J15 |
+   | Alimentación | 5V en B15, GND en B11 | Puentes E15–F15 y E11–F11 |
+
+3. **Protoboard negra (LED):** cada GPIO → 330 Ω → ánodo del LED; cátodo → GND.
+
+   | Elemento | Conexión |
+   |---|---|
+   | GPIO4 / R 330 / LED verde | A3 / D3–D7 / ánodo E7, cátodo F7 |
+   | GPIO5 / R 330 / LED amarillo | A8 / D8–D12 / ánodo E12, cátodo F12 |
+   | GPIO6 / R 330 / LED rojo | A13 / D13–D17 / ánodo E17, cátodo F17 |
+   | GND ESP | J7 · puentes I7–J12 e I12–J17 |
+   | GND a la blanca | H7 negra → B11 blanca |
+
+4. Unir las tierras de ambas protoboards y de la ESP32 (tierra común).
+5. Conectar la ESP32 por USB y la bomba a **su propio cargador**.
+6. Subir el firmware y verificar en el Monitor Serie (ver `Documentación de Software`).
 
 ### Precauciones
-- ⚠️ [Precaución 1]
-- ⚠️ [Precaución 2]
+- ⚠️ **No alimentar la bomba desde el mismo PC que la ESP32:** el motor mete ruido por la tierra USB (se midieron ~1300 pulsos/s falsos sin agua).
+- ⚠️ **No conectar la señal de 5 V del sensor directo a un GPIO:** la ESP32 trabaja a 3,3 V; usar siempre el divisor.
+- ⚠️ Verificar la polaridad de los LED (pata larga = ánodo hacia la resistencia) y que GND no quede conectado a 3V3.
+- ⚠️ Mantener el agua lejos de la electrónica; la bomba y los sensores van fuera de la caja.
 
 ---
 
 ## Especificaciones Técnicas
-
-**Alimentación:** [Voltaje y corriente]  
-**Consumo:** [Watts/mA]  
-**Dimensiones:** [mm x mm x mm]  
-**Peso:** [gramos]
+**Alimentación:** 5 V por USB-C (ESP32); los sensores toman 5 V del pin 5V de la placa. Bomba: 3–6 V USB con cargador independiente.
+**Niveles lógicos:** señal de sensores 5 V → ~3,3 V en GPIO (divisor 10k/20k).
+**Consumo:** pendiente de medir.
+**Dimensiones del encapsulado:** 120 × 85 × 43 mm (exterior).
+**Peso:** pendiente de medir.
+**Rango de medición:** 1–60 L/min por sensor (FS400A); el prototipo opera a ~1,5 L/min.
 
 ---
 
 ## Troubleshooting
 
 | Problema | Posible Causa | Solución |
-|----------|---------------|----------|
-| [Problema 1] | [Causa] | [Solución] |
-| [Problema 2] | [Causa] | [Solución] |
+|---|---|---|
+| LED rojo encendido con la salida apagada | Cable de GND conectado a 3V3 y LED invertido | Llevar el cable al pin GND y girar el LED |
+| ~1300 pulsos/s sin agua circulando | Ruido del motor por la tierra USB compartida con el PC | Bomba con cargador propio + filtro por software (1 ms) |
+| Caudales irreales (hasta 49 L/min) | Ruido + flujo irregular | Mismas soluciones anteriores |
+| Turbinas detenidas | Agua escapando en la boquilla de la bomba | Sellar la boquilla dentro de la manguera con cinta |
+| Sensor 2 en 0 con fugas medianas | Caudal bajo el mínimo del FS400A (1 L/min) | Limitación conocida; usar bomba de mayor caudal o sensor de menor rango |
