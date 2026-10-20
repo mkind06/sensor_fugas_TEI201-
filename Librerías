@@ -2,27 +2,46 @@
 
 ## Librerías Estándar (Arduino IDE)
 
-El firmware **no requiere librerías externas**. Todo lo que usa (`digitalRead`, `digitalWrite`, `micros`, `millis`, `Serial`) viene incluido en el núcleo Arduino-ESP32.
+Instalar desde el Library Manager de Arduino IDE:
 
-### Núcleo de la placa (obligatorio)
-- **esp32 (Espressif Systems)**
-  - Propósito: soporte para ESP32-S3 en Arduino IDE.
-  - Instalación: *Herramientas → Placa → Gestor de tarjetas* → buscar "esp32" → Instalar.
-  - URL del gestor: `https://espressif.github.io/arduino-esp32/package_esp32_index.json`
+1. **[Nombre Librería 1]** - v[X.X.X]
+   - Propósito: [Descripción]
+   - Instalación: `Sketch > Include Library > Manage Libraries > Buscar "[nombre]"`
+
+2. **[Nombre Librería 2]** - v[X.X.X]
+   - Propósito: [Descripción]
+   - Instalación: [Instrucciones]
 
 ---
 
 ## Librerías Personalizadas/Modificadas
-No aplica.
+
+Si hay librerías modificadas o no disponibles en Arduino IDE, incluir en esta carpeta:
+
+### Estructura
+```
+librerias/
+├── MiLibreria/
+│   ├── MiLibreria.h
+│   ├── MiLibreria.cpp
+│   ├── keywords.txt
+│   └── README.md
+```
+
+### Instalación Manual
+```bash
+# Copiar carpeta a Arduino libraries
+cp -r MiLibreria ~/Documents/Arduino/libraries/
+```
 
 ---
 
 ## Dependencias Completas
 
-| Librería | Versión | Fuente | Obligatoria |
-|---|---|---|---|
-| Núcleo Arduino-ESP32 | La instalada en el IDE (registrar versión) | Gestor de tarjetas | ✅ |
-| WiFi | Built-in | ESP32 Core | ⏳ Para la conectividad (pendiente) |
-| WebServer | Built-in | ESP32 Core | ⏳ Si se usa página web local (pendiente) |
+Listar TODAS las librerías necesarias con versiones exactas:
 
-> Nota: no se usaron librerías de sensores de flujo porque el conteo de pulsos se hace con muestreo y un filtro de estabilidad propio, necesario para descartar el ruido de la bomba.
+| Librería | Versión | Fuente | Obligatoria |
+|----------|---------|--------|-------------|
+| WiFi | Built-in | ESP32 Core | ✅ |
+| [Lib 1] | x.x.x | Arduino Library Manager | ✅ |
+| [Lib 2] | x.x.x | GitHub | ❌ |

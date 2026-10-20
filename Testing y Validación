@@ -1,75 +1,93 @@
 # Testing y Validación
 
 ## Objetivo
-Validar que el prototipo detecta fugas de forma confiable y estimar su aporte al uso eficiente del agua en riego (ODS 6.4).
+Validar el funcionamiento del prototipo con usuarios reales y medir el impacto cuantitativo en la problemática ODS seleccionada.
 
 ---
 
 ## 📁 Carpetas
-#### `reportes/` – ver `Reportes de Testing`
-#### `evidencias/` – ver `Evidencias de Testing`
-#### `datos/` – ver `Datos de Testing`
+
+#### `reportes/`
+Documentos con resultados del testing
+
+#### `evidencias/`
+Fotos y videos de sesiones con usuarios
+
+#### `datos/`
+Datos cuantitativos recolectados
 
 ---
 
-## Testing técnico realizado (banco de pruebas, Avance #2)
-
-**Montaje:** bomba → sensor 1 → llave de fuga → sensor 2 → recipiente. La llave abierta simula la fuga.
-
-| Prueba | Objetivo | Resultado |
-|---|---|---|
-| Bomba desenchufada | Línea base de ruido | 0 pulsos |
-| Bomba en el mismo PC que la ESP32 | Aislar la fuente de ruido | ~330 pulsos/s falsos (con filtro de 2 ms) |
-| Bomba con cargador propio | Confirmar la causa | 0 pulsos sin flujo |
-| Llave cerrada (sin fuga) | Calibración y falsa alarma | Q1 ≈ 1,53–1,60 L/min, Q2 ≈ 1,46–1,53 L/min, razón 0,953–0,956 → K2 = 275 → verde |
-| Llave abierta por completo | Fuga máxima | Q1 ≈ 1,48 L/min, Q2 = 0, Dif = 100 % → rojo |
-| Apertura gradual | Respuesta de los umbrales | Verde → amarillo → rojo de forma consistente |
-| Operación continua 5 min | Requisito de estabilidad | ⏳ Pendiente |
-
----
-
-## Metodología de Testing con usuarios (propuesta, aún no realizada)
+## Metodología de Testing
 
 ### Grupo Objetivo
-- **Perfil:** agricultores, encargados de riego o estudiantes de agronomía.
-- **Cantidad mínima:** 5 usuarios.
-- **Ubicación:** banco de pruebas o línea de riego real.
+- **Perfil de usuarios:** [Descripción]
+- **Cantidad mínima:** 5 usuarios
+- **Ubicación:** [Contexto real de uso]
 
-### Protocolo
-1. **Briefing (5 min):** qué detecta el sistema y qué significa cada LED.
-2. **Sesión de uso (15 min):** el usuario abre la llave sin aviso del momento y debe interpretar el estado.
-3. **Entrevista (10 min):** ¿lo instalaría?, ¿qué falta?
-4. **Encuesta (5 min):** escala Likert 1–5.
+### Protocolo de Testing
+1. **Briefing** (5 min)
+   - Explicar propósito del prototipo
+   - Contexto de uso
+
+2. **Sesión de Uso** (15-20 min)
+   - Usuario interactúa con prototipo
+   - Observación sin intervención
+   - Toma de notas
+
+3. **Entrevista Post-Testing** (10 min)
+   - Preguntas sobre experiencia
+   - Feedback cualitativo
+   - Sugerencias de mejora
+
+4. **Encuesta Cuantitativa** (5 min)
+   - Escala Likert (1-5)
+   - Métricas específicas
 
 ---
 
 ## Métricas de Evaluación
 
 ### Usabilidad
-- Facilidad para entender el estado por los LED (1–5)
-- Claridad de funcionamiento (1–5)
-- Satisfacción general (1–5)
+- Facilidad de uso (1-5)
+- Claridad de funcionamiento (1-5)
+- Satisfacción general (1-5)
 
 ### Impacto ODS
-- Tiempo de detección de la fuga (s)
-- Fuga mínima detectable (% del caudal)
-- Agua perdida evitada estimada (L)
+- [Métrica específica 1 relacionada con ODS]
+- [Métrica específica 2 relacionada con ODS]
+- [Métrica específica 3 relacionada con ODS]
 
 ### Desempeño Técnico
-- Tiempo de respuesta: 10–20 s
-- Sin fuga: tras calibrar K2, ambos sensores marcan lo mismo
-- Confiabilidad: prueba continua pendiente
+- Tiempo de respuesta del sistema
+- Tasa de errores
+- Confiabilidad
+
+---
+
+## Análisis de Resultados
+
+### Cuantitativo
+- Promedios y desviaciones estándar
+- Gráficos de resultados
+- Comparación con baseline
+
+### Cualitativo
+- Temas recurrentes en feedback
+- Problemas identificados
+- Sugerencias de mejora
 
 ---
 
 ## Validación de Impacto ODS
 
-**ODS Seleccionado:** 6 – Agua limpia y saneamiento
+**ODS Seleccionado:** [Número y nombre]
 
-**Meta específica:** detectar automáticamente fugas en tramos de líneas de riego de huertos para reducir el agua desperdiciada.
+**Meta específica del proyecto:** [Describir]
 
-**Indicadores:**
-1. Tiempo de detección – Baseline: hasta que alguien recorre la línea. Alcanzado en banco: 10–20 s.
-2. Fuga mínima detectable – Meta: 10 % del caudal. Alcanzado: umbral de 10 % (amarillo).
+**Indicadores de impacto:**
+1. [Indicador 1] - Baseline: [X], Meta: [Y], Alcanzado: [Z]
+2. [Indicador 2] - Baseline: [X], Meta: [Y], Alcanzado: [Z]
 
-**Proyección a escala:** pendiente (requiere caudal típico de una línea de riego y tiempo promedio que tarda en detectarse una fuga hoy).
+**Proyección de impacto a escala:**
+[Si el prototipo se despliega en toda la ciudad/comunidad, cuál sería el impacto estimado]

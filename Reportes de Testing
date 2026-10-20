@@ -1,39 +1,75 @@
 # Reportes de Testing
 
-## Reporte técnico del Avance #2 (resumen)
-
-1. **Objetivo:** verificar que el sistema detecta una fuga simulada entre dos sensores de flujo sin falsas alarmas.
-2. **Montaje:** bomba → sensor 1 → llave de fuga → sensor 2 → recipiente; ESP32-S3 + 3 LED.
-3. **Protocolo:**
-   1. Medir pulsos con la bomba apagada (ruido).
-   2. Medir con llave cerrada y calibrar K2.
-   3. Abrir la llave gradualmente hasta abrirla por completo.
-4. **Resultados cuantitativos:** ver `Datos de Testing`. Ruido eliminado (0 pulsos sin flujo), ambos sensores marcan lo mismo sin fuga tras calibrar K2, 100 % con llave abierta.
-5. **Resultados cualitativos:** la transición verde → amarillo → rojo es consistente y fácil de interpretar.
-6. **Problemas identificados:** caudal de la bomba (~1,5 L/min) cerca del mínimo del sensor (1 L/min); K1 sin calibrar con volumen real; respuesta en 10–20 s.
-7. **Conclusiones:** el principio de comparación de caudales funciona. Faltan conectividad, prueba de 5 min y testing con usuarios.
-
----
-
-## Reportes por entregar (Avance #3)
+## Formato del Reporte Principal
 
 ### `reporte_testing_usuarios_v3.pdf`
-Introducción · Participantes · Protocolo · Resultados cuantitativos · Resultados cualitativos · Validación ODS · Conclusiones · Anexos.
 
-### `analisis_metricas_ods.pdf`
-Tiempo de detección, fuga mínima detectable y agua perdida evitada.
+**Estructura sugerida:**
 
-### `comparativa_iteraciones.pdf`
-Evolución v1 → v2 → v3 (ver `Historial de Iteraciones`).
+1. **Introducción**
+   - Objetivo del testing
+   - Metodología utilizada
+
+2. **Descripción de Participantes**
+   - Perfil de usuarios
+   - Cantidad y demografía
+
+3. **Protocolo Aplicado**
+   - Pasos del testing
+   - Preguntas realizadas
+   - Métricas evaluadas
+
+4. **Resultados Cuantitativos**
+   - Tablas de datos
+   - Gráficos de resultados
+   - Análisis estadístico básico
+
+5. **Resultados Cualitativos**
+   - Feedback de usuarios
+   - Observaciones del equipo
+   - Problemas identificados
+
+6. **Validación de Impacto ODS**
+   - Métricas de impacto medidas
+   - Comparación con situación inicial
+   - Proyección de escalabilidad
+
+7. **Conclusiones**
+   - Fortalezas del prototipo
+   - Limitaciones identificadas
+   - Recomendaciones para mejoras futuras
+
+8. **Anexos**
+   - Formularios utilizados
+   - Consentimientos informados
+   - Datos raw
 
 ---
 
-## Tabla de resultados con usuarios (plantilla)
+## Reportes Complementarios
 
-| Usuario | Perfil | Entiende el estado por LED (1–5) | Satisfacción (1–5) | Comentarios |
-|---|---|---|---|---|
-| U1 | [completar] | [ ] | [ ] | [ ] |
+### `analisis_metricas_ods.pdf`
+Enfoque específico en validación de impacto ODS
 
-### Gráficos recomendados
-- Barras: promedio por métrica.
-- Líneas: Q1, Q2 y diferencia vs. tiempo durante una fuga simulada.
+### `feedback_usuarios.pdf`
+Compilación de comentarios y sugerencias
+
+### `comparativa_iteraciones.pdf`
+Evolución del desempeño entre versiones v1, v2, v3
+
+---
+
+## Datos a Incluir
+
+### Tablas de Resultados
+Ejemplo de formato:
+
+| Usuario | Edad | Facilidad de Uso (1-5) | Satisfacción (1-5) | Comentarios |
+|---------|------|------------------------|-------------------|-------------|
+| U1 | [edad] | 4 | 5 | "Muy intuitivo" |
+| U2 | [edad] | 5 | 4 | "Funciona bien" |
+
+### Gráficos Recomendados
+- Gráfico de barras: Promedios por métrica
+- Gráfico de dispersión: Correlaciones
+- Gráfico de líneas: Evolución entre iteraciones

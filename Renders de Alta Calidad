@@ -1,39 +1,54 @@
 # Renders de Alta Calidad
 
-## Renders Requeridos (estado)
+## Renders Requeridos (Mínimo 4 ángulos)
 
-| # | Archivo | Contenido | Estado |
-|---|---|---|---|
-| 1 | `01_isometrica_frontal_v2.png` | Caja cerrada, tapa con 3 LED, prensaestopas y ventana USB-C | ⏳ |
-| 2 | `02_interior_componentes_v2.png` | Sin tapa: ESP32 en postes + 2 protoboards | ⏳ |
-| 3 | `03_ensamble_explosionado_v2.png` | Base, componentes y tapa separados | ⏳ |
-| 4 | `04_instalacion_contexto_v2.png` | Caja sobre la línea de riego con lazo de goteo en los cables | ⏳ (recomendado) |
+### 1. Vista Isométrica Frontal
+`01_isometrica_frontal.png`
+- Muestra exterior completo
+- Iluminación clara
+- Resolución: 1920×1080 mínimo
 
-Mientras no haya render, se puede usar una captura de AutoCAD (*SE Isometric*, *Shaded*) del `ensamble_componentes.step`.
+### Renders Opcionales (Recomendados)
+- `02_detalle_sensores.png` - Close-up de sensores
+- `03_ensamble_explosionado.png` - Componentes separados
+- `04_variantes_color.png` - Si hay opciones de diseño
 
 ---
 
-## Configuración sugerida (Fusion 360 tras importar el STEP)
-- **Render:** Local, calidad alta
-- **Resolución:** 1920×1080 o superior
-- **Ambient Occlusion:** ON
+## Configuración de Render en Fusion 360
+
+### Settings Recomendados
+- **Render Engine:** Local / Cloud
+- **Environment:** [Tipo de iluminación]
+- **Resolution:** 1920×1080 o superior
+- **Quality:** High
+- **Exposure:** [Ajustado para visibilidad]
+- **Effects:** Ambient Occlusion ON
 
 ### Materiales y Apariencias
-- Caja: plástico mate (PETG) en un color claro que contraste con los LED
-- ESP32: PCB negro/azul; protoboards negra y blanca
-- LED: verde, amarillo, rojo con emisión
-- Tornillos M3: acero inoxidable
+Asignar materiales realistas:
+- Plástico: PLA/ABS mate o satinado
+- Electrónica: PCB verde, componentes negros
+- Metales: Tornillos acero inoxidable
 
 ---
 
-## Nomenclatura
-`[numero]_[descripcion]_[version].png` → p. ej. `01_isometrica_frontal_v2.png`
+## Nomenclatura de Archivos
+```
+[numero]_[descripcion]_[version].png
+
+Ejemplo:
+01_isometrica_frontal_v3.png
+```
 
 ---
 
 ## Checklist de Calidad
+
 - [ ] Resolución mínima 1920×1080
-- [ ] Formato PNG
-- [ ] Componentes internos visibles (vista sin tapa o explosionada)
-- [ ] Fondo neutro
+- [ ] Formato PNG (con transparencia si aplica)
+- [ ] Iluminación sin sombras excesivas
+- [ ] Componentes internos visibles en corte
+- [ ] Fondo neutro o contextual apropiado
+- [ ] Sin aliasing o bordes pixelados
 - [ ] Todos los componentes críticos visibles

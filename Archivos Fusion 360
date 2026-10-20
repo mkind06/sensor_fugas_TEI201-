@@ -1,64 +1,60 @@
 # Archivos Fusion 360
 
-## Archivos del modelo
+## Archivos Requeridos
 
-> El encapsulado se modeló en **AutoCAD** y se exportó a **STEP**. Fusion 360 abre STEP directamente, así que los archivos sirven para ambas herramientas. Si se exige el `.f3d` nativo, se puede importar el STEP en Fusion 360 y guardarlo como `.f3d`.
+### `modelo_completo_v3.f3d`
+Archivo principal con **historial de cambios completo**
 
-| Archivo | Contenido |
-|---|---|
-| `encapsulado/ensamble_componentes.step` | Ensamble completo con componentes |
-| `encapsulado/caja_base.step` | Base de la caja |
-| `encapsulado/caja_tapa.step` | Tapa con agujeros para LED |
-| `encapsulado/caja_impresion.3mf` / `.stl` | Para impresión 3D |
-| `encapsulado/caja_planos.dxf` | Planos acotados |
-| `modelo_completo.f3d` | ⏳ Pendiente (si la guía lo exige) |
+**DEBE INCLUIR:**
+-  Todos los componentes modelados
+-  Ensamble completo funcional
+-  Historial de diseño (timeline)
+-  Materiales asignados
+-  Constraints y relaciones
 
 ---
 
 ## Estructura del Modelo
 
-### Componentes
+### Componentes (Components)
 ```
 Ensamble_Principal
-├── Caja_Base            (PETG, paredes 2,5 mm, 4 postes de 5 mm, ventana USB-C 12 × 7 mm)
-├── Caja_Tapa            (PETG, 3 mm, 3 agujeros de 5 mm para LED)
-├── ESP32-S3_SuperMini   (23 × 18 mm)
-├── Protoboard_Negra     (47 × 35 mm, LED)
-├── Protoboard_Blanca    (47 × 35 mm, divisores)
-├── LED_x3 + PortaLED_x3
-├── Prensaestopas_PG7_x2
-├── Burlete_2mm
-└── Tornillos_M3_x4
+├── Encapsulado_Inferior
+├── Encapsulado_Superior
+├── ESP32_DevKit
+├── Sensor_DHT22
+├── LED_Indicador
+├── Soporte_Bateria
+├── Bracket_Montaje
+└── Tornilleria
 ```
 
-### Uniones
-- Tapa ↔ base: 4 tornillos M3, sellado con burlete de 2 mm en el labio.
-- ESP32 ↔ base: 4 postes de 5 mm, alineada con la ventana USB-C.
-- LED ↔ tapa: portaLED a presión en agujeros de 5 mm.
-- Prensaestopas ↔ pared: rosca PG7.
+### Uniones (Joints)
+Documentar las juntas principales y sus restricciones
 
 ### Parámetros
-- `ancho_total = 120 mm`
-- `largo_total = 85 mm`
-- `alto_total = 43 mm`
-- `grosor_pared = 2,5 mm`
-- `grosor_tapa = 3 mm`
-- `interior_util = 115 × 80 × 37 mm`
+Listar parámetros principales utilizados:
+- `ancho_total = 120mm`
+- `alto_total = 80mm`
+- `grosor_pared = 2mm`
 
 ---
 
 ## Instrucciones de Apertura
 
-**Fusion 360:** *File → Open → Open from my computer* → seleccionar `ensamble_componentes.step`.
-
-**AutoCAD:** comando `_IMPORT` → seleccionar el `.step` → vista *SE Isometric*, estilo *Shaded*.
+1. Abrir Fusion 360
+2. File > Open > Seleccionar archivo `.f3d`
+3. Verificar que todas las referencias están cargadas
+4. Revisar timeline para ver historial
 
 ---
 
 ## Versiones
 
 | Versión | Fecha | Cambios Principales |
-|---|---|---|
-| v1.0 | [fecha] | Primera caja con componentes para el Avance #2 |
-| v2.x | — | Ajustes post Avance #2 (pendiente) |
-| v3.0 | — | Versión final Avance #3 (pendiente) |
+|---------|-------|---------------------|
+| v3.0 | [Fecha] | Versión final para Avance #3 |
+| v2.1 | [Fecha] | Ajustes post Avance #2 |
+| v1.0 | [Fecha] | Primera versión funcional |
+
+---

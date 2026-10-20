@@ -1,114 +1,89 @@
 # Software - Documentación
 
 ## Contenido
-Código y documentación del software del detector de fugas.
+Esta carpeta contiene todo el código y documentación del software del proyecto.
 
 ### 📁 Carpetas
-#### `firmware/PruebaSensor/`
-Código fuente (`PruebaSensor.ino`) para la ESP32-S3 Super Mini.
+
+#### `src/`
+Código fuente del proyecto (.ino para Arduino/ESP32)
 
 #### `librerias/`
-No aplica: el proyecto no usa librerías externas (ver `Librerías`).
+Librerías adicionales necesarias (no incluidas en Arduino IDE)
 
 #### `docs/`
-Documentación del software: `Código Fuente`, `Documentación de Software`.
+Documentación técnica del software
 
 ---
 
 ## Stack Tecnológico
-**Plataforma:** ESP32-S3 Super Mini
-**Lenguaje:** C/C++ (Arduino)
-**IDE:** Arduino IDE 1.8.19
-**Núcleo:** Arduino-ESP32 (Espressif)
-**Librerías externas:** ninguna
+
+**Plataforma:** Arduino / ESP32  
+**Lenguaje:** C/C++  
+**IDE:** Arduino IDE 2.x  
+**Librerías principales:**
+- [Librería 1] - Versión X.X
+- [Librería 2] - Versión X.X
+- [Librería 3] - Versión X.X
 
 ---
 
 ## Instalación y Configuración
 
 ### 1. Instalar Arduino IDE
-Descargar desde arduino.cc e instalar (se usó la versión 1.8.19; la 2.x también sirve).
+[Instrucciones de instalación]
 
-### 2. Configurar la ESP32-S3
-1. *Archivo → Preferencias → Gestor de URLs adicionales de tarjetas:*
-   `https://espressif.github.io/arduino-esp32/package_esp32_index.json`
-2. *Herramientas → Placa → Gestor de tarjetas* → instalar **esp32 (Espressif Systems)**.
-3. Seleccionar placa **ESP32S3 Dev Module**.
-4. *Herramientas → USB CDC On Boot →* **Enabled** (sin esto el Monitor Serie no muestra nada).
-5. Seleccionar el puerto COM de la placa.
+### 2. Configurar ESP32/Arduino
+[Pasos de configuración]
 
 ### 3. Instalar Librerías
-No se requiere ninguna.
+```bash
+# Copiar librerías personalizadas
+cp -r librerias/* ~/Arduino/libraries/
+```
 
 ### 4. Cargar Código
-1. Abrir `firmware/PruebaSensor/PruebaSensor.ino`.
-2. Verificar que la carpeta del proyecto tenga **una sola pestaña** (dos programas en el mismo proyecto causan `setup()` redefinido).
-3. Compilar y subir.
-4. Abrir el Monitor Serie a 115200 baudios.
+1. Abrir `src/main.ino`
+2. Seleccionar placa y puerto
+3. Compilar y subir
 
 ---
 
 ## Configuración de Parámetros
+
+Editar las siguientes constantes en el código:
+
 ```cpp
-// Pines
-const int PIN_S[2] = {1, 2};          // sensor 1 (entrada), sensor 2 (salida)
-const int LED_VERDE = 4, LED_AMARILLO = 5, LED_ROJO = 6;
+// WiFi
+#define WIFI_SSID "tu_red"
+#define WIFI_PASS "tu_password"
 
-// Calibración: pulsos por litro de cada sensor
-float K[2] = {288.0, 275.0};
+// Sensores
+#define SENSOR_PIN 4
+#define SAMPLE_RATE 1000
 
-// Filtro anti-ruido
-const uint32_t MUESTRA_US = 200;      // muestreo cada 0,2 ms
-const int ESTABLE = 5;                // 5 lecturas iguales = 1 ms estable
-
-// Decisión
-const unsigned long VENTANA_MS = 10000;  // ventana de cálculo
-const float Q_MIN = 0.5;                 // L/min mínimo para considerar flujo
-const float UMBRAL_AMARILLO = 10.0;      // %
-const float UMBRAL_ROJO = 25.0;          // %
-
-// WiFi: pendiente para la versión con conectividad
-// #define WIFI_SSID "tu_red"
-// #define WIFI_PASS "tu_password"
+// Otros parámetros
 ```
 
 ---
 
 ## Arquitectura del Software
-```
-setup(): Serial 115200 → LED como salida (apagados) → sensores como entrada → leer nivel inicial
-   │
-   ▼
-loop() ──► ¿pasaron 0,2 ms? ── sí ──► muestrear(0), muestrear(1)
-   │                                   (cuenta flancos estables ≥ 1 ms)
-   ▼
-¿pasaron 10 s? ── no ──► volver a loop()
-   │ sí
-   ▼
-n1, n2 = pulsos de la ventana
-Q1 = n1/10·60/K1 ; Q2 = n2/10·60/K2
-   │
-   ▼
-Q1 < 0,5 ? ── sí ──► LED apagados
-   │ no
-Dif = (Q1−Q2)/Q1·100
-Dif < 10 → verde | 10–25 → amarillo | ≥ 25 → rojo
-   │
-   ▼
-Imprimir reporte en Monitor Serie
-```
+
+[Incluir diagrama de flujo o arquitectura]
 
 ### Módulos Principales
-1. **Inicialización** – `setup()`.
-2. **Lectura de Sensores** – `muestrear()` con filtro de estabilidad por software.
-3. **Procesamiento** – cálculo de caudales y diferencia por ventana de 10 s.
-4. **Actuación** – `luces()` según umbrales.
-5. **Comunicación** – hoy solo USB/Monitor Serie. **WiFi pendiente.**
+1. **Inicialización** - Setup del sistema
+2. **Lectura de Sensores** - Captura de datos
+3. **Procesamiento** - Análisis y decisiones
+4. **Actuación** - Control de actuadores
+5. **Comunicación** - Envío de datos
 
 ---
 
-## API / Endpoints (propuesta para la conectividad, pendiente)
+## API / Endpoints (si aplica)
+
 | Endpoint | Método | Descripción |
-|---|---|---|
-| `/` | GET | Página web local con Q1, Q2, diferencia y estado |
-| `/data` | GET | JSON con `q1`, `q2`, `dif`, `estado` |
+|----------|--------|-------------|
+| `/status` | GET | Estado del sistema |
+| `/data` | GET | Datos de sensores |
+| `/control` | POST | Control de actuadores |
