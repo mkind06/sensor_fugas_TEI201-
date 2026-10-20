@@ -1,58 +1,154 @@
 # Presentación Final
 
-## Formato
-**Archivo:** `presentacion_avance3.pdf` o `.pptx` · 10 min · 10–15 slides · 16:9 · texto ≥ 24 pt, títulos ≥ 32 pt.
+## Formato de la Presentación
+
+**Archivo:** `presentacion_avance3.pdf` o `.pptx`
+
+**Especificaciones:**
+- Duración: 10 minutos
+- Slides: 10-15 slides recomendado
+- Formato: 16:9 (widescreen)
+- Fuente mínima: 24pt para texto, 32pt para títulos
 
 ---
 
-## Estructura con contenido del proyecto
+## Estructura de la Presentación (10 min total)
 
-| Slide | Título | Contenido |
-|---|---|---|
-| 1 | Portada | Detector de fugas para riego agrícola · integrantes · ODS 6 · TEI201 |
-| 2 | ODS 6 – meta 6.4 | Uso eficiente del agua; vínculo con ODS 2 (agricultura sostenible) |
-| 3 | El problema | Fugas por roturas o uniones sueltas en líneas largas de huertos (avellanos, cerezos) pasan inadvertidas |
-| 4 | La solución | Dos sensores en serie: si sale menos agua de la que entra, hay fuga. Diagrama de bloques + foto |
-| 5 | Hardware | ESP32-S3, 2 × FS400A, divisores 10k/20k, 3 LED. Esquema simplificado |
-| 6 | Software y 3D | Ventana de 10 s, filtro anti-ruido 1 ms, umbrales 10 % / 25 %. Render de la caja PETG |
-| 7 | Evolución | v1 → v2 → v3 lado a lado |
-| 8 | Mejoras medidas | Ruido 1300 pulsos/s → 0; sensores descalibrados (~4,5 %) → calibrados (K2 = 275); ventana 3 s → 10 s |
-| 9 | Testing con usuarios | [Completar: fotos, N, protocolo] |
-| 10 | Resultados e impacto ODS | Tiempo de detección 10–20 s; umbral de posible fuga 10 %; [agua evitada] |
-| 11 | Demo en vivo | Abrir la llave: verde → amarillo → rojo (+ conectividad) |
-| 12 | Conclusiones | Logros, limitaciones (caudal cerca del mínimo del sensor), aprendizajes |
-| 13 | Trabajo futuro | Varios tramos, alimentación solar, sensores acordes al caudal real |
-| 14 | ¿Preguntas? | — |
+### Slide 1: Portada (30 seg)
+- Título del proyecto
+- Integrantes
+- ODS Seleccionado
+- Logo Universidad/Curso
 
----
+### Slides 2-3: Contexto y Problema
+**Slide 2: Problemática ODS**
+- Descripción del ODS seleccionado
+- Datos de contexto (estadísticas, impacto)
+- Foto/imagen representativa
 
-## Demo en Vivo
-- Bomba con **su propio cargador**, nunca en el mismo PC que la ESP32.
-- Encender 1–2 min antes para que la primera ventana marque verde.
-- Abrir la llave lentamente; recordar que el cambio de LED tarda 10–20 s y explicarlo mientras tanto.
-- Mostrar el Monitor Serie (o la página web, si la conectividad está lista) proyectado.
-- Plan B: video `demo_fuga_gradual.mp4`, repuestos de cables y resistencias, modelo 3D abierto.
+**Slide 3: Problema Específico**
+- Problema local identificado
+- ¿Por qué es importante?
+- ¿A quiénes afecta?
+
+### Slides 4-6: Solución Técnica
+**Slide 4: Visión General**
+- ¿Qué hace el sistema?
+- Diagrama de bloques simple
+- Foto del prototipo
+
+**Slide 5: Hardware**
+- Componentes principales
+- Esquema del circuito (simplificado)
+- Sensores y actuadores
+
+**Slide 6: Software y Diseño 3D**
+- Arquitectura del software
+- Render del modelo 3D
+- Características clave
+
+### Slides 7-8: Iteraciones y Refinamiento
+**Slide 7: Evolución del Diseño**
+- Imágenes de v1, v2, v3 lado a lado
+- Cambios principales entre versiones
+
+**Slide 8: Mejoras Cuantitativas**
+- Tabla/gráfico comparativo
+- Métricas de mejora
+- Feedback incorporado
+
+### Slides 9-10: Validación y Resultados
+**Slide 9: Testing con Usuarios**
+- Fotos de sesiones
+- Cantidad de usuarios testeados
+- Metodología aplicada
+
+**Slide 10: Resultados e Impacto ODS**
+- Gráficos de resultados cuantitativos
+- Métricas de impacto ODS
+- Feedback cualitativo destacado
+
+### Slide 11: Demostración en Vivo
+**Slide de transición:**
+- "Demo en vivo"
+- [Realizar demostración del prototipo funcionando]
+- Mostrar casos de uso principales
+
+### Slide 12: Conclusiones
+- Logros alcanzados
+- Limitaciones identificadas
+- Aprendizajes del equipo
+
+### Slide 13: Trabajo Futuro
+- Mejoras potenciales
+- Escalabilidad
+- Próximos pasos
+
+### Slide 14: Preguntas
+- "¿Preguntas?"
+- Información de contacto (opcional)
 
 ---
 
 ## Diseño Visual
-- Poco texto, más imágenes; una idea por slide; regla 6×6.
-- Colores del proyecto: verde / amarillo / rojo de los LED como código de estado en gráficos.
-- Fuentes sans-serif.
+
+### Principios de Diseño
+- **Minimalismo:** Poco texto, más imágenes
+- **Regla 6×6:** Máximo 6 bullets × 6 palabras
+- **Una idea por slide:** No sobrecargar
+- **Alto contraste:** Texto legible desde lejos
+
+### Elementos Visuales
+- Fotos de alta calidad (>1920×1080)
+- Iconos y gráficos profesionales
+- Gráficos de datos claros y grandes
+- Colores consistentes con identidad del proyecto
+
+### Tipografía
+- Títulos: 32-44 pt, negrita
+- Texto: 24-28 pt
+- Fuentes sans-serif (Arial, Calibri, Helvetica)
+
+---
+
+## Recomendaciones de Presentación
+
+### Preparación
+- **Ensayar múltiples veces:** Medir tiempos
+- **Repartir roles:** Cada integrante presenta secciones
+- **Preparar demo:** Tener backup por si falla
+- **Anticipar preguntas:** Preparar respuestas
+
+### Durante la Presentación
+- **Volumen y claridad:** Hablar alto y claro
+- **Contacto visual:** Mirar a la audiencia, no leer slides
+- **Fluidez:** Transiciones naturales entre speakers
+- **Manejo de tiempo:** Respetar 10 minutos
+- **Confianza:** Mostrar dominio del tema
+
+### Demo en Vivo
+- Tener prototipo listo y funcionando ANTES
+- Explicar QUÉ se está mostrando
+- Mostrar sensores capturando datos
+- Mostrar actuadores respondiendo
+- Tener plan B si falla (video de respaldo)
 
 ---
 
 ## Checklist Pre-Presentación
 
-### 1 día antes
-- [ ] Presentación revisada
-- [ ] Ensayo completo midiendo tiempos
-- [ ] Prototipo probado 3 veces y 5 min seguidos
-- [ ] Cargador de la bomba y cable USB-C listos
-- [ ] Video de respaldo grabado
+### 1 día antes:
+- [ ] Presentación finalizada y revisada
+- [ ] Ensayo completo del equipo
+- [ ] Prototipo funcionando perfectamente
+- [ ] Baterías cargadas / fuentes listas
+- [ ] Video de backup de la demo grabado
 
-### Día de presentación
-- [ ] Llegar 15 min antes y probar el prototipo en la sala
-- [ ] Recipiente con agua y toalla
-- [ ] Presentación en USB de respaldo
-- [ ] Todos los integrantes listos
+### Día de presentación:
+- [ ] Llegar 15 min antes
+- [ ] Probar prototipo en el lugar
+- [ ] Probar conexión de laptop a proyector
+- [ ] Tener presentación en USB de respaldo
+- [ ] Todos los integrantes presentes y preparados
+
+---
