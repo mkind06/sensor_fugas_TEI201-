@@ -1,11 +1,15 @@
 # Evidencias de Testing
 
+## Evidencia recibida del montaje final - Avance 2
+
+El equipo aportó dos fotografías originales, conservadas en [hardware/fotos](../../hardware/fotos/README.md). Permiten observar el banco completo y, en una de ellas, el monitor web con gráfico junto al concepto CAD. Las fotos no sustituyen registros de los tres estados ni una prueba continua de cinco minutos.
+
 ## Contenido Requerido (estado)
 
 ### Fotografías de banco (Avance #2)
 | Archivo | Contenido | Estado |
 |---|---|---|
-| `banco_montaje_completo.jpg` | Bomba, sensores, llave, recipiente y electrónica | ⏳ |
+| [Dos vistas del montaje final](../../hardware/fotos/README.md) | Banco hidráulico, sensores, llave, recipiente, electrónica y computador | Recibidas; ver alcance en sus leyendas |
 | `banco_led_verde.jpg` | Llave cerrada → verde | ⏳ |
 | `banco_led_amarillo.jpg` | Apertura parcial → amarillo | ⏳ |
 | `banco_led_rojo.jpg` | Llave abierta → rojo | ⏳ |
