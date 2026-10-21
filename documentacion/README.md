@@ -12,20 +12,20 @@ Se revisó la guía completa de nueve páginas, fechada 19-10-2026. La entrega e
 | Integración y estabilidad ≥5 min | Demostración informada como exitosa; falta registro continuo final de cinco minutos |
 | Encapsulado conceptual | [STEP, DXF y justificación](../diseno_3d/README.md); sin impresión ni encaje físico confirmado |
 | Iteración y resolución parcial | [Cambios y aprendizajes](../iteraciones/README.md); alerta local de posible pérdida, sin ahorro medido |
-| Código y dependencias | [Fuentes y procedencia](../software/src/README.md); versión exacta del núcleo y firmware de demo por cotejar |
+| Código y dependencias | [Fuentes y procedencia](../software/src/README.md); código aportado por el equipo como el utilizado; versión exacta del núcleo pendiente |
 | Circuito completo | [Diagrama y coordenadas](../hardware/esquemas/README.md) |
 
 ## Fuentes y trazabilidad
 
 La revisión usa la guía aportada, TRASPASO_CODEX.md, el repositorio actual (base 181590e), el sketch histórico del commit ed744f1 y los CAD locales. Las instrucciones y ejemplos de documentos se evaluaron como contexto; las exigencias de etapas posteriores no se incorporaron como tareas de esta entrega.
 
-También se consultó el informe de propuesta de septiembre del proyecto de pérdidas de agua en Recoleta. Sus alternativas de placa Nano, sensores YF-S201, bomba de 12 V, presupuesto y metas eran propuestas. El montaje posterior documentado utiliza ESP32-S3, FS400A y bomba USB; no se sustituyen las piezas reales por aquella planificación. La propuesta identifica a Andrés García, Pablo Miranda, Macarena Kuperman y Mathias Kind; falta confirmar roles actuales y profesor.
+El enfoque actual, confirmado por el equipo, es la detección de pérdidas en conducciones de riego agrícola, con aplicación prevista para agricultores y profesionales de agronomía. Se acota a un tramo con recorrido conocido para reducir variables y facilitar el ensayo. La propuesta urbana anterior es un antecedente histórico, no el contexto actual. La selección de ODS es 6/meta 6.4 como vínculo principal y 2/meta 2.4 como complemento; su justificación y fuentes están en el [resumen del proyecto](../README.md). El montaje utiliza ESP32-S3, FS400A y bomba USB. Los integrantes identificados en antecedentes son Andrés García, Pablo Miranda, Macarena Kuperman y Mathias Kind; falta confirmar roles actuales y profesor.
 
-El paquete de archivos preparado en la sesión anterior no estaba disponible en las carpetas revisadas. Por ello se transcribieron las siete lecturas, se recuperó el sketch histórico desde Git y se identificaron expresamente las reconstrucciones. El CSV sintético y HTML nuevos no se presentan como los originales anteriores.
+El código fuente utilizado por el equipo fue compartido directamente por el usuario después de la primera revisión. Sus instrucciones ejecutables coinciden con la reconstrucción anterior: K1=288, K2=229 y ventana de 10000 ms. Se actualizó su procedencia y se corrigió el comentario que decía 3 s a 10 s, sin modificar la lógica. El archivo no se extrajo de la placa y no se ejecutó una prueba física durante esta revisión. El CSV sintético y HTML reconstruidos mantienen su procedencia anterior; no se presentan como originales de la demo.
 
 ## Pendientes de esta evidencia
 
-Fotos originales finales, registro continuo de cinco minutos, feedback, firmware exacto de la demo, versión Arduino-ESP32, medidas reales, inventario hidráulico y precios comprobados. Falta confirmar ODS/meta formal; la contribución propuesta a eficiencia hídrica no está cuantificada.
+Fotos originales finales, registro continuo de cinco minutos, feedback, versión Arduino-ESP32, medidas reales, inventario hidráulico y precios comprobados. El código utilizado y el enfoque agrícola ya fueron aportados. La contribución a eficiencia hídrica todavía no está cuantificada.
 
 ## Etapas posteriores
 
