@@ -18,7 +18,7 @@ Versión final del prototipo, incorporando todas las mejoras y refinamientos bas
 - Encapsulado finalizado con todos los componentes
 - Validación con 5+ usuarios del grupo objetivo
 - Métricas de impacto ODS cuantificadas
-- Sistema instalable en contexto urbano real
+- Sistema instalable en contexto de riego agrícola real (objetivo pendiente de esta plantilla)
 
 ---
 
