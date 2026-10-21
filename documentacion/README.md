@@ -25,7 +25,7 @@ El código fuente utilizado por el equipo fue compartido directamente por el usu
 
 ## Pendientes de esta evidencia
 
-Fotos originales finales, registro continuo de cinco minutos, feedback, versión Arduino-ESP32, medidas reales, inventario hidráulico y precios comprobados. El código utilizado y el enfoque agrícola ya fueron aportados. La contribución a eficiencia hídrica todavía no está cuantificada.
+Registro continuo de cinco minutos, feedback, versión Arduino-ESP32, medidas reales, inventario hidráulico y precios comprobados. Ya se incorporaron dos [fotografías del montaje final](../hardware/fotos/README.md) aportadas por el equipo: una muestra el monitor web junto al CAD. El código utilizado y el enfoque agrícola también fueron aportados. Aún faltan capturas legibles de los tres estados y el HTML original del monitor utilizado. La contribución a eficiencia hídrica todavía no está cuantificada.
 
 ## Etapas posteriores
 
