@@ -2,6 +2,8 @@
 
 ## Revisión frente a la guía
 
+El resultado de la revisión individual de los 27 documentos y de sus archivos de respaldo está en la [matriz de revisión](revision_avance2.md). Los estados describen documentación y evidencia disponible; no constituyen una nota ni certifican pruebas físicas.
+
 Se revisó la guía completa de nueve páginas, fechada 19-10-2026. La entrega es una demostración presencial de Alpha de 5–7 minutos más 2 de feedback, con participación de todos. Las recomendaciones de ensayo no se registran como actividades realizadas sin evidencia.
 
 | Requisito de Avance 2 | Evidencia disponible y límite |
@@ -10,7 +12,7 @@ Se revisó la guía completa de nueve páginas, fechada 19-10-2026. La entrega e
 | Actuación visible | LED verde/amarillo/rojo según lógica; resultado cualitativo comunicado por equipo |
 | Conectividad verificable | USB serie a computador; WiFi/Bluetooth no implementados y sin feedback docente que confirme aceptación específica del criterio |
 | Integración y estabilidad ≥5 min | Demostración informada como exitosa; falta registro continuo final de cinco minutos |
-| Encapsulado conceptual | [STEP, DXF y justificación](../diseno_3d/README.md); sin impresión ni encaje físico confirmado |
+| Encapsulado conceptual | [STEP, DXF y justificación](../diseno_3d/README.md); modelo conceptual disponible; distribución interna visual y dimensiones reales por contrastar. La impresión no es obligatoria |
 | Iteración y resolución parcial | [Cambios y aprendizajes](../iteraciones/README.md); alerta local de posible pérdida, sin ahorro medido |
 | Código y dependencias | [Fuentes y procedencia](../software/src/README.md); código aportado por el equipo como el utilizado; versión exacta del núcleo pendiente |
 | Circuito completo | [Diagrama y coordenadas](../hardware/esquemas/README.md) |
