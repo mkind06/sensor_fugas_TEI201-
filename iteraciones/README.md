@@ -17,6 +17,10 @@ La evolución técnica siguiente corresponde al desarrollo del Alpha. No reconst
 
 La ventana evolucionó de 3 s en pruebas anteriores a 10 s nominales. El sondeo usa 200 µs y cinco lecturas consecutivas; estos tiempos de configuración no son mediciones de latencia. La explicación del ruido eléctrico es una hipótesis de diagnóstico respaldada por su asociación con la bomba; no hubo ensayo instrumental del mecanismo.
 
+## Ajuste del enfoque del proyecto
+
+El equipo orientó la aplicación a sistemas agrícolas y agronomía en el campo. Acotar el banco a una conducción de riego y un tramo conocido permite estudiar el balance con menos variables desconocidas que una red urbana completa. No se afirma que todos los sistemas de riego tengan la misma complejidad: antes de instalar deben identificarse consumos, derivaciones y condiciones hidráulicas. La relación principal es ODS 6/meta 6.4, con ODS 2/meta 2.4 como vínculo complementario. El código utilizado fue aportado por el equipo y coincide con la lógica archivada con K2=229.
+
 ## Estado de esta iteración
 
 La [iteración 2](iteracion_2/README.md) documenta el Alpha actual. El [testeo](../testing/README.md) conserva los datos preajuste, el cálculo relativo y el reporte de demostración, sin porcentajes inventados de mejora. La [iteración 1](iteracion_1/README.md) conserva el documento anterior; sus afirmaciones deben leerse en su contexto histórico. La [iteración 3](iteracion_3/README.md) queda pendiente.
