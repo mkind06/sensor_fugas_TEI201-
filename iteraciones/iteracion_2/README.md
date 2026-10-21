@@ -20,7 +20,7 @@ El funcionamiento continuo mínimo de cinco minutos requerido por la guía queda
 
 ## Pendientes de evidencia y próximos pasos
 
-- Incorporar fotos originales del montaje presentado. El código utilizado ya fue compartido por el equipo y cotejado con la lógica archivada.
+- Las dos [fotografías del montaje final](../../hardware/fotos/README.md) ya están incorporadas y una muestra el monitor web junto al CAD. Faltan primeros planos legibles y evidencia de los tres estados. El código utilizado ya fue compartido por el equipo y cotejado con la lógica archivada.
 - Guardar CSV físico continuo de cinco minutos y ensayos de derivación cerrada, parcial y abierta.
 - Calibrar con volumen conocido y medir respuesta en vez de inferirla del período de reporte.
 - Verificar encaje con medidas reales y completar inventario/precios con comprobantes.
