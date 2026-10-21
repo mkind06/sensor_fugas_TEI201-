@@ -1,79 +1,35 @@
-# Diseño 3D - Documentación
+# Encapsulado conceptual - Avance 2
 
-## ⚠️ REQUISITO CRÍTICO – estado
-El modelo `ensamble_componentes.step` incluye la caja con los componentes internos:
-- ✅ Encapsulado exterior (base + tapa)
-- ✅ ESP32-S3 Super Mini (23 × 18 mm) sobre 4 postes
-- ✅ Dos mini protoboards (47 × 35 mm c/u)
-- ✅ LED en la tapa con portaLED
-- ✅ Prensaestopas PG7 para los cables de los sensores
-- ✅ Ventana USB-C
-- ⚠️ Sensores FS400A y bomba: van **fuera** de la caja, sobre la línea de riego
-- ⚠️ Cableado: routing aproximado por agregar si se exige
-- ✅ Sistema de cierre: 4 tornillos M3 + burlete
+## Archivos disponibles
 
----
+- [caja_impresion_1.step](cad/caja_impresion_1.step): base y tapa dispuestas para impresión, 393715 bytes.
+- [caja_planos.dxf](cad/caja_planos.dxf): plano conceptual, 80255 bytes.
+- [Procedencia y revisión](cad/README.md).
 
-## Carpetas / archivos
-| Archivo | Contenido |
+El modelo se generó con CadQuery y se exportó a STEP/DXF. No se dispone de archivo nativo Fusion 360 con historial ni de un ensamble que incorpore toda la electrónica. El CAD representa un concepto de protección y distribución; no acredita fabricación o encaje físico.
+
+## Dimensiones y distribución propuesta
+
+| Elemento | Dimensiones / ubicación conceptual |
 |---|---|
-| `diseno_3d/fusion360/ensamble_componentes.step` | Modelo 3D con componentes (para mostrar) |
-| `diseno_3d/fusion360/caja_base.step`, `caja_tapa.step` | Piezas separadas |
-| `diseno_3d/fusion360/caja_impresion.3mf` / `.stl` | Archivos para imprimir |
-| `diseno_3d/planos/caja_planos.dxf` | Planos acotados |
-| `renders/` | Imágenes (ver `diseno_3d/renders/`) |
+| Base | 120×85×40 mm; paredes y fondo 2,5 mm; esquinas radio 3 mm |
+| Tapa | Placa 3 mm + labio interior 2 mm; envolvente de pieza 5 mm |
+| Labio | Holgura nominal 0,3 mm; ancho 1,5 mm |
+| Cierre | Cuatro torretas Ø8, pilotos Ø2,5; tapa Ø3,4 para M3×10 |
+| ESP32 de referencia | 23×18 mm sobre cuatro postes Ø3,6×5 mm, piloto Ø1,6 |
+| Protoboards de referencia | Dos de 47×35 mm; centros (−25,14) y (27,14) mm |
+| USB-C | Ventana 12×7 mm en pared izquierda, centro a altura 10,4 mm |
+| Cables de sensores | Dos pasos PG7 Ø12,5 mm en derecha, altura 18 mm |
+| LED | Tres agujeros Ø5 en tapa; X=10,26,42 e Y=−24 mm |
 
----
+Los tamaños de placa y protoboards son referencias típicas, no mediciones del equipo. Verificar también si la placa real permite la fijación por postes. El labio entra en la base; no se suman las envolventes de las piezas separadas para afirmar una altura total de 45 mm. El encaje final está pendiente.
 
-## Especificaciones
-**Software:** AutoCAD (exportado a STEP, abrible en Fusion 360)
-**Unidades:** milímetros
-**Escala:** 1:1
+## Justificación
 
-**Dimensiones externas:** 120 × 85 × 43 mm
-**Interior útil:** 115 × 80 × 37 mm
-**Paredes:** 2,5 mm · **Tapa:** 3 mm
-**Peso estimado:** pendiente
-**Material:** PETG
+La planta permite distribuir placa, protoboards y cables en una zona seca independiente de bomba y sensores. La altura deja margen para conexiones y acceso a los indicadores de tapa. La ventana USB facilita consulta y reprogramación; los pasos laterales ordenan cables y la tapa desmontable permite mantenimiento.
 
-### Justificación de dimensiones
-La ESP32 (23 × 18 mm) y las dos protoboards (47 × 35 mm cada una) caben lado a lado en el fondo con margen para cables. La altura deja espacio para la protoboard (8,5 mm), las resistencias y los cables de los LED hacia la tapa.
+Se propone PETG como material de impresión para la caja. Su elección y la nota de relleno del 30 % del plano son decisiones de diseño; no existe impresión confirmada ni parámetros completos de máquina. Se plantean burlete de 2 mm, prensaestopas y montaje sobre las mangueras con lazos de goteo. No se declara grado IP, resistencia al exterior ni estanqueidad probada.
 
-### Justificación del material
-PETG resiste mejor la humedad, la radiación UV y el calor que el PLA, y es fácil de imprimir: adecuado para uso en el campo.
+La bomba queda fuera y no hay etapa de potencia interna; la necesidad de ventilación y el calentamiento deben comprobarse con el montaje real. Antes de fabricar: medir piezas, revisar tolerancias, paso del conector USB, compatibilidad de fijaciones, mantenimiento y protección frente a salpicaduras.
 
----
-
-## Consideraciones de Diseño
-
-### Funcionales
-- [x] Acceso a USB/alimentación: ventana USB-C de 12 × 7 mm, reprogramar sin abrir la caja.
-- [x] Ventilación: no se requiere (bajo consumo, sin componentes de potencia; la bomba queda fuera).
-- [x] Protección de componentes: prensaestopas sellan los cables; componentes elevados del fondo por si entra humedad.
-- [x] Mantenimiento: tapa con 4 tornillos M3.
-- [x] Condiciones ambientales: burlete de 2 mm en el labio; caja montada por encima de la línea de riego con **lazo de goteo** en los cables (bajan antes de subir al prensaestopas).
-- [x] Visibilidad: 3 LED en la tapa (agujeros de 5 mm con portaLED), visibles desde lejos.
-
-### Integración hardware-encapsulado
-- ESP32 sobre 4 postes de 5 mm, alineada con la ventana USB.
-- Protoboard blanca (divisores) cerca de los prensaestopas para acortar los cables de los sensores.
-
-### Fabricación
-- [x] Grosor de pared ≥ 2 mm (2,5 mm)
-- [ ] Verificar tolerancias de ensamble (+0,2 mm) en postes y agujeros
-- [ ] Verificar overhangs < 45° en la ventana USB y prensaestopas
-
----
-
-## Configuración de Impresión 3D
-**Impresora:** [completar]
-**Material:** PETG
-**Calidad de capa:** [completar]
-**Relleno:** [completar]
-**Soportes:** [completar]
-**Temperatura nozzle:** [completar]
-**Temperatura cama:** [completar]
-**Velocidad:** [completar]
-
-**Tiempo estimado de impresión:** [completar]
-**Peso de material:** [completar]
+Las carpetas [Fusion 360](fusion360/README.md), [planos finales](planos/README.md) y [renders finales](renders/README.md) conservan sus plantillas de otras etapas. Esta guía exige el modelo conceptual y su justificación; la impresión no es obligatoria.

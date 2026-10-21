@@ -1,126 +1,24 @@
-# Historial de Iteraciones
+# Historial de Iteraciones - Avance 2
 
-## Propósito
-Documenta la evolución del detector de fugas a lo largo del curso.
+La evolución técnica siguiente corresponde al desarrollo del Alpha. No reconstruye ni modifica la entrega oficial de Avance 1 y no declara una versión final realizada.
 
----
+| Etapa | Observación o problema | Cambio y aprendizaje |
+|---|---|---|
+| Prueba de LED | Retorno a 3V3 y rojo invertido | Conectar retorno a GND y corregir polaridad |
+| Programas iniciales | setup/loop y constantes redefinidos | Una carpeta por programa completo |
+| Un sensor | Logs de cero y diagnóstico digital | Separar fallo de señal de indicación LED |
+| Dos sensores | Conteos espurios asociados a bomba y placa en PC | Fuente independiente para bomba y filtro por estabilidad |
+| Hidráulica | Agua escapaba por unión de boquilla; turbinas detenidas | Sellar unión y comprobar paso por sensores |
+| Ajuste inicial | Razón de pulsos aproximada 0,955, K1=288 | K2 histórico≈275; ajuste relativo inicial |
+| Lecturas posteriores | Amarillo sin fuga intencional con K2=275 | Siete lecturas físicas y revisión por incrementos |
+| Ajuste posterior | ΔTot1=384 y ΔTot2=305 | K2=288×305/384=228,75≈229 provisional |
+| Alpha presentado | Equipo informó normalidad, advertencia y fuga | Resultado cualitativo; no se conservó CSV final |
+| Encapsulado | Necesidad de separar agua y electrónica y permitir acceso | Concepto STEP/DXF con base, tapa, USB y pasos de cable |
 
-## Estructura de Carpetas
-```
-iteraciones/
-├── iteracion_1/    # Primer montaje en protoboard
-├── iteracion_2/    # Prototipo Alpha IoT – Avance #2 (actual)
-└── iteracion_3/    # Versión final – Avance #3 (pendiente)
-```
+La ventana evolucionó de 3 s en pruebas anteriores a 10 s nominales. El sondeo usa 200 µs y cinco lecturas consecutivas; estos tiempos de configuración no son mediciones de latencia. La explicación del ruido eléctrico es una hipótesis de diagnóstico respaldada por su asociación con la bomba; no hubo ensayo instrumental del mecanismo.
 
----
+## Estado de esta iteración
 
-## Tabla Comparativa de Iteraciones
+La [iteración 2](iteracion_2/README.md) documenta el Alpha actual. El [testeo](../testing/README.md) conserva los datos preajuste, el cálculo relativo y el reporte de demostración, sin porcentajes inventados de mejora. La [iteración 1](iteracion_1/README.md) conserva el documento anterior; sus afirmaciones deben leerse en su contexto histórico. La [iteración 3](iteracion_3/README.md) queda pendiente.
 
-| Aspecto | v1 | v2 (actual) | v3 |
-|---|---|---|---|
-| **Fecha** | [fecha] | [fecha Avance #2] | Pendiente |
-| **Sensores** | 2 × FS400A | 2 × FS400A calibrados entre sí (K1 = 288, K2 = 275) | Sensores ajustados al caudal real de la línea |
-| **Actuadores** | 3 LED (con fallas de conexión) | 3 LED respondiendo según umbrales | 3 LED + alerta remota |
-| **Conectividad** | USB / Monitor Serie | USB / Monitor Serie | WiFi (pendiente) |
-| **Filtro de ruido** | No | Filtro de estabilidad 1 ms + bomba con cargador propio | — |
-| **Ventana de medición** | 3 s | 10 s | — |
-| **Encapsulado** | ❌ | Modelo 3D (PETG, 120 × 85 × 43 mm) | Impreso e instalado |
-| **Testing** | Solo equipo | Pruebas de banco con llave de fuga | Pendiente |
-
----
-
-## Evolución del Diseño
-
-### Versión 1 – Primer montaje
-**Estado:** prueba de concepto en protoboard.
-
-**Características:**
-- Dos FS400A en serie con la llave de paso entre ellos; LED como indicador.
-- Problemas: LED mal conectados, error de compilación por dos programas en el mismo proyecto, pulsos falsos (~1300/s sin agua) y caudales irreales (hasta 49 L/min), turbinas detenidas por fuga en la boquilla de la bomba.
-- Aprendizaje clave: las lecturas había que contrastarlas con lo físicamente posible antes de confiar en ellas.
-
-### Versión 2 – Prototipo Alpha IoT (Avance #2)
-**Estado:** prototipo funcional en banco.
-
-**Mejoras implementadas:**
-- Bomba con cargador propio + filtro por software → 0 pulsos sin flujo.
-- Calibración relativa de sensores (K2 = 275).
-- Ventana de 10 s → diferencia estable.
-- Modelo 3D del encapsulado con componentes.
-
-**Problemas pendientes:**
-- Conectividad WiFi.
-- Prueba de estabilidad de 5 minutos.
-- Caudal de la bomba (~1,5 L/min) cerca del mínimo del sensor (1 L/min).
-- K1 sin calibrar con volumen real.
-- Diagrama de circuito en imagen.
-
-### Versión 3 – Versión Final
-Pendiente (ver `iteraciones/iteracion_3/`).
-
----
-
-## Justificación de Cambios
-
-### Hardware
-**De v1 a v2:**
-- Cambio: bomba alimentada con cargador propio, separada del PC.
-- Razón: el motor inyectaba ruido por la tierra USB compartida.
-- Impacto: de ~1300 pulsos/s falsos a 0 pulsos sin flujo.
-
-- Cambio: corrección del cableado de LED (GND real y LED orientado).
-- Impacto: los 3 LED responden correctamente.
-
-- Cambio: boquilla de la bomba sellada dentro de la manguera.
-- Impacto: flujo continuo; las turbinas dejaron de detenerse.
-
-### Software
-**De v1 a v2:**
-- Filtro de estabilidad: muestreo cada 0,2 ms, cambio aceptado si dura ≥ 1 ms.
-- Calibración K2 = 288 × 0,955 ≈ 275: ambos sensores pasan a marcar lo mismo sin fuga (antes ~4,5 % de diferencia).
-- Ventana de 3 s → 10 s: la diferencia ya no salta entre 0 y 4,5 %.
-- Proyecto con una sola pestaña: compila sin errores.
-
-### Diseño 3D
-**De v1 a v2:**
-- Primer encapsulado: caja PETG con LED en la tapa, ventana USB-C, prensaestopas PG7, burlete y tornillos M3.
-
----
-
-## Incorporación de Feedback
-
-### Feedback del Avance #1 → Cambios en v2
-1. [Completar con comentarios del profesor/ayudante]
-   - Acción tomada: [completar]
-
-### Feedback del Avance #2 → Cambios en v3
-1. [Completar tras la presentación]
-
----
-
-## Métricas de Mejora (medidas)
-
-| Métrica | v1 | v2 | Mejora |
-|---|---|---|---|
-| Pulsos falsos sin flujo | ~1300 /s | 0 /s | ↓ 100 % |
-| Caudal máx. leído con bomba de ~1,5 L/min | hasta 49 L/min | ~1,5 L/min | Lecturas coherentes |
-| Diferencia sin fuga | ~4,5 % (saltaba entre 0 y 4,5 %) | Ambos sensores marcan lo mismo | ✅ |
-| Tiempo de respuesta | 3 s (inestable) | 10–20 s (estable) | Más lento, pero confiable |
-
----
-
-## Lecciones Aprendidas
-
-### Técnicas
-- Separar la alimentación de cargas inductivas (motores) del microcontrolador.
-- Filtrar por software la señal de sensores de pulsos.
-- Contrastar cada lectura con lo físicamente posible antes de confiar en ella.
-- Calibrar los sensores entre sí antes de compararlos.
-
-### De Proceso
-- Aislar las causas cambiando una variable a la vez (bomba desenchufada / en el PC / con cargador propio).
-- Registrar cada problema con causa, solución y resultado.
-
-### De Trabajo en Equipo
-- [Completar]
+El feedback textual del profesor, la distribución de roles y las métricas de impacto no fueron aportados. Los pasos siguientes son guardar una corrida física continua de cinco minutos con la configuración final, calibrar mediante volumen conocido y verificar medidas de componentes antes de fabricar la caja.

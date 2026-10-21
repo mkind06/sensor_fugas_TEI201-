@@ -1,71 +1,27 @@
-# Datos de Testing
+# Testeo: datos disponibles del Alpha
 
-## Archivos de Datos
+## Mediciones físicas previas al ajuste
 
-### `datos_sensores_testing.csv` (formato del prototipo)
-El firmware imprime una línea cada 10 s por el Monitor Serie. Para generar el CSV, copiar el Monitor Serie (o usar un registrador serie) y convertir a columnas:
+[lecturas_preajuste.csv](lecturas_preajuste.csv) transcribe las siete filas del monitor conservadas en el traspaso. Condición: sin fuga intencional; K1=288 y K2=275 pulsos/L; ventana nominal 10 s. No se conoce la fecha individual de adquisición, por eso solo se conserva la hora recibida.
 
-```csv
-timestamp, q1_lmin, q2_lmin, dif_pct, tot1, tot2, razon_t2_t1, led, evento
-[hh:mm:ss], 1.48, 0.00, 100.0, 1276, 996, 0.781, ROJO, llave_abierta
-```
+| Hora | Q1 L/min | Q2 L/min | Dif % | Tot1 | Tot2 | Razón |
+|---|---:|---:|---:|---:|---:|---:|
+| 12:38:21.249 | 1,35 | 1,18 | 13,0 | 470 | 411 | 0,874 |
+| 12:38:31.283 | 1,37 | 1,16 | 15,9 | 536 | 464 | 0,866 |
+| 12:38:41.267 | 1,35 | 1,09 | 19,4 | 601 | 514 | 0,855 |
+| 12:38:51.247 | 1,29 | 1,05 | 18,9 | 663 | 562 | 0,848 |
+| 12:39:01.286 | 1,29 | 1,07 | 17,2 | 725 | 611 | 0,843 |
+| 12:39:11.254 | 1,33 | 1,11 | 16,5 | 789 | 662 | 0,839 |
+| 12:39:21.251 | 1,35 | 1,18 | 13,0 | 854 | 716 | 0,838 |
 
-Ejemplo de línea real del Monitor Serie:
-```
-Q1: 1.48 | Q2: 0.00 L/min | Dif: 100.0 % | Tot1: 1276 | Tot2: 996 | Razon T2/T1: 0.781
-```
+**Estado indicado en todas las filas:** POSIBLE FUGA / AMARILLO. Esto no confirma una fuga física. Dif conserva el porcentaje transmitido, que puede diferir del recalculado a partir de caudales redondeados. Tot1/Tot2 son pulsos acumulados.
 
----
+## Ajuste posterior
 
-### Datos medidos en banco (Avance #2)
+Entre la primera y última fila: ΔTot1=384 y ΔTot2=305. K2=288×305/384=228,75≈229 pulsos/L. El ajuste iguala relativamente la respuesta bajo el supuesto de caudal equivalente; K1 también queda por calibrar con volumen conocido.
 
-#### Ruido eléctrico
-| Condición | Pulsos sin flujo |
-|---|---|
-| Bomba desenchufada | 0 |
-| Bomba en el mismo PC (filtro 2 ms) | ~330 /s |
-| Sin filtro, bomba en el mismo PC | ~1300 /s |
-| Bomba con cargador propio + filtro 1 ms | 0 |
+## Testeo de verde
 
-#### Calibración (llave cerrada, sin fuga)
-| Variable | Rango medido |
-|---|---|
-| Q1 | 1,53 – 1,60 L/min |
-| Q2 | 1,46 – 1,53 L/min |
-| Razón de pulsos T2/T1 | 0,953 – 0,956 |
-| K1 (fabricante) | 288 pulsos/L |
-| K2 (calibrado) | 288 × 0,955 ≈ 275 pulsos/L |
+[testeo_verde.csv](testeo_verde.csv) contiene 30 escenarios nuevos con origen DATOS_SINTETICOS y tiempo virtual 10–300 s. El CSV anterior mencionado en el traspaso no se encontró y no se afirma haberlo recuperado. Ver [metodología y límites](testeo_verde.md). Las filas no tienen totales, pulsos o fechas físicas inventadas.
 
-#### Fuga simulada
-| Llave | Q1 | Q2 | Dif | LED |
-|---|---|---|---|---|
-| Cerrada | 1,53–1,60 L/min | 1,46–1,53 L/min (antes de calibrar; tras calibrar K2 ambos marcan lo mismo) | — | Verde |
-| Apertura gradual | — | — | 10–25 % | Amarillo |
-| Abierta por completo | 1,48 L/min | 0 | 100 % | Rojo |
-
-> Pendiente: registrar valores numéricos de varias aperturas intermedias y de una corrida continua ≥ 5 min.
-
----
-
-### `datos_cuantitativos.xlsx` (testing con usuarios)
-Pendiente. Hojas sugeridas: Datos de usuarios · Métricas de usabilidad · Métricas ODS (tiempo de detección, fuga mínima detectable) · Feedback cualitativo.
-
----
-
-### `comparativa_versiones.xlsx`
-| Métrica | v1 | v2 | v3 |
-|---|---|---|---|
-| Pulsos falsos sin flujo | ~1300 /s | 0 | — |
-| Diferencia sin fuga | 0–4,5 % | Ambos sensores marcan lo mismo | — |
-| Ventana de medición | 3 s | 10 s | — |
-
----
-
-## Análisis Estadístico
-Para la corrida continua y las pruebas con usuarios calcular media, mediana, desviación estándar, mínimo y máximo de Q1, Q2 y Dif.
-
----
-
-## Visualización de Datos
-- `grafico_q1_q2_tiempo.png` – Q1 y Q2 vs. tiempo al abrir la llave (pendiente)
-- `grafico_dif_tiempo.png` – diferencia % con líneas en 10 % y 25 % (pendiente)
+Los [logs de diagnóstico](diagnostico.md) y los resúmenes históricos se conservan separados. No hay un CSV continuo de la presentación, hojas de usuarios ni comparativas de ahorro disponibles.

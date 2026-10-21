@@ -1,0 +1,3 @@
+# Preservar byte a byte los archivos CAD entregados.
+*.step -text
+*.dxf -text
