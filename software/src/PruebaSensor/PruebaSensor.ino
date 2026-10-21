@@ -1,6 +1,6 @@
 /*
  * ============================================================
- *  Detector de fugas para riego con dos sensores de flujo
+ *  Detector de pérdidas en riego agrícola con dos sensores de flujo
  *  TEI201 - Taller de Diseño en Ingeniería · Prototipo Alpha
  * ============================================================
  *  Placa:     ESP32-S3 Super Mini (Arduino IDE 1.8.19,
@@ -33,7 +33,8 @@ const int LED_AMARILLO = 5;
 const int LED_ROJO = 6;
 
 // ---------- Calibración ----------
-// Reconstrucción documental: no extraída de la placa ni verificada físicamente.
+// Código aportado por el usuario como el utilizado por el equipo.
+// Instrucciones ejecutables coincidentes; no extraído de la placa.
 // K1 procede de una ficha comercial inconsistente; pendiente calibración absoluta.
 // K2 = 288 * (716-411)/(854-470) = 228,75, redondeado a 229.
 // Ajuste relativo documentado en el traspaso, no calibración con volumen conocido.

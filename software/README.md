@@ -34,4 +34,4 @@ Los totales son pulsos desde arranque, no litros; su razón acumulada no sustitu
 
 ## Archivos y procedencia
 
-El [índice de fuentes](src/README.md) diferencia el sketch recuperado del historial de GitHub, la versión reconstruida con el ajuste documentado y el panel de consulta reconstruido en esta revisión. Ningún archivo se extrajo de la placa ni se cotejó con el exacto utilizado en la presentación. Las funciones y el uso se explican en el [manual](docs/README.md); las [dependencias](librerias/README.md) no incluyen librerías externas.
+El [índice de fuentes](src/README.md) diferencia el sketch histórico de GitHub, el código compartido directamente por el usuario como el utilizado por el equipo y el panel de consulta reconstruido. El código aportado coincide en instrucciones ejecutables con la reconstrucción previa (K1=288, K2=229, ventana 10 s); se corrigió únicamente el comentario desactualizado que decía 3 s. No se extrajo firmware de la placa ni se realizó una nueva prueba física. Las funciones y el uso se explican en el [manual](docs/README.md); las [dependencias](librerias/README.md) no incluyen librerías externas.
