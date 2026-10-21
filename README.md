@@ -12,6 +12,7 @@ La demostración ya se realizó: el equipo informó que se observaron los tres e
 |---|---|
 | Montaje y alimentación | [Hardware](hardware/README.md) |
 | Componentes confirmados | [BOM](hardware/bom/README.md) |
+| Fotografías del montaje final y monitor web | [Evidencia fotográfica](hardware/fotos/README.md) |
 | Diagrama y coordenadas de protoboards | [Circuito](hardware/esquemas/README.md) |
 | Código y comunicación USB | [Software](software/README.md) |
 | Instalación y operación | [Manual](software/docs/README.md) |
