@@ -17,7 +17,7 @@ El filtro exige estabilidad de varias muestras; no demuestra que todo ruido se d
 2. Conectar ESP32 al computador con USB de datos y alimentar la bomba desde fuente USB independiente. La bomba se acciona manualmente.
 3. Consultar el Monitor Serie a 115200 o abrir el [panel reconstruido](../src/web/Panel_USB_Real.html), descargarlo y ejecutarlo en un contexto que permita Web Serial. Si el archivo local no habilita la API, servir la carpeta desde localhost.
 4. Para usar el panel, cerrar Monitor Serie y otras páginas que ocupen el puerto. Pulsar Conectar, seleccionar la placa y esperar unos 10–15 s para la primera línea; conectar puede reiniciar la placa.
-5. Con la derivación cerrada observar las lecturas; abrirla gradualmente y contrastar diferencia, LED y agua desviada. Verde significa Dif<10 %, amarillo 10–25 % y rojo desde 25 %, siempre que Q1≥0,5. Una lectura negativa también es verde según esta lógica.
+5. Con la derivación cerrada observar las lecturas; abrirla gradualmente y contrastar diferencia, LED y agua desviada. Verde significa Dif<10 %, amarillo 10≤Dif<25 % y rojo Dif≥25 %, siempre que Q1≥0,5. Una lectura negativa también es verde según esta lógica.
 6. Exportar CSV antes de cerrar. El panel reconstruido conserva hasta 3600 registros locales, distingue desconexión, espera y datos vencidos a los 25 s, y etiqueta USB como ESP32_USB_REAL. No incluye el gráfico ni todas las funciones del panel anterior no localizado.
 7. Apagar primero la bomba, desconectar placa y vaciar/secar el montaje para guardarlo.
 
