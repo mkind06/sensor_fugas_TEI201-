@@ -1,5 +1,7 @@
 # Iteración 3 - Versión Final
 
+> **Plantilla para una etapa posterior: no corresponde rellenarla en Avance 2.** Iteración final v3. El contenido siguiente se conserva como referencia; sus cifras, componentes de ejemplo, marcas de verificación y frases de logro no son resultados del Alpha ni requisitos adicionales de la guía actual. Ver la [documentación de esta entrega](../iteracion_2/README.md).
+
 ## Información General
 
 **Fecha:** [XX/XX/2025]  
