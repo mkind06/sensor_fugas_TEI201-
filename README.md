@@ -20,6 +20,7 @@ La demostración ya se realizó: el equipo informó que se observaron los tres e
 | Problemas, soluciones y cambios | [Iteraciones](iteraciones/README.md) |
 | Mediciones y procedencia del testeo | [Testeo](testing/README.md) |
 | Revisión de requisitos de la guía | [Estado de la entrega](documentacion/README.md) |
+| Revisión documento por documento | [Matriz del Avance 2](documentacion/revision_avance2.md) |
 
 ## Alcance y evidencia
 
@@ -40,4 +41,4 @@ El logro de Avance 2 es la detección y señalización en banco. Aún no se midi
 
 ## Entregas posteriores
 
-Las carpetas de [versión final](iteraciones/iteracion_3/README.md), [presentación final](documentacion/presentacion/README.md), [reporte final](documentacion/reporte_final/README.md), [Fusion 360 nativo](diseno_3d/fusion360/README.md), [planos finales](diseno_3d/planos/README.md), [renders](diseno_3d/renders/README.md) y [reportes de usuarios](testing/reportes/README.md) conservan su contenido anterior. Sus listas y cifras de ejemplo son plantillas para otras etapas, no resultados del Alpha.
+Las carpetas de [versión final](iteraciones/iteracion_3/README.md), [presentación final](documentacion/presentacion/README.md), [reporte final](documentacion/reporte_final/README.md), [Fusion 360 nativo](diseno_3d/fusion360/README.md), [planos finales](diseno_3d/planos/README.md), [renders](diseno_3d/renders/README.md) y [reportes de usuarios](testing/reportes/README.md) conservan su contenido de referencia, identificado al inicio como plantilla de otra etapa. Sus listas y cifras de ejemplo no son resultados del Alpha.
