@@ -14,16 +14,16 @@ Se conservan [siete mediciones](../../testing/datos/lecturas_preajuste.csv) de l
 
 ## Logros y límites
 
-Se integraron sensores, cálculo, LED y transmisión USB en un banco de demostración. El aporte al problema es advertir una posible pérdida entre dos puntos para facilitar inspección. No se cuantificaron ahorro, precisión absoluta, consumo, latencia ni usabilidad; no hay pruebas de usuarios o terreno aportadas.
+Se integraron sensores, cálculo, LED y transmisión USB en un banco de demostración. El aporte al problema es advertir una posible pérdida entre dos puntos de una conducción de riego agrícola para facilitar su inspección por agricultores o encargados de riego. Se relaciona principalmente con ODS 6/meta 6.4 y, de manera complementaria, con ODS 2/meta 2.4; no constituye una medición de esos indicadores. No se cuantificaron ahorro, precisión absoluta, consumo, latencia ni usabilidad; no hay pruebas de usuarios o terreno aportadas.
 
 El funcionamiento continuo mínimo de cinco minutos requerido por la guía queda sin registro verificable. El bajo caudal puede detener el sensor 2, por lo que Q2=0 no prueba que toda el agua se haya perdido. El detalle de decisiones está en el [historial](../README.md).
 
 ## Pendientes de evidencia y próximos pasos
 
-- Incorporar fotos originales del montaje presentado y cotejar el archivo realmente cargado.
+- Incorporar fotos originales del montaje presentado. El código utilizado ya fue compartido por el equipo y cotejado con la lógica archivada.
 - Guardar CSV físico continuo de cinco minutos y ensayos de derivación cerrada, parcial y abierta.
 - Calibrar con volumen conocido y medir respuesta en vez de inferirla del período de reporte.
 - Verificar encaje con medidas reales y completar inventario/precios con comprobantes.
-- Registrar feedback, integrantes con roles y meta ODS formal cuando se disponga de ellos.
+- Registrar feedback e integrantes con roles cuando se disponga de ellos. El enfoque agrícola y las metas ODS se explican en el [resumen](../../README.md).
 
 Las mejoras futuras se enumeran como planificación; no se rellena la versión final del proyecto.
