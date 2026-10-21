@@ -12,7 +12,7 @@ body{font:16px system-ui;margin:40px auto;max-width:1000px;padding:0 20px;color:
 <p id="mensaje" role="status">Seleccione el puerto; cierre antes el Monitor Serie.</p>
 <p id="estado" role="status">Desconectado</p>
 <div class="valores"><p>Entrada Q1<strong id="q1">—</strong>L/min</p><p>Salida Q2<strong id="q2">—</strong>L/min</p><p>Diferencia<strong id="dif">—</strong>%</p></div>
-<p><small>Reporte nominal: 10 s. Datos vencidos tras 25 s. K1=288, K2=229 provisional en el sketch reconstruido; el panel recibe caudales y no aplica calibración. La bomba se controla manualmente.</small></p>
+<p><small>Reporte nominal: 10 s. Datos vencidos tras 25 s. K1=288, K2=229 provisional en el sketch aportado por el equipo; el panel recibe caudales y no aplica calibración. La bomba se controla manualmente.</small></p>
 <h2>Últimas 100 lecturas</h2><div class="tabla"><table><thead><tr><th>Hora</th><th>Q1</th><th>Q2</th><th>Dif %</th><th>Estado</th></tr></thead><tbody id="filas"></tbody></table></div>
 <p><small>Los registros recibidos por USB se etiquetan ESP32_USB_REAL. Esa etiqueta identifica el canal de recepción, no certifica exactitud o condición hidráulica.</small></p>
 <script>
