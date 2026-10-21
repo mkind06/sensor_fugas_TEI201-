@@ -1,4 +1,4 @@
-# Detector de fugas mediante comparación de caudales
+# Detector de pérdidas de agua en sistemas de riego agrícola
 
 TEI201 · Taller de Diseño en Ingeniería · Universidad Adolfo Ibáñez.
 
@@ -24,7 +24,18 @@ La demostración ya se realizó: el equipo informó que se observaron los tres e
 
 Se distinguen siete lecturas físicas anteriores al ajuste, registros de diagnóstico, un testeo de lógica con datos sintéticos y el resultado cualitativo comunicado por el equipo. Ninguno sustituye un registro físico continuo de cinco minutos. El STEP y el DXF son archivos de diseño conceptual; la impresión y el ensamble con componentes reales quedan por verificar.
 
-El problema de origen es la pérdida de agua en distribución, inicialmente contextualizado en Recoleta; el banco permite estudiar un solo tramo y el traspaso plantea una aplicación posterior a riego. El aporte actual es advertir una diferencia para que una persona inspeccione. La relación propuesta con eficiencia hídrica y ODS 6 no equivale a un ahorro medido; falta confirmar la meta formal del equipo.
+## Problema y enfoque agrícola
+
+El proyecto se enfoca en pérdidas de agua en conducciones de riego agrícola y su detección mediante comparación de caudal antes y después de un tramo. Sus usuarios previstos son agricultores, encargados de riego y profesionales de agronomía. La alerta permite advertir una diferencia y orientar una inspección del tramo; el Alpha no localiza el punto exacto de la fuga ni cierra el agua automáticamente.
+
+El equipo acotó el desarrollo a un tramo agrícola con recorrido conocido para trabajar con menos ramificaciones, consumos simultáneos y variables desconocidas que las de una red urbana completa. Esta simplificación corresponde al alcance elegido, no a afirmar que todo sistema agrícola sea simple. En una aplicación real deben considerarse presión, rango de caudal, aire, sedimentos, válvulas y salidas de riego. Una salida legítima entre sensores también produce una diferencia: las salidas normales deben quedar fuera del tramo vigilado o medirse por separado.
+
+## Objetivos de Desarrollo Sostenible
+
+- **ODS principal: 6, Agua limpia y saneamiento; meta 6.4.** El proyecto se vincula con el uso eficiente del agua al advertir posibles pérdidas en la conducción de riego y facilitar su revisión. [Meta oficial de Naciones Unidas](https://sdgs.un.org/goals/goal6).
+- **ODS complementario: 2, Hambre cero; meta 2.4.** Su aplicación prevista apoya prácticas agrícolas sostenibles mediante un mejor cuidado del agua destinada al riego. Esta relación es indirecta y no constituye evidencia de mayor producción o resiliencia de cultivos. [Meta oficial de Naciones Unidas](https://sdgs.un.org/goals/goal2).
+
+El logro de Avance 2 es la detección y señalización en banco. Aún no se midieron ahorro de agua, rendimiento agrícola ni cambios en los indicadores oficiales de estas metas.
 
 ## Entregas posteriores
 
