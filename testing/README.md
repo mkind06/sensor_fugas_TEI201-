@@ -11,6 +11,7 @@ Documentar las pruebas de mesa, los problemas detectados y las evidencias dispon
 | Ajuste relativo | 288×(716−411)/(854−470)=228,75≈229 pulsos/L |
 | Testeo de verde | 30 escenarios sintéticos nuevos, claramente identificados; [metodología](datos/testeo_verde.md) |
 | Presentación | Equipo informó que funcionaron normalidad, advertencia y fuga; observación cualitativa sin CSV final |
+| Fotografías finales | [Dos vistas del montaje y monitor web](../hardware/fotos/README.md); evidencia visual, sin registro temporal |
 
 ## Interpretación
 
@@ -20,6 +21,8 @@ El ajuste relativo usa incrementos del mismo intervalo (384 y 305 pulsos), no la
 
 ## Comprobaciones pendientes
 
+El [protocolo de respaldo](protocolo_avance2.md) ordena cómo registrar la prueba que falta. Está marcado como propuesta sin ejecutar.
+
 Para respaldar la estabilidad mínima de cinco minutos de la guía falta una corrida física continua de la configuración final. Debe registrar hora, Q1/Q2, diferencia, pulsos, estado, apertura de derivación e interrupciones. Repetir con llave cerrada, parcialmente abierta y abierta, contrastando el agua desviada mediante recipiente de referencia.
 
-No se midieron exactitud absoluta, demora, corriente, tasa de falsas alarmas, ahorro de agua ni satisfacción. Un sensor detenido a bajo caudal puede indicar Q2=0 sin pérdida total. Las [evidencias visuales](evidencias/README.md) y los [reportes de usuarios](reportes/README.md) conservan sus pendientes anteriores; no se inventan sesiones ni participantes.
+No se midieron exactitud absoluta, demora, corriente, tasa de falsas alarmas, ahorro de agua ni satisfacción. Un sensor detenido a bajo caudal puede indicar Q2=0 sin pérdida total. Las [evidencias visuales](evidencias/README.md) incluyen las fotografías finales y explican el respaldo todavía pendiente. Los [reportes de usuarios](reportes/README.md) son plantillas de etapas posteriores.
