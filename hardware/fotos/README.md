@@ -1,29 +1,13 @@
-# Fotografías del Prototipo
+# Fotografías del Prototipo - Avance 2
 
-## Requisitos de las Fotos
+No se localizaron en el repositorio las fotografías finales originales del montaje. El traspaso describe fotos de etapas de armado, pero no permite acreditar que correspondan al estado presentado. Por ello no se sustituyen con imágenes generadas ni se enlazan archivos inexistentes.
 
-### Calidad
-- **Resolución mínima:** 1920x1080 px
-- **Formato:** JPG o PNG
-- **Iluminación:** uniforme, sin reflejos sobre el agua
-- **Fondo:** neutro
+| Evidencia por incorporar | Qué debe permitir comprobar |
+|---|---|
+| Vista general del banco Alpha | Depósito, bomba, sensores, derivación y electrónica |
+| Detalle de placa y protoboards | GPIO, divisores, resistencias y tierra común |
+| Detalle hidráulico | Sentido de sensores y unión de boquilla |
+| Tres estados de LED | Condición de la llave y lectura correspondiente |
+| Captura del panel o monitor | Caudales, diferencia y procedencia del registro |
 
-### Tomas Requeridas (estado)
-
-| # | Toma | Archivo | Qué debe mostrar | Estado |
-|---|---|---|---|---|
-| 1 | Vista general | `01_vista_general.jpg` | Bomba → sensor 1 → llave → sensor 2 → recipiente, ESP32 y LED | ⏳ |
-| 2 | Circuito interno | `02_circuito_interno.jpg` | ESP32 + protoboard negra (LED) + blanca (divisores) | ⏳ |
-| 3 | Conexiones críticas | `03_detalle_conexiones.jpg` | Divisores 10k/20k y tierra común | ⏳ |
-| 4 | Sensores montados | `04_sensores.jpg` | Ambos FS400A con flechas de flujo visibles y uniones selladas | ⏳ |
-| 5 | Actuadores | `05_actuadores.jpg` | Una foto por estado: verde, amarillo, rojo | ⏳ |
-| 6 | Encapsulado cerrado | `06_encapsulado_cerrado.jpg` | Caja PETG con LED en la tapa, prensaestopas y ventana USB-C | ⏳ (si se imprime) |
-| 7 | Contexto de uso | `07_contexto_uso.jpg` | Montaje sobre una línea de riego o simulación | ⏳ |
-| 8 | Monitor Serie | `08_monitor_serie.png` | Captura con Q1, Q2 y Dif (llave cerrada y abierta) | ⏳ |
-
----
-
-## Nomenclatura
-- Numerar según orden: `01_`, `02_`, etc.
-- Incluir versión si hay varias: `v2_01_vista_general.jpg`.
-- Guardar en `hardware/fotos/`.
+Estas tomas documentan el Alpha. Una foto del encapsulado impreso o una instalación en terreno solo corresponde si esas actividades se realizan. El [modelo CAD](../../diseno_3d/README.md) es evidencia del concepto, no fotografía del prototipo.
