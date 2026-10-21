@@ -10,6 +10,10 @@
 
 El usuario aportó el sketch utilizado por el equipo. Se verificó que sus constantes, funciones, condiciones y formato serie coinciden con la lógica ya archivada. El comentario de VENTANA_MS decía evaluar cada 3 s, aunque 10000 ms corresponden a 10 s: se corrigió solo el comentario. La identificación de uso procede del equipo; no de una extracción o lectura de la memoria del ESP32. El HTML y CSV sintético exactos de la sesión previa siguen sin estar disponibles, por lo que las reconstrucciones de esos dos recursos mantienen esa etiqueta.
 
+## Monitor web utilizado por el equipo
+
+La [fotografía del montaje final](../../hardware/fotos/README.md) muestra un monitor web con indicadores y gráfico junto al CAD. Es evidencia visual de la interfaz utilizada por el equipo; sus valores no se transcriben como una serie de mediciones por falta de legibilidad. El HTML original de ese monitor aún no fue aportado. Por eso el archivo Panel_USB_Real.html de este repositorio sigue identificado como reconstruido, con su propio alcance documentado en el [manual](../docs/README.md); no se afirma que reproduzca exactamente la interfaz de la fotografía.
+
 ## Estructura del sketch
 
 `setup()` inicializa Serial, LED y entradas sin pull-up. `muestrear(i)` acepta un cambio tras cinco lecturas opuestas consecutivas y cuenta solo cambios a HIGH. `luces(v,a,r)` aplica las salidas. `loop()` intenta muestrear cada 200 µs; cada 10 s calcula caudales por incrementos de pulsos, decide el estado y transmite los valores.
