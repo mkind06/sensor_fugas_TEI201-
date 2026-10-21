@@ -1,93 +1,25 @@
-# Testing y Validación
+# Testeo - Avance 2
 
-## Objetivo
-Validar el funcionamiento del prototipo con usuarios reales y medir el impacto cuantitativo en la problemática ODS seleccionada.
+## Propósito
 
----
+Documentar las pruebas de mesa, los problemas detectados y las evidencias disponibles del Alpha. La evaluación actual exige funcionamiento real, integración e iteración; no convierte las plantillas de encuestas y usuarios de etapas posteriores en resultados.
 
-## 📁 Carpetas
+| Evidencia | Procedencia y alcance |
+|---|---|
+| Logs iniciales | Diagnóstico de un sensor y lecturas cero de dos sensores; [transcripción](datos/diagnostico.md) |
+| Siete lecturas físicas | Condición sin fuga intencional, K1=288/K2=275, ventana 10 s; [CSV](datos/lecturas_preajuste.csv) |
+| Ajuste relativo | 288×(716−411)/(854−470)=228,75≈229 pulsos/L |
+| Testeo de verde | 30 escenarios sintéticos nuevos, claramente identificados; [metodología](datos/testeo_verde.md) |
+| Presentación | Equipo informó que funcionaron normalidad, advertencia y fuga; observación cualitativa sin CSV final |
 
-#### `reportes/`
-Documentos con resultados del testing
+## Interpretación
 
-#### `evidencias/`
-Fotos y videos de sesiones con usuarios
+Las siete mediciones transmiten diferencias de 13,0–19,4 %, por lo que el algoritmo indicó POSIBLE FUGA / AMARILLO. Como no se introdujo una fuga en esa condición, el resultado mostró la necesidad de revisar la relación entre sensores. Se conservan los números originales, incluidos sus redondeos.
 
-#### `datos/`
-Datos cuantitativos recolectados
+El ajuste relativo usa incrementos del mismo intervalo (384 y 305 pulsos), no la razón acumulada desde arranque. Supone flujo equivalente por ambos sensores y no reemplaza una calibración absoluta con litros recogidos. El resultado de la demo se informa por separado; no se atribuye un registro inexistente a esa presentación.
 
----
+## Comprobaciones pendientes
 
-## Metodología de Testing
+Para respaldar la estabilidad mínima de cinco minutos de la guía falta una corrida física continua de la configuración final. Debe registrar hora, Q1/Q2, diferencia, pulsos, estado, apertura de derivación e interrupciones. Repetir con llave cerrada, parcialmente abierta y abierta, contrastando el agua desviada mediante recipiente de referencia.
 
-### Grupo Objetivo
-- **Perfil de usuarios:** [Descripción]
-- **Cantidad mínima:** 5 usuarios
-- **Ubicación:** [Contexto real de uso]
-
-### Protocolo de Testing
-1. **Briefing** (5 min)
-   - Explicar propósito del prototipo
-   - Contexto de uso
-
-2. **Sesión de Uso** (15-20 min)
-   - Usuario interactúa con prototipo
-   - Observación sin intervención
-   - Toma de notas
-
-3. **Entrevista Post-Testing** (10 min)
-   - Preguntas sobre experiencia
-   - Feedback cualitativo
-   - Sugerencias de mejora
-
-4. **Encuesta Cuantitativa** (5 min)
-   - Escala Likert (1-5)
-   - Métricas específicas
-
----
-
-## Métricas de Evaluación
-
-### Usabilidad
-- Facilidad de uso (1-5)
-- Claridad de funcionamiento (1-5)
-- Satisfacción general (1-5)
-
-### Impacto ODS
-- [Métrica específica 1 relacionada con ODS]
-- [Métrica específica 2 relacionada con ODS]
-- [Métrica específica 3 relacionada con ODS]
-
-### Desempeño Técnico
-- Tiempo de respuesta del sistema
-- Tasa de errores
-- Confiabilidad
-
----
-
-## Análisis de Resultados
-
-### Cuantitativo
-- Promedios y desviaciones estándar
-- Gráficos de resultados
-- Comparación con baseline
-
-### Cualitativo
-- Temas recurrentes en feedback
-- Problemas identificados
-- Sugerencias de mejora
-
----
-
-## Validación de Impacto ODS
-
-**ODS Seleccionado:** [Número y nombre]
-
-**Meta específica del proyecto:** [Describir]
-
-**Indicadores de impacto:**
-1. [Indicador 1] - Baseline: [X], Meta: [Y], Alcanzado: [Z]
-2. [Indicador 2] - Baseline: [X], Meta: [Y], Alcanzado: [Z]
-
-**Proyección de impacto a escala:**
-[Si el prototipo se despliega en toda la ciudad/comunidad, cuál sería el impacto estimado]
+No se midieron exactitud absoluta, demora, corriente, tasa de falsas alarmas, ahorro de agua ni satisfacción. Un sensor detenido a bajo caudal puede indicar Q2=0 sin pérdida total. Las [evidencias visuales](evidencias/README.md) y los [reportes de usuarios](reportes/README.md) conservan sus pendientes anteriores; no se inventan sesiones ni participantes.
