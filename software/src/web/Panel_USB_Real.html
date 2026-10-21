@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detector de fugas · USB</title>
+<style>
+body{font:16px system-ui;margin:40px auto;max-width:1000px;padding:0 20px;color:#17313b;background:#f4f7f8}h1{font-size:28px}button{font:inherit;padding:10px 16px;margin:4px;border:1px solid #839ba4;border-radius:8px;cursor:pointer}#estado{padding:20px;background:white;border-left:8px solid #839ba4;font-size:24px}.valores{display:flex;gap:20px;flex-wrap:wrap}.valores p{padding:20px;background:white;min-width:160px}.valores strong{display:block;font-size:28px}table{width:100%;border-collapse:collapse;background:white}td,th{text-align:left;padding:8px;border-bottom:1px solid #dde6e9}.tabla{overflow:auto}small{color:#4c626c}
+</style>
+<h1>Detector de fugas · Avance 2</h1>
+<p>Lectura USB de ESP32-S3 y dos FS400A. Panel reconstruido para consulta; no es el HTML original de la demostración.</p>
+<button id="conectar">Conectar USB</button><button id="desconectar" disabled>Desconectar</button><button id="exportar">Exportar CSV</button>
+<p id="mensaje" role="status">Seleccione el puerto; cierre antes el Monitor Serie.</p>
+<p id="estado" role="status">Desconectado</p>
+<div class="valores"><p>Entrada Q1<strong id="q1">—</strong>L/min</p><p>Salida Q2<strong id="q2">—</strong>L/min</p><p>Diferencia<strong id="dif">—</strong>%</p></div>
+<p><small>Reporte nominal: 10 s. Datos vencidos tras 25 s. K1=288, K2=229 provisional en el sketch reconstruido; el panel recibe caudales y no aplica calibración. La bomba se controla manualmente.</small></p>
+<h2>Últimas 100 lecturas</h2><div class="tabla"><table><thead><tr><th>Hora</th><th>Q1</th><th>Q2</th><th>Dif %</th><th>Estado</th></tr></thead><tbody id="filas"></tbody></table></div>
+<p><small>Los registros recibidos por USB se etiquetan ESP32_USB_REAL. Esa etiqueta identifica el canal de recepción, no certifica exactitud o condición hidráulica.</small></p>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const KEY='riego-monitor-fs400a-reconstruido-v1';
+let registros=[];
+try{const prev=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(prev))registros=prev.filter(r=>r&&r.source==='ESP32_USB_REAL'&&Number.isFinite(r.q1)&&Number.isFinite(r.q2)&&Number.isFinite(r.dif)&&typeof r.timestamp==='string'&&typeof r.estado==='string').slice(-3600);}catch{}
+let puerto=null,lector=null,activo=false,conectando=false,ultima=null,resto='',sesion='';
+function clasificar(q1,dif){return q1<0.5?'SIN FLUJO':dif<10?'NORMAL':dif<25?'POSIBLE FUGA':'FUGA';}
+function parsear(linea){
+  const n='(-?\\d+(?:\\.\\d+)?)';
+  const re=new RegExp('^Q1: '+n+' \\| Q2: '+n+' L/min \\| Dif: '+n+' % \\| Tot1: (\\d+) \\| Tot2: (\\d+) \\| Razon T2/T1: ('+n+'|-)\\s*$');
+  const m=linea.trim().match(re);if(!m)return null;
+  const q1=Number(m[1]),q2=Number(m[2]),dif=Number(m[3]),tot1=Number(m[4]),tot2=Number(m[5]);
+  const razon=m[6]==='-'?null:Number(m[6]);
+  if(![q1,q2,dif,tot1,tot2].every(Number.isFinite)||q1<0||q2<0||!Number.isSafeInteger(tot1)||!Number.isSafeInteger(tot2)||(razon!==null&&(!Number.isFinite(razon)||razon<0)))return null;
+  return {timestamp:new Date().toISOString(),sesion,source:'ESP32_USB_REAL',origen:'ESP32_USB_REAL',simulado:false,q1,q2,dif,diferencia_lmin:q1-q2,tot1,tot2,razon,estado:clasificar(q1,dif)};
+}
+function fragmento(texto){
+  resto+=texto;const partes=resto.split(/\r?\n/);resto=partes.pop();
+  if(resto.length>4096)resto='';
+  for(const linea of partes){const r=parsear(linea);if(r)recibir(r);}
+}
+function recibir(r){
+  ultima=r;registros.push(r);registros=registros.slice(-3600);
+  try{localStorage.setItem(KEY,JSON.stringify(registros));}catch{$('mensaje').textContent='Lectura recibida; almacenamiento local no disponible. Exporte el CSV.';}
+  dibujar();
+}
+function dibujar(){
+  let texto='Desconectado',color='#839ba4';
+  if(activo){texto='Esperando datos';if(ultima){texto=Date.now()-Date.parse(ultima.timestamp)>25000?'Datos vencidos':ultima.estado;color=texto==='NORMAL'?'#23864c':texto==='POSIBLE FUGA'?'#c79400':texto==='FUGA'?'#cb3434':'#839ba4';}}
+  $('estado').textContent=texto;$('estado').style.borderColor=color;
+  const vigente=activo&&ultima&&Date.now()-Date.parse(ultima.timestamp)<=25000;
+  for(const k of ['q1','q2','dif'])$(k).textContent=vigente?ultima[k].toFixed(k==='dif'?1:2):'—';
+  $('filas').replaceChildren();
+  for(const r of registros.slice(-100).reverse()){
+    const tr=document.createElement('tr');
+    for(const v of [new Date(r.timestamp).toLocaleTimeString(),r.q1.toFixed(2),r.q2.toFixed(2),r.dif.toFixed(1),r.estado]){const td=document.createElement('td');td.textContent=v;tr.append(td);}
+    $('filas').append(tr);
+  }
+}
+async function limpiar(){
+  activo=false;
+  if(lector){try{await lector.cancel();}catch{}}
+}
+async function conectar(){
+  if(conectando||activo)return;
+  if(!('serial' in navigator)){$('mensaje').textContent='Web Serial no está disponible. Use Chrome/Edge de escritorio en un contexto permitido (localhost o HTTPS).';return;}
+  conectando=true;$('conectar').disabled=true;
+  try{
+    puerto=await navigator.serial.requestPort();await puerto.open({baudRate:115200});
+    activo=true;ultima=null;resto='';sesion=new Date().toISOString();$('desconectar').disabled=false;
+    $('mensaje').textContent='Puerto abierto a 115200. Espere la siguiente línea de la placa.';dibujar();
+    const decoder=new TextDecoder();lector=puerto.readable.getReader();
+    while(activo){const {value,done}=await lector.read();if(done)break;fragmento(decoder.decode(value,{stream:true}));}
+  }catch(e){$('mensaje').textContent='No se pudo mantener la conexión: '+e.message;}
+  finally{
+    activo=false;if(lector){try{lector.releaseLock();}catch{}lector=null;}
+    if(puerto){try{await puerto.close();}catch{}puerto=null;}
+    conectando=false;$('conectar').disabled=false;$('desconectar').disabled=true;dibujar();
+  }
+}
+function csv(){
+  const campos=['timestamp','sesion','source','origen','simulado','q1','q2','diferencia_lmin','dif','tot1','tot2','razon','estado'];
+  const escapar=v=>'"'+String(v??'').replaceAll('"','""')+'"';
+  return campos.join(',')+'\r\n'+registros.map(r=>campos.map(k=>escapar(r[k])).join(',')).join('\r\n');
+}
+$('conectar').addEventListener('click',conectar);$('desconectar').addEventListener('click',limpiar);
+$('exportar').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob(['\ufeff'+csv()],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='testeo_usb_real.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+setInterval(dibujar,1000);dibujar();
+</script>
+</html>
