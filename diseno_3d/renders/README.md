@@ -1,5 +1,7 @@
 # Renders de Alta Calidad
 
+> **Plantilla para una etapa posterior: no corresponde rellenarla en Avance 2.** Renders finales. El contenido siguiente se conserva como referencia; sus cifras, componentes de ejemplo, marcas de verificación y frases de logro no son resultados del Alpha ni requisitos adicionales de la guía actual. Ver la [documentación de esta entrega](../README.md).
+
 ## Renders Requeridos (Mínimo 4 ángulos)
 
 ### 1. Vista Isométrica Frontal
