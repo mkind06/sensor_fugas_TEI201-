@@ -1,101 +1,36 @@
-# Documentación de Software
+# Documentación de Software - Avance 2
 
-## Contenido
+## Funciones
 
-### Diagramas de Flujo
-El diagrama de flujo del programa está en `software/` (sección *Arquitectura del Software*). Pendiente: exportarlo como imagen (draw.io → PNG).
+| Función | Responsabilidad |
+|---|---|
+| setup() | Inicia Serial a 115200, LED apagados e INPUT para sensores |
+| muestrear(i) | Lee el canal 0 o 1; actualiza nivel, cuenta y pulsos tras cinco lecturas consecutivas |
+| luces(v,a,r) | Escribe HIGH/LOW en GPIO4/5/6 |
+| loop() | Programa muestreo, calcula cada 10 s nominales, clasifica y reporta |
 
-### Documentación de Funciones
+El filtro exige estabilidad de varias muestras; no demuestra que todo ruido se descarte ni que se cubra toda la frecuencia del rango comercial del sensor. La [arquitectura](../README.md) describe fórmulas, parámetros y límites.
 
-#### `muestrear(int i)`
-- **Propósito:** contar los pulsos del sensor *i* descartando el ruido eléctrico del motor de la bomba.
-- **Parámetros:** `i` (`int`) – índice del sensor: 0 = entrada, 1 = salida.
-- **Retorna:** nada. Actualiza `nivel[i]`, `cuenta[i]` y `pulsos[i]`.
-- **Funcionamiento:** si la lectura difiere del último nivel estable, incrementa un contador; solo acepta el cambio si se repite `ESTABLE` = 5 veces seguidas (1 ms a 0,2 ms por muestra). Cuenta un pulso en cada flanco de subida aceptado. Los picos de ruido duran microsegundos y se descartan; los pulsos reales duran decenas de ms.
-- **Ejemplo de uso:**
-```cpp
-if (ahora - ultimaMuestra >= MUESTRA_US) {
-  ultimaMuestra = ahora;
-  muestrear(0);   // sensor de entrada
-  muestrear(1);   // sensor de salida
-}
-```
+## Instalación y operación
 
-#### `luces(bool v, bool a, bool r)`
-- **Propósito:** mostrar el estado del tramo con los LED.
-- **Parámetros:** `v`, `a`, `r` (`bool`) – encender verde, amarillo, rojo.
-- **Retorna:** nada.
-- **Ejemplo de uso:**
-```cpp
-luces(false, true, false);   // posible fuga: solo amarillo
-```
+1. Revisar [conexiones](../../hardware/esquemas/README.md), polaridad, uniones hidráulicas y recorrido de la derivación. La bomba debe estar sumergida y tener retorno de agua.
+2. Conectar ESP32 al computador con USB de datos y alimentar la bomba desde fuente USB independiente. La bomba se acciona manualmente.
+3. Consultar el Monitor Serie a 115200 o abrir el [panel reconstruido](../src/web/Panel_USB_Real.html), descargarlo y ejecutarlo en un contexto que permita Web Serial. Si el archivo local no habilita la API, servir la carpeta desde localhost.
+4. Para usar el panel, cerrar Monitor Serie y otras páginas que ocupen el puerto. Pulsar Conectar, seleccionar la placa y esperar unos 10–15 s para la primera línea; conectar puede reiniciar la placa.
+5. Con la derivación cerrada observar las lecturas; abrirla gradualmente y contrastar diferencia, LED y agua desviada. Verde significa Dif<10 %, amarillo 10–25 % y rojo desde 25 %, siempre que Q1≥0,5. Una lectura negativa también es verde según esta lógica.
+6. Exportar CSV antes de cerrar. El panel reconstruido conserva hasta 3600 registros locales, distingue desconexión, espera y datos vencidos a los 25 s, y etiqueta USB como ESP32_USB_REAL. No incluye el gráfico ni todas las funciones del panel anterior no localizado.
+7. Apagar primero la bomba, desconectar placa y vaciar/secar el montaje para guardarlo.
 
-#### `setup()`
-- **Propósito:** inicializar Monitor Serie, pines de LED (apagados) y de sensores (entrada sin pull-up; el divisor externo fija el nivel).
+## Diagnóstico
 
-#### `loop()`
-- **Propósito:** muestrear ambos sensores sin bloquear y, cada `VENTANA_MS` (10 s), calcular:
-  - `Q = pulsos / segundos × 60 / K` [L/min]
-  - `Dif = (Q1 − Q2) / Q1 × 100` [%] (solo si Q1 ≥ 0,5 L/min)
-  - Estado del LED y línea de reporte serie.
+| Síntoma | Comprobación y acción |
+|---|---|
+| COM ocupado | Cerrar monitor y otras aplicaciones del puerto; reconectar |
+| Sin salida USB | Revisar cable de datos, puerto, 115200 y USB CDC On Boot |
+| setup/loop redefinidos | Separar programas completos en carpetas diferentes |
+| Pulsos sin flujo | Revisar cableado y alimentación; hubo asociación con bomba conectada al PC |
+| Q=0 con bomba encendida | Revisar boquilla, aire, sentido y si giran las turbinas; puede haber caudal insuficiente |
+| Amarillo sin pérdida intencional | Comparar incrementos simultáneos y revisar ajuste; no forzar verde cambiando umbrales |
+| LED incorrecto | Comprobar GND real y orientación de ánodo/cátodo |
 
----
-
-## Manual de Instalación
-1. Instalar Arduino IDE y el soporte para ESP32 (ver `software/`).
-2. Placa **ESP32S3 Dev Module**, **USB CDC On Boot: Enabled**.
-3. Abrir `software/src/PruebaSensor/PruebaSensor.ino`, compilar y subir.
-4. Abrir Monitor Serie a 115200.
-
----
-
-## Manual de Operación
-
-### Encendido del Sistema
-1. Verificar el circuito hidráulico: **bomba → sensor 1 → llave de fuga → sensor 2 → recipiente**, con las uniones selladas con cinta.
-2. Conectar la ESP32 por USB (PC o cargador).
-3. Conectar la bomba a **su propio cargador**, nunca al mismo PC que la ESP32.
-4. Esperar la primera lectura (10 s). Con flujo y llave cerrada debe encenderse el LED verde.
-
-### Operación Normal
-1. Observar el LED: verde = normal, amarillo = posible fuga, rojo = fuga, apagados = sin flujo.
-2. Para simular una fuga, abrir gradualmente la llave de paso: los LED pasan de verde a amarillo y a rojo.
-3. Revisar en el Monitor Serie los valores de Q1, Q2 y diferencia.
-4. Considerar que el sistema responde en 10–20 s (una o dos ventanas de medición).
-
-### Apagado del Sistema
-1. Desconectar la bomba.
-2. Esperar una ventana: los LED se apagan (sin flujo).
-3. Desconectar la ESP32.
-4. Vaciar mangueras y secar los sensores si se van a guardar.
-
----
-
-## Troubleshooting
-
-**Problema 1: No conecta a WiFi**
-- Estado: la conectividad aún no está implementada.
-
-**Problema 2: Sensor marca pulsos sin agua circulando**
-- Causa probable: ruido del motor de la bomba entrando por la tierra USB compartida con el PC.
-- Solución: alimentar la bomba con su propio cargador. El filtro por software (1 ms) ya descarta los picos restantes.
-
-**Problema 3: Caudales irreales (decenas de L/min)**
-- Causa probable: ruido sumado a flujo irregular.
-- Solución: misma que el problema 2; verificar que la bomba esté sumergida y la boquilla sellada.
-
-**Problema 4: Las turbinas no giran / Q = 0 con la bomba encendida**
-- Causa probable: el agua se escapa en la unión bomba–manguera, o el caudal está bajo el mínimo del FS400A (1 L/min).
-- Solución: sellar la boquilla dentro de la manguera con cinta.
-
-**Problema 5: El Monitor Serie no muestra nada**
-- Causa probable: *USB CDC On Boot* desactivado o baudrate distinto.
-- Solución: activar *USB CDC On Boot: Enabled*, volver a subir y usar 115200.
-
-**Problema 6: Error `redefinition of 'void setup()'` al compilar**
-- Causa probable: dos programas en pestañas del mismo proyecto.
-- Solución: dejar una sola pestaña por proyecto.
-
-**Problema 7: LED amarillo sin fuga**
-- Causa probable: sensores descalibrados entre sí.
-- Solución: con la llave cerrada, leer `Razon T2/T1` y ajustar `K[1] = K[0] × razón`.
+La ventana de 10 s no prueba un tiempo de respuesta de 10–20 s. Q2=0 puede responder a flujo bajo; el rojo por sí solo no cuantifica una pérdida total. El panel clasifica números redondeados, por lo que cerca de umbrales puede diferir del cálculo interno de la placa.
