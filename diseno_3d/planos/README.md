@@ -1,5 +1,7 @@
 # Planos Técnicos
 
+> **Plantilla para una etapa posterior: no corresponde rellenarla en Avance 2.** Planos de fabricación v3. El contenido siguiente se conserva como referencia; sus cifras, componentes de ejemplo, marcas de verificación y frases de logro no son resultados del Alpha ni requisitos adicionales de la guía actual. Ver la [documentación de esta entrega](../README.md).
+
 ## Planos Requeridos
 
 ### 1. Plano de Conjunto
