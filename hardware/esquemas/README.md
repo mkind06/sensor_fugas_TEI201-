@@ -1,62 +1,67 @@
-# Esquemas de Circuito
+# Esquemas de Circuito - Avance 2
 
-## Esquema del circuito (texto)
+## Circuito eléctrico
 
-```
-                       +5V (pin 5V ESP32)
-                        │
-          ┌─────────────┴─────────────┐
-          │                           │
-     ┌────┴────┐                 ┌────┴────┐
-     │ FS400A  │ Sensor 1        │ FS400A  │ Sensor 2
-     │ (rojo)  │ entrada         │ (rojo)  │ salida
-     │ (negro)─┼──GND            │ (negro)─┼──GND
-     │(amarillo)                 │(amarillo)
-     └────┬────┘                 └────┬────┘
-          │ señal 5 V                 │ señal 5 V
-         [10 kΩ]                     [10 kΩ]
-          │                           │
-          ├────────► GPIO1            ├────────► GPIO2
-          │                           │
-         [20 kΩ]                     [20 kΩ]
-          │                           │
-         GND                         GND
-
-   V_GPIO = 5 V × 20k / (10k + 20k) ≈ 3,3 V
-
-
-   GPIO4 ──[330 Ω]──►|── GND    LED verde    (normal)
-   GPIO5 ──[330 Ω]──►|── GND    LED amarillo (posible fuga)
-   GPIO6 ──[330 Ω]──►|── GND    LED rojo     (fuga)
-
-   ESP32-S3 Super Mini ── USB-C ── PC / cargador
-   Bomba 3–6 V ── cargador USB independiente (sin conexión eléctrica con la ESP32)
+```mermaid
+flowchart LR
+  PC["Computador USB de datos"] --> ESP["ESP32-S3 Super Mini"]
+  ESP -->|"5 V y GND"| S1["FS400A entrada"]
+  ESP -->|"5 V y GND"| S2["FS400A salida"]
+  S1 -->|"Amarillo: señal"| R1["10 kΩ"]
+  R1 --> N1["Nodo S1"]
+  N1 -->|"GPIO1"| ESP
+  N1 --> D1["20 kΩ a GND"]
+  S2 -->|"Amarillo: señal"| R2["10 kΩ"]
+  R2 --> N2["Nodo S2"]
+  N2 -->|"GPIO2"| ESP
+  N2 --> D2["20 kΩ a GND"]
+  ESP -->|"GPIO4"| V["330 Ω → LED verde → GND"]
+  ESP -->|"GPIO5"| A["330 Ω → LED amarillo → GND"]
+  ESP -->|"GPIO6"| R["330 Ω → LED rojo → GND"]
+  USB["Fuente USB 5 V independiente"] -->|"WAGO: positivo y retorno separados"| B["Bomba manual"]
 ```
 
-Las conexiones exactas en cada protoboard están en `hardware/`.
+Los negros de ambos sensores, las resistencias inferiores y los cátodos comparten GND con la ESP32. Los rojos de los sensores reciben 5 V. La bomba tiene circuito de alimentación independiente, sin mando desde la placa. El divisor nominal entrega 5×20/(10+20)=3,33 V; no se ha comprobado con multímetro.
 
----
+## Coordenadas del montaje
 
-## Archivos Requeridos
+Cada fila conecta A–E y, por separado, F–J; la ranura separa ambos grupos. Identificar GPIO por serigrafía de placa y mantener la orientación usada por el equipo.
 
-### Formato Fritzing
-- `circuito_completo.fzz` – **pendiente**
-- `esquema_circuito.png` – **pendiente** (exigido por la guía: no basta con tablas)
+### Protoboard negra
 
-### Formato Wokwi
-- `wokwi_diagram.json`, `wokwi_screenshot.png`, `wokwi_link.txt` – **pendiente** (alternativa a Fritzing; Wokwi no tiene el FS400A, se puede representar con un generador de pulsos o un botón).
+| Elemento | Coordenadas |
+|---|---|
+| GPIO4 / resistencia verde 330 Ω | A3 / D3–D7 |
+| LED verde | Ánodo E7; cátodo F7 |
+| GPIO5 / resistencia amarilla 330 Ω | A8 / D8–D12 |
+| LED amarillo | Ánodo E12; cátodo F12 |
+| GPIO6 / resistencia roja 330 Ω | A13 / D13–D17 |
+| LED rojo | Ánodo E17; cátodo F17 |
+| GND ESP32 | J7 |
+| Puentes de retorno | I7–J12 e I12–J17 |
+| GND a blanca | H7 negra → B11 blanca |
 
----
+Las patas de cada LED cruzan la ranura central.
 
-## Nomenclatura de Archivos
-- Nombres descriptivos con versión: `v2_esquema_circuito.png`, `v2_circuito_completo.fzz`.
-- Fecha en formato `YYYYMMDD_descripcion`.
+### Protoboard blanca
 
----
+| Elemento | Sensor 1 | Sensor 2 |
+|---|---|---|
+| Señal amarilla | A3 | J3 |
+| 10 kΩ | D3–D7 | G3–G7 |
+| 20 kΩ | C7–C11 | H7–H11 |
+| Señal a placa | B7 → GPIO1 | I7 → GPIO2 |
+| Negro | A11 | J11 |
+| Rojo | A15 | J15 |
+| Alimentación | 5 V de placa → B15 | Puente E15–F15 |
+| Retorno | GND desde negra → B11 | Puente E11–F11 |
 
-## Notas de Diseño
-1. **Divisor de tensión 10k/20k:** los FS400A trabajan y entregan pulsos a 5 V, pero los GPIO de la ESP32-S3 toleran 3,3 V. El divisor deja ~3,3 V en el pin. Por eso los pines de sensores se configuran como `INPUT` sin pull-up: el divisor ya fija el nivel.
-2. **Resistencias de 330 Ω en los LED:** limitan la corriente desde 3,3 V a pocos mA, seguro para los GPIO.
-3. **Alimentación separada de la bomba:** el motor es una carga inductiva que inyectaba picos por la tierra USB compartida y generaba pulsos falsos. Con cargador propio, 0 pulsos sin flujo.
-4. **Dos protoboards:** la negra agrupa los LED (van hacia la tapa de la caja); la blanca agrupa los divisores y se ubica cerca de los prensaestopas para acortar los cables de los sensores.
-5. **Tierra común:** GND de la ESP32, ambas protoboards y los sensores están unidos (puente H7 negra → B11 blanca).
+## Recorrido hidráulico
+
+```mermaid
+flowchart LR
+  D["Depósito"] --> B["Bomba"] --> S1["Sensor 1"] --> T["Derivación T"] --> S2["Sensor 2"] --> D
+  T --> L["Llave de fuga regulable"] --> C["Recolección del agua desviada"]
+```
+
+La separación de fuentes y el filtro surgieron tras conteos espurios; el sellado de la boquilla resolvió una pérdida ajena a la derivación. Fritzing, Wokwi y planos finales no se presentan como archivos existentes: la guía exige un diagrama claro, sin imponer esos formatos.
