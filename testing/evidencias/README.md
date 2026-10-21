@@ -1,50 +1,22 @@
-# Evidencias de Testing
+# Evidencias de Testeo - Avance 2
 
-## Evidencia recibida del montaje final - Avance 2
+## Evidencia incorporada
 
-El equipo aportó dos fotografías originales, conservadas en [hardware/fotos](../../hardware/fotos/README.md). Permiten observar el banco completo y, en una de ellas, el monitor web con gráfico junto al concepto CAD. Las fotos no sustituyen registros de los tres estados ni una prueba continua de cinco minutos.
-
-## Contenido Requerido (estado)
-
-### Fotografías de banco (Avance #2)
-| Archivo | Contenido | Estado |
+| Evidencia disponible | Qué respalda | Límite |
 |---|---|---|
-| [Dos vistas del montaje final](../../hardware/fotos/README.md) | Banco hidráulico, sensores, llave, recipiente, electrónica y computador | Recibidas; ver alcance en sus leyendas |
-| `banco_led_verde.jpg` | Llave cerrada → verde | ⏳ |
-| `banco_led_amarillo.jpg` | Apertura parcial → amarillo | ⏳ |
-| `banco_led_rojo.jpg` | Llave abierta → rojo | ⏳ |
-| `monitor_serie_sin_fuga.png` | Q1 ≈ Q2, Dif ≈ 0 % | ⏳ |
-| `monitor_serie_fuga.png` | Q2 = 0, Dif = 100 % | ⏳ |
+| [Dos fotos del montaje final](../../hardware/fotos/README.md) | Banco hidráulico, dos sensores, protoboards y computador; monitor web y CAD visibles en una toma | No registran secuencia de estados ni duración continua |
+| [Siete mediciones reales](../datos/lecturas_preajuste.csv) | Diagnóstico previo al ajuste con condición y parámetros identificados | Todas son anteriores al ajuste final; no son un ensayo de cinco minutos |
+| [Logs históricos](../datos/diagnostico.md) | Problemas de lectura e iteración del montaje | Bloques separados, sin fecha de ensayo completo |
+| Reporte del equipo | La presentación mostró normalidad, advertencia y fuga | Observación cualitativa sin registro final guardado |
 
-### Videos
-| Archivo | Contenido | Estado |
-|---|---|---|
-| `demo_fuga_gradual.mp4` | Abrir la llave de a poco: verde → amarillo → rojo, con Monitor Serie visible | ⏳ (sirve de plan B para la demo) |
-| `estabilidad_5min.mp4` | Sistema funcionando 5 min seguidos | ⏳ |
+El [Testeo sintético de verde](../datos/testeo_verde.md) verifica lógica y se mantiene separado de la evidencia física.
 
-### Sesiones con usuarios e instalación en terreno (Avance #3)
-- `sesion_U01_[fecha].jpg` … `sesion_U05_[fecha].jpg`
-- `instalacion_linea_riego_[fecha].jpg`
+## Evidencia que falta respaldar
 
----
+La guía, sección 3.1, exige operación integrada continua durante un mínimo de cinco minutos y actuación visible coherente con las lecturas. Falta conservar un registro de esa duración con la configuración final y evidencia legible de los estados. Si la operación fue observada directamente por el evaluador, eso puede ser parte de la evaluación presencial; el repositorio no permite verificarla independientemente.
 
-## Privacidad y Consentimiento
-- [ ] Consentimiento informado de cada usuario
-- [ ] Explicar uso académico de las imágenes
-- [ ] Ofrecer anonimato (difuminar rostros, usar iniciales)
+Un video continuo que muestre banco, indicadores y lecturas, acompañado de CSV real, sería una forma de respaldarlo. La guía no impone nombres como banco_led_verde.jpg ni obliga a entregar un archivo de video específico. Las capturas adicionales y primeros planos son medios sugeridos para hacer la documentación más clara, no nuevos requisitos académicos.
 
----
+## Fuera de esta entrega
 
-## Organización de Archivos
-```
-evidencias/
-├── fotos/
-│   ├── banco/
-│   ├── sesiones_usuarios/
-│   └── instalacion_terreno/
-├── videos/
-└── consentimientos/
-```
-
-## Nomenclatura
-`[tipo]_[identificador]_[YYYYMMDD].jpg` → p. ej. `banco_led_rojo_20261020.jpg`
+No se presentan sesiones con usuarios externos o instalación en campo como realizadas. Esas actividades y sus reportes corresponden a desarrollos posteriores; no se agregan participantes, encuestas o métricas para completar una plantilla.
