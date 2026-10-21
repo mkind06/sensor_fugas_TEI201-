@@ -1,5 +1,7 @@
 # Presentación Final
 
+> **Plantilla para una etapa posterior: no corresponde rellenarla en Avance 2.** Presentación final de Avance 3. El contenido siguiente se conserva como referencia; sus cifras, componentes de ejemplo, marcas de verificación y frases de logro no son resultados del Alpha ni requisitos adicionales de la guía actual. Ver la [documentación de esta entrega](../README.md).
+
 ## Formato de la Presentación
 
 **Archivo:** `presentacion_avance3.pdf` o `.pptx`
