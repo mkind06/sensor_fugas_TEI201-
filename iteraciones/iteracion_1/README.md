@@ -1,5 +1,7 @@
 # Iteración 1 - Concepto Inicial
 
+> **Antecedente histórico conservado.** Este documento precede a la revisión del Avance 2 y no acredita por sí solo la entrega oficial de Avance 1. Su fecha, referencias a v1 y diagnósticos causales no fueron corroborados con registros completos. Para la evolución sustentada del Alpha, consultar el [historial actualizado](../README.md) y los [registros disponibles](../../testing/datos/diagnostico.md). K2=275 y la ventana de 3 s son antecedentes; la configuración actual es K2=229 y 10 s.
+
 ## Información General
 **Fecha:** 19/10/2026
 **Versión:** v1.0
