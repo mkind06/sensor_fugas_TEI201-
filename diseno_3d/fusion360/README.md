@@ -1,5 +1,7 @@
 # Archivos Fusion 360
 
+> **Plantilla para una etapa posterior: no corresponde rellenarla en Avance 2.** Archivo nativo v3 e historial. El contenido siguiente se conserva como referencia; sus cifras, componentes de ejemplo, marcas de verificación y frases de logro no son resultados del Alpha ni requisitos adicionales de la guía actual. Ver la [documentación de esta entrega](../README.md).
+
 ## Archivos Requeridos
 
 ### `modelo_completo_v3.f3d`
