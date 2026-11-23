@@ -36,7 +36,7 @@ flowchart LR
 | Período de publicación | 1 s | El dashboard se actualiza en tiempo real; un cambio de caudal se ve en ~1 s |
 | Ventana del estado | 5 s (promedio móvil) | A ~4 L/min un FS400A entrega pocos pulsos por segundo; promediar 5 s evita que el LED parpadee por un pulso de más o de menos. En Avance 2 la ventana fija de 10 s hacía la respuesta lenta |
 | Antirrebote | 2 ms | Descarta pulsos espurios causados por el ruido del motor; a la frecuencia de trabajo los pulsos reales están separados por mucho más de 2 ms |
-| K1 / K2 | 288 / 229 pulsos/L | Ajuste relativo de Avance 2. K2 se puede reenviar desde el dashboard (`K2=...`) |
+| K1 / K2 | 288 / 229 pulsos/L | Ajuste relativo de Avance 2. Se cambian en el código o por USB con el comando `K2=...` |
 | Q_MIN | 0,5 L/min | Bajo este caudal de entrada no se evalúa: LED apagados, estado SIN_FLUJO |
 | Umbrales | < 10 % normal · < 25 % advertencia · ≥ 25 % fuga | Iguales a Avance 2 |
 | Pines | S1 → GPIO 8, S2 → GPIO 2, LED → GPIO 4/5/6 | La señal de S1 se movió de GPIO 1 a GPIO 8 durante el diagnóstico de la placa soldada (ver [testing](../testing/resultados_avance3.md)) |
@@ -75,7 +75,6 @@ Por USB (una línea) o por WiFi (`GET /cmd?c=...`): `n`, `a`, `f` activan un esc
 | Agua perdida estimada en la sesión (L) | Cuantificar el desperdicio |
 | Tiempo en cada estado y registro de eventos | Saber cuándo empezó una fuga y cuánto duró |
 | Gráficos de caudal y de diferencia con umbrales | Ver tendencias y si la fuga empeora |
-| Calibración (razón T2/T1 y K2 sugerido) | Ajustar los sensores con la llave cerrada |
 
 ## Persistencia de los datos
 
