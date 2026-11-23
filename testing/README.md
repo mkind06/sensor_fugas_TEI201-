@@ -1,4 +1,14 @@
-# Testeo - Avance 2
+# Testeo - Avance 3
+
+| Documento | Contenido |
+|---|---|
+| [Protocolo de pruebas](protocolo_avance3.md) | Nueve pruebas con procedimiento, criterio de éxito y evidencia esperada |
+| [Resultados y fallas](resultados_avance3.md) | Resultados medidos, cuatro fallas analizadas con su solución, validación contra el problema y mejoras |
+| [Datos](datos/README.md) | CSV de pruebas (Avance 2 y los que se exporten desde el dashboard) |
+
+---
+
+# Testeo - Avance 2 (antecedente)
 
 ## Propósito
 
