@@ -2,6 +2,17 @@
 
 TEI201 · Taller de Diseño en Ingeniería · Universidad Adolfo Ibáñez.
 
+**Integrantes:** Andrés García · Pablo Miranda · Macarena Kuperman · Mathias Kind
+
+## Avance 3: prototipo final
+
+| Contenido | Documento |
+|---|---|
+| Fuentes, librerías y uso de IA | [FUENTES.md](FUENTES.md) |
+| Componentes y costos | [BOM](hardware/bom/README.md) |
+| Fotografías del banco de PVC 32 mm | [Evidencia fotográfica](hardware/fotos/README.md) |
+| Caja v3, gemelo 3D de la demo, renders y visor | [Diseño 3D](diseno_3d/README.md) |
+
 ## Avance 2: primer prototipo físico Alpha
 
 El banco recircula agua por dos sensores FS400A y permite abrir una derivación entre ellos. Una ESP32-S3 Super Mini estima los caudales, compara su diferencia y activa un LED verde, amarillo o rojo. La comunicación disponible es USB serie al computador. La bomba se enciende manualmente y tiene alimentación independiente.
