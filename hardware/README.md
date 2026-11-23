@@ -1,4 +1,48 @@
-# Hardware - Avance 2
+# Hardware - Avance 3
+
+## Cambios respecto a Avance 2
+
+| Avance 2 | Avance 3 | Motivo |
+|---|---|---|
+| Dos mini protoboards con jumpers | Placa perforada 5 × 7 cm soldada | Conexiones firmes que no se sueltan al mover el banco (requisito de montaje y de la guía) |
+| ESP32 enchufada en protoboard | ESP32 sobre **cabezales hembra soldados** | Se retira y reemplaza sin desoldar (diseño para la reparación) |
+| Sensores directo a la protoboard | **Conectores de 3 pines** por sensor + cables macho-macho | Cada sensor se desconecta en segundos para cambiarlo o moverlo |
+| ESP32 alimentada por el USB del PC | **Fuente propia** por pines 5V/GND; USB solo para programar | El sistema opera sin computador |
+| Comunicación USB serie | **WiFi propio** con dashboard en el navegador + USB | Los datos se ven en otro dispositivo |
+| Banco con mangueras | Banco de PVC 32 mm con válvula de bola como fuga | Circuito rígido, repetible ([fotos](fotos/README.md)) |
+| S1 en GPIO 1 | S1 en GPIO 8 | Cambio durante el diagnóstico de la placa soldada (ver [testing](../testing/resultados_avance3.md)) |
+
+## Justificación de componentes
+
+| Componente | Por qué |
+|---|---|
+| ESP32-S3 Super Mini | WiFi integrado para el dashboard, interrupciones por hardware para contar pulsos de dos sensores, 3,3 V lógicos, tamaño 22 × 18 mm que cabe en la caja, bajo costo (~CLP 10.000) |
+| 2 × FS400A G1 (efecto Hall) | Rosca de 1" compatible con tubería de riego, salida de pulsos proporcional al caudal (lectura digital sin ADC), rango comercial 1–60 L/min y ±5 % según la ficha, alimentación 5–18 V. Usar dos sensores iguales permite comparar entrada y salida del tramo |
+| Divisores 10 kΩ / 20 kΩ | La salida del FS400A va a 5 V y el GPIO tolera 3,3 V: 5 × 20/30 = 3,33 V. Las resistencias altas consumen < 0,2 mA |
+| LED verde / amarillo / rojo con resistencia en serie | Alerta local visible en terreno sin necesidad de pantalla; cada LED a ~2–3 mA desde un GPIO |
+| Cabezales hembra y conectores de 3 pines | Permiten reemplazar la ESP32 o un sensor sin herramientas |
+| Mini bomba sumergible 5 V con fuente aparte | Simula el riego en el banco; su fuente independiente evita el ruido y los reinicios observados al compartir alimentación |
+| Válvula de bola en una tee entre sensores | Fuga controlada y repetible para validar los tres estados |
+
+## Alimentación
+
+- **ESP32 y sensores:** fuente de 5 V a los pines **5V** y **GND** de la placa; los sensores toman 5 V desde la misma línea. No conectar la fuente y el USB del computador al mismo tiempo.
+- **Bomba:** powerbank / fuente USB propia con empalmes WAGO, sin conexión eléctrica con la placa.
+
+## Diseño para la reparación
+
+| Pieza | Cómo se cambia |
+|---|---|
+| ESP32 | Se desenchufa de los cabezales hembra |
+| Sensor de flujo | Se desconectan sus 3 cables del conector y se desenrosca del PVC |
+| Placa completa | Sale de la caja quitando los 4 tornillos M3 de la tapa ([diseño 3D](../diseno_3d/README.md)) |
+| Bomba | Conexión por WAGO, se suelta sin herramientas |
+
+Los detalles de cada soldadura, el esquema y las coordenadas están en [esquemas](esquemas/README.md).
+
+---
+
+# Hardware - Avance 2 (antecedente)
 
 ## Sistema construido
 
