@@ -1,4 +1,14 @@
-# Historial de Iteraciones - Avance 2
+# Historial de Iteraciones
+
+| Iteración | Documento | Resumen |
+|---|---|---|
+| v1 | [iteracion_1](iteracion_1/README.md) | Propuesta inicial (contexto histórico) |
+| v2 · Alpha (Avance 2) | [iteracion_2](iteracion_2/README.md) | Dos FS400A, protoboards, USB serie, LED |
+| v3 · Avance 3 | [iteracion_3](iteracion_3/README.md) | Banco PVC, placa soldada reparable, fuente propia, WiFi y dashboard |
+
+---
+
+# Detalle de la iteración 2 (Avance 2)
 
 La evolución técnica siguiente corresponde al desarrollo del Alpha. No reconstruye ni modifica la entrega oficial de Avance 1 y no declara una versión final realizada.
 
@@ -23,6 +33,6 @@ El equipo orientó la aplicación a sistemas agrícolas y agronomía en el campo
 
 ## Estado de esta iteración
 
-La [iteración 2](iteracion_2/README.md) documenta el Alpha actual. El [testeo](../testing/README.md) conserva los datos preajuste, el cálculo relativo y el reporte de demostración, sin porcentajes inventados de mejora. La [iteración 1](iteracion_1/README.md) conserva el documento anterior; sus afirmaciones deben leerse en su contexto histórico. La [iteración 3](iteracion_3/README.md) queda pendiente.
+La [iteración 2](iteracion_2/README.md) documenta el Alpha actual. El [testeo](../testing/README.md) conserva los datos preajuste, el cálculo relativo y el reporte de demostración, sin porcentajes inventados de mejora. La [iteración 1](iteracion_1/README.md) conserva el documento anterior; sus afirmaciones deben leerse en su contexto histórico. La [iteración 3](iteracion_3/README.md) documenta el Avance 3.
 
 El feedback textual del profesor, la distribución de roles y las métricas de impacto no fueron aportados. Los pasos siguientes son guardar una corrida física continua de cinco minutos con la configuración final, calibrar mediante volumen conocido y verificar medidas de componentes antes de fabricar la caja.
