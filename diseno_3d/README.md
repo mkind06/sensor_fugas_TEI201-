@@ -1,4 +1,24 @@
-# Encapsulado conceptual - Avance 2
+# Diseño 3D
+
+## Avance 3: caja v3 y gemelo de la demostración
+
+| Archivo | Contenido |
+|---|---|
+| [caja_v3_base.step](cad/caja_v3_base.step), [caja_v3_tapa.step](cad/caja_v3_tapa.step) | Caja v3 en PETG, base y tapa por separado |
+| [caja_v3_ensamble_electronica.step](cad/caja_v3_ensamble_electronica.step) | Caja con placa perforada 5 × 7 cm, ESP32 en cabezales, resistencias, borneras, LED, prensaestopas y tornillos |
+| [gemelo_demo_completo.step](cad/gemelo_demo_completo.step) | Banco de demostración completo: estanque, PVC 32 mm, 2 FS400A, válvula de fuga y caja con cables |
+| [fuente/](cad/fuente) | Scripts CadQuery que generan los STEP (`modelo_caja.py`, `modelo_demo.py`) |
+| [renders/](renders/README.md) | 4 renders de la caja y de la demo |
+| [visor/visor_3d.html](visor/visor_3d.html) | Visor web del gemelo: girar, acercar y abrir la caja |
+
+Cambios respecto del concepto del Avance 2:
+- La electrónica pasa de dos protoboards a una placa perforada soldada sobre 4 postes; la ESP32 va en cabezales hembra y se reemplaza sin desoldar.
+- La ventana USB-C sube a 20,5 mm de altura (centro) para alinearse con la ESP32 montada en cabezales.
+- Se mantienen la tapa con 4 tornillos M3 × 10, los 2 prensaestopas PG7 y los 3 LED de 5 mm en la tapa.
+
+Para Fusion 360: abrir el STEP (Archivo → Abrir) y guardarlo como `.f3d` en [`fusion360/`](fusion360/README.md). Las medidas de la ESP32, la placa, las borneras y el banco son referenciales; confirmarlas antes de imprimir.
+
+## Avance 2: encapsulado conceptual
 
 ## Archivos disponibles
 

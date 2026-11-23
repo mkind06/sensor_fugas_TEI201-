@@ -1,4 +1,27 @@
-# Bill of Materials (BOM) - Avance 2
+# Bill of Materials (BOM)
+
+## Avance 3: componentes y costos
+
+| N.º | Componente | Especificación | Proveedor | Cant. | Costo unitario (CLP) | Costo total (CLP) |
+|---|---|---|---|---|---|---|
+| 1 | Tubo PVC | 32 × 1,6 mm PN10 × 1 m | Sodimac | 2 | 1.118 | 2.236 |
+| 2 | Sensor de flujo | FS400A, caudalímetro 1–60 L/min, efecto Hall | Mercado Libre | 2 | 19.990 | 39.980 |
+| 3 | Soldadura de lápiz | 60/40, 17 g | Sodimac | 1 | 3.990 | 3.990 |
+| 4 | Mini bomba sumergible | 120 L/h | Mercado Libre | 1 | 5.990 | 5.990 |
+| 5 | Codo PVC | Presión 32 mm | Sodimac | 3 | 338 | 1.014 |
+| 6 | Llave de paso | Válvula de bola PVC 32 mm | Sodimac | 1 | 2.790 | 2.790 |
+| 7 | Cabezales | Tira 40 pines hembra 2,54 mm | Mercado Libre | 1 | 2.890 | 2.890 |
+| 8 | Cables | Dupont 40 u. macho-hembra 10 cm | Mercado Libre | 1 | 3.000 | 3.000 |
+| 9 | Placa perforada | 5 × 7 cm | — | 1 | 0 | 0 |
+| | **Subtotal gastado por el equipo** | | | | | **61.890** |
+| 10 | ESP32-S3 Super Mini* | WiFi y Bluetooth, USB-C | Afel (referencia) | 1 | 9.990 | 9.990 |
+| 11 | LED 5 mm* | Verde, amarillo y rojo | Afel (referencia) | 3 | 70 | 210 |
+| 12 | Resistencias 1/4 W* | 3 × 330 Ω, 2 × 10 kΩ, 2 × 20 kΩ | Mechatronic Store (referencia) | 7 | 100 | 700 |
+| | **Total con precios de referencia** | | | | | **72.790** |
+
+\* Aportado por la universidad, sin costo para el equipo. Se informa un precio de referencia de tiendas chilenas (consultado el 22-11-2026) para estimar el costo de replicar el prototipo.
+
+## Avance 2: materiales confirmados
 
 ## Materiales confirmados
 

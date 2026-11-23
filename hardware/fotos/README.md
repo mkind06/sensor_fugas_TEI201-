@@ -19,3 +19,21 @@ El equipo aportó las siguientes fotografías, identificadas por el usuario como
 Las fotografías cubren la vista general del banco y muestran que el equipo disponía de un monitor web. No acreditan por sí solas cinco minutos de funcionamiento continuo, la secuencia de los tres LED, calibración absoluta o ahorro de agua. Falta una toma cercana legible de las conexiones críticas y, si se dispone de ellas, capturas de los tres estados y registros físicos continuos.
 
 El [panel archivado](../../software/src/README.md) sigue identificado como una reconstrucción: la foto del monitor utilizado no reemplaza su HTML original. El [modelo CAD](../../diseno_3d/README.md) es evidencia del concepto, no de fabricación de la caja.
+
+## Avance 3: banco de PVC 32 mm
+
+El equipo aportó tres fotografías del nuevo banco hidráulico, tomadas el 22-11-2026. Se conservan en resolución completa.
+
+![Vista frontal del banco de PVC](03_banco_pvc_frontal.jpeg)
+
+**Figura 3.** Vista frontal: un FS400A en cada pierna del circuito y, al centro del tramo inferior, una tee con la válvula de bola que simula la fuga.
+
+![Vista diagonal del banco de PVC](04_banco_pvc_diagonal.jpeg)
+
+**Figura 4.** Vista diagonal: el circuito sale del estanque (bidón cortado) y vuelve a él.
+
+![Vista lateral del banco de PVC](05_banco_pvc_lateral.jpeg)
+
+**Figura 5.** Vista lateral del circuito cerrado de recirculación.
+
+Estas fotos muestran solo la parte hidráulica. Falta una fotografía de la electrónica soldada y, si se imprime, de la caja.

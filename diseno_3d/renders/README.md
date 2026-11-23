@@ -1,56 +1,12 @@
-# Renders de Alta Calidad
+# Renders - Avance 3
 
-> **Plantilla para una etapa posterior: no corresponde rellenarla en Avance 2.** Renders finales. El contenido siguiente se conserva como referencia; sus cifras, componentes de ejemplo, marcas de verificación y frases de logro no son resultados del Alpha ni requisitos adicionales de la guía actual. Ver la [documentación de esta entrega](../README.md).
+Renders generados con PyVista a partir de los modelos STEP de [`../cad`](../cad). Los volúmenes de la ESP32, la placa perforada, las borneras y el banco de PVC son referenciales: no son mediciones del prototipo.
 
-## Renders Requeridos (Mínimo 4 ángulos)
+| Archivo | Qué muestra |
+|---|---|
+| `01_caja_exterior.png` | Caja cerrada: LED en la tapa, tornillos M3 y ventana USB-C |
+| `02_caja_explosionada.png` | Tapa levantada: placa perforada, ESP32 en cabezales hembra, resistencias, borneras y prensaestopas |
+| `03_demo_completa.png` | Banco de demostración: estanque, circuito de PVC 32 mm, sensores FS400A, válvula de fuga y caja |
+| `04_demo_detalle_caja.png` | Detalle de la caja abierta con los cables de los sensores entrando por los prensaestopas |
 
-### 1. Vista Isométrica Frontal
-`01_isometrica_frontal.png`
-- Muestra exterior completo
-- Iluminación clara
-- Resolución: 1920×1080 mínimo
-
-### Renders Opcionales (Recomendados)
-- `02_detalle_sensores.png` - Close-up de sensores
-- `03_ensamble_explosionado.png` - Componentes separados
-- `04_variantes_color.png` - Si hay opciones de diseño
-
----
-
-## Configuración de Render en Fusion 360
-
-### Settings Recomendados
-- **Render Engine:** Local / Cloud
-- **Environment:** [Tipo de iluminación]
-- **Resolution:** 1920×1080 o superior
-- **Quality:** High
-- **Exposure:** [Ajustado para visibilidad]
-- **Effects:** Ambient Occlusion ON
-
-### Materiales y Apariencias
-Asignar materiales realistas:
-- Plástico: PLA/ABS mate o satinado
-- Electrónica: PCB verde, componentes negros
-- Metales: Tornillos acero inoxidable
-
----
-
-## Nomenclatura de Archivos
-```
-[numero]_[descripcion]_[version].png
-
-Ejemplo:
-01_isometrica_frontal_v3.png
-```
-
----
-
-## Checklist de Calidad
-
-- [ ] Resolución mínima 1920×1080
-- [ ] Formato PNG (con transparencia si aplica)
-- [ ] Iluminación sin sombras excesivas
-- [ ] Componentes internos visibles en corte
-- [ ] Fondo neutro o contextual apropiado
-- [ ] Sin aliasing o bordes pixelados
-- [ ] Todos los componentes críticos visibles
+El [visor 3D](../visor/visor_3d.html) permite girar el modelo de la demo en el navegador (necesita internet para cargar three.js).
