@@ -1,4 +1,4 @@
-# Fotografías del Prototipo - Avance 2
+# Fotografías del Prototipo
 
 El equipo aportó las siguientes fotografías, identificadas por el usuario como el montaje final. Los JPEG se conservan sin edición. La fecha del nombre de WhatsApp identifica el archivo recibido; no se usa como prueba independiente de la fecha de captura o de la evaluación.
 
@@ -36,4 +36,20 @@ El equipo aportó tres fotografías del nuevo banco hidráulico, tomadas el 22-1
 
 **Figura 5.** Vista lateral del circuito cerrado de recirculación.
 
-Estas fotos muestran solo la parte hidráulica. Falta una fotografía de la electrónica soldada y, si se imprime, de la caja.
+## Avance 3: electrónica soldada y sistema integrado (23-11-2026)
+
+![Sistema integrado: banco de PVC, sensores y placa en caja de conexiones](06_sistema_integrado.jpg)
+
+**Figura 6.** Sistema integrado: banco de PVC con los dos FS400A, la tee con válvula de fuga y la placa soldada dentro de una caja plástica de conexiones abierta. Los sensores llegan con conectores de 3 pines y la bomba se alimenta por separado (empalmes WAGO junto al estanque).
+
+![Placa perforada, cara de componentes](07_placa_superior.jpg)
+
+**Figura 7.** Cara de componentes: ESP32-S3 sobre cabezales hembra (se retira sin desoldar), tres LED con sus resistencias y, a la izquierda, el conector largo de los sensores con los dos divisores 10 kΩ / 20 kΩ.
+
+![Placa perforada, cara de soldaduras](08_placa_inferior.jpg)
+
+**Figura 8.** Cara de soldaduras: cables aislados de alimentación, tierra y señal entre la ESP32, la línea de tierra de los LED y los conectores de los sensores.
+
+![Detalle de los divisores de voltaje](09_placa_divisores.jpg)
+
+**Figura 9.** Detalle del conector de sensores y los divisores (beige 10 kΩ, azul 20 kΩ) del sensor 1 (arriba) y del sensor 2 (abajo).
