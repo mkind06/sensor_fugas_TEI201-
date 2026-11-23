@@ -41,9 +41,9 @@ No se copió código de tutoriales, foros ni otros repositorios. El firmware y l
 
 ### Dashboards (`software/src/web/`, `docs/index.html`)
 - **Herramienta:** Claude (Anthropic), 22 y 23 de noviembre de 2026.
-- **Uso:** semáforo de estado, indicadores (caudales, diferencia, agua perdida), gráficos en `<canvas>`, tiempo por estado, eventos, ayuda de calibración, exportación CSV y conexión por WiFi (`fetch`) o USB (Web Serial).
+- **Uso:** semáforo de estado, indicadores (caudales, diferencia, agua perdida), gráficos en `<canvas>`, tiempo por estado, eventos, exportación CSV y conexión por WiFi (`fetch`) o USB (Web Serial).
 - **Adaptación del equipo:** se definieron los indicadores útiles para el problema (agua perdida, tiempo en fuga, eventos) y los umbrales del proyecto. Antes de la presentación se probaron contra una ESP32 simulada con el mismo formato JSON del firmware real; la prueba con la placa se registra en [testing](testing/resultados_avance3.md).
-- **Comprensión:** la página recibe una lectura por segundo, integra los caudales en el tiempo para estimar litros (`L += Q × Δt / 60`), acumula segundos por estado y registra un evento cuando el estado cambia. El K2 sugerido es `K1 × (pulsos2 / pulsos1)` medidos con la válvula cerrada.
+- **Comprensión:** la página recibe una lectura por segundo, integra los caudales en el tiempo para estimar litros (`L += Q × Δt / 60`), acumula segundos por estado y registra un evento cuando el estado cambia.
 
 ### Encapsulado y gemelo 3D (`diseno_3d/`)
 - **Herramienta:** Claude (Anthropic), noviembre de 2026, con CadQuery (Python).
