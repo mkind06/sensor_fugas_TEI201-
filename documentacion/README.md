@@ -1,4 +1,32 @@
-# Estado documental - Avance 2
+# Estado de la entrega - Avance 3
+
+Revisión frente al checklist de la guía del Avance 3 (23-11-2026).
+
+| Checklist de la guía | Estado | Dónde |
+|---|---|---|
+| Captura continua de datos | ✅ Sensor 2 y firmware publicando cada 1 s · ⚠️ sensor 1 en reparación | [testing](../testing/resultados_avance3.md) |
+| Repositorio persistente | ✅ CSV estructurado exportado desde el dashboard · nube como siguiente paso | [software](../software/README.md#persistencia-de-los-datos) |
+| Dashboard funcional | ✅ Por WiFi desde la ESP32 y por USB / GitHub Pages | [software](../software/README.md) |
+| Información útil (alertas, indicadores) | ✅ Semáforo, % de diferencia, agua perdida, eventos, tiempo por estado | [software](../software/README.md#información-que-genera-el-dashboard) |
+| Código comentado en GitHub | ✅ | [software/src](../software/src/README.md) |
+| Justificación de componentes | ✅ | [hardware](../hardware/README.md#justificación-de-componentes) |
+| Esquemático actualizado | ✅ Esquema y coordenadas de la placa soldada | [esquemas](../hardware/esquemas/README.md) |
+| BOM con costos | ✅ | [bom](../hardware/bom/README.md) |
+| Fotos del prototipo (3 ángulos) | ✅ Banco, sistema integrado y placa soldada (ambas caras) | [fotos](../hardware/fotos/README.md) |
+| Encapsulado reparable | ✅ Tapa con 4 tornillos, ESP32 en cabezales, conectores | [diseño 3D](../diseno_3d/README.md) |
+| Archivo Fusion 360 (.f3d) | ⚠️ Pendiente: abrir `caja_v3_ensamble_electronica.step` en Fusion y guardar como `.f3d` en `diseno_3d/fusion360/` | [diseño 3D](../diseno_3d/README.md) |
+| Renders | ✅ 4 renders | [renders](../diseno_3d/renders/README.md) |
+| Planos en PDF | ⚠️ Pendiente exportar desde Fusion (Drawing) · existe DXF conceptual | [planos](../diseno_3d/planos/README.md) |
+| Protocolo y resultados de pruebas | ✅ | [testing](../testing/README.md) |
+| Falla analizada y resuelta | ✅ Cuatro fallas | [resultados](../testing/resultados_avance3.md#fallas-encontradas-y-cómo-se-resolvieron) |
+| Conexión con el problema | ✅ | [resultados](../testing/resultados_avance3.md#validación-contra-el-problema) |
+| FUENTES.md | ✅ | [FUENTES.md](../FUENTES.md) |
+| README completo | ✅ | [README](../README.md) |
+| Guion de la demo | ✅ | [guion](presentacion/guion_demo.md) |
+
+---
+
+# Estado documental - Avance 2 (antecedente)
 
 ## Revisión frente a la guía
 
