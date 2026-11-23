@@ -1,4 +1,18 @@
-# Librerías y entorno - Avance 2
+# Librerías y entorno - Avance 3
+
+| Dependencia | Versión | Uso |
+|---|---|---|
+| Arduino IDE | 1.8.19 (Windows Store 1.8.57.0) | Compilar y cargar |
+| Núcleo Arduino-ESP32 (Espressif) | Versión exacta por registrar (Herramientas → Placa → Gestor de tarjetas) | GPIO, interrupciones, `Serial` |
+| `WiFi.h` | Incluida en el núcleo ESP32 | Red propia (modo AP) o conexión a hotspot (modo STA) |
+| `WebServer.h` | Incluida en el núcleo ESP32 | Servidor HTTP: rutas `/`, `/data`, `/cmd` |
+| Web Serial API | Chrome / Edge | Dashboard por USB |
+
+No se instalan librerías externas. Los dashboards usan solo HTML, CSS y JavaScript propios (gráficos dibujados en `<canvas>`), por lo que funcionan sin internet.
+
+---
+
+# Librerías y entorno - Avance 2 (antecedente)
 
 | Dependencia | Versión conocida | Uso |
 |---|---|---|
