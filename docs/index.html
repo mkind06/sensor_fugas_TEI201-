@@ -54,7 +54,7 @@ button.sel,button.sel:hover:enabled{background:var(--ink);color:#fff;border-colo
 .kpi .val small{font-size:13px;letter-spacing:0;color:var(--muted);font-weight:450;margin-left:3px}
 .kpi .sub{font-size:12px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
 .two{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
-.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.two-eq{grid-template-columns:repeat(2,minmax(0,1fr))}
 canvas{width:100%;display:block}
 .c-flow{height:260px}.c-diff{height:200px}
 .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-bottom:6px;flex-wrap:wrap}
@@ -71,14 +71,10 @@ canvas{width:100%;display:block}
 .pill{font-size:11px;font-weight:700;padding:1px 7px;border-radius:10px;white-space:nowrap}
 .p-NORMAL{background:var(--green-bg);color:var(--green)}.p-ADVERTENCIA{background:var(--amber-bg);color:var(--amber)}
 .p-FUGA{background:var(--red-bg);color:var(--red)}.p-SIN_FLUJO,.p-SIN_DATOS,.p-INFO{background:var(--gray-bg);color:var(--muted)}
-.calib{font-size:13px}
-.calib .big{font-size:24px;font-weight:650;font-variant-numeric:tabular-nums}
-.calib .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin:8px 0 12px}
-.calib input{width:80px;padding:6px 8px;border:1px solid #c8d7cf;border-radius:7px}
 pre{background:#f3f6f3;border-radius:8px;padding:10px;font-size:11.5px;max-height:180px;overflow:auto;white-space:pre-wrap;margin:8px 0 0}
 details summary{cursor:pointer;font-weight:600;font-size:13px}
 footer{font-size:12px;color:var(--muted);margin-top:16px}
-@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.two,.three{grid-template-columns:1fr}}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.two,.two-eq{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -158,7 +154,7 @@ footer{font-size:12px;color:var(--muted);margin-top:16px}
   </section>
 </div>
 
-<div class="row three">
+<div class="row two-eq">
   <section class="card">
     <h2>Tiempo en cada estado</h2>
     <div class="bar" id="stBar"></div>
@@ -167,18 +163,6 @@ footer{font-size:12px;color:var(--muted);margin-top:16px}
   <section class="card">
     <h2>Eventos</h2>
     <ul class="events" id="events"></ul>
-  </section>
-  <section class="card calib">
-    <h2>Calibración del sensor 2</h2>
-    <div class="muted">Con la llave de fuga <b>cerrada</b>, ambos sensores ven el mismo caudal. Deja correr agua 1–2 min y usa el K2 sugerido.</div>
-    <div class="grid2">
-      <div><div class="muted">Pulsos S1 / S2 (sesión)</div><div class="big" id="cTot">— / —</div></div>
-      <div><div class="muted">Razón T2/T1</div><div class="big" id="cRatio">—</div></div>
-      <div><div class="muted">K1 · K2 en la placa</div><div class="big" id="cK">— · —</div></div>
-      <div><div class="muted">K2 sugerido</div><div class="big" id="cSug">—</div></div>
-    </div>
-    <div class="toolbar"><input id="inK2" type="number" step="0.1" placeholder="K2"><button id="btnK2" disabled>Enviar K2 a la placa</button></div>
-    <div class="muted" style="font-size:12px;margin-top:6px">El valor enviado dura hasta que la placa se reinicia. Para dejarlo fijo, cámbialo también en el código (<code>float K2 = ...</code>).</div>
   </section>
 </div>
 
@@ -318,21 +302,6 @@ function render(){
   $("stBar").innerHTML = total ? keys.map(k=>`<div style="width:${stateTime[k]/total*100}%;background:${STATE_INFO[k].color}" title="${STATE_INFO[k].title}"></div>`).join("") : "";
   $("stList").innerHTML = keys.map(k=>`<span class="sw" style="background:${STATE_INFO[k].color}"></span><span>${STATE_INFO[k].title.split(" ·")[0]}</span><span>${hms(stateTime[k])} · ${total?fmt(stateTime[k]/total*100,0):"0"}%</span>`).join("");
 
-  // calibración
-  if (r && baseTot && Number.isFinite(r.tot1)) {
-    const t1 = r.tot1 - baseTot.t1, t2 = r.tot2 - baseTot.t2;
-    $("cTot").textContent = `${t1} / ${t2}`;
-    if (t1 > 50) {
-      const ratio = t2 / t1;
-      $("cRatio").textContent = fmt(ratio,3);
-      const k1 = lastK.k1 || 288;
-      $("cSug").textContent = r.estado === "NORMAL" || r.estado === "SIN_FLUJO" ? fmt(k1 * ratio,1) : fmt(k1 * ratio,1) + " ⚠";
-      $("cSug").title = "Si la llave de fuga está abierta, este valor no sirve para calibrar.";
-      if (!$("inK2").value || $("inK2").dataset.auto === "1") { $("inK2").value = (k1*ratio).toFixed(1); $("inK2").dataset.auto="1"; }
-    } else { $("cRatio").textContent = "—"; $("cSug").textContent = "faltan pulsos"; }
-  } else { $("cTot").textContent = "— / —"; $("cRatio").textContent = "—"; $("cSug").textContent = "—"; }
-  $("cK").textContent = lastK.k1 ? `${fmt(lastK.k1,1)} · ${fmt(lastK.k2,1)}` : "— · —";
-  $("btnK2").disabled = source !== "USB";
 
   // tags
   const to = $("tagOrigin");
@@ -541,14 +510,6 @@ document.querySelectorAll("#boardDemo button").forEach(b => b.onclick = async ()
 $("btnCsv").onclick = downloadCsv;
 $("btnReset").onclick = () => { if (!rows.length || confirmReset()) { resetSession(); addEvent("INFO","Nueva sesión iniciada."); } };
 function confirmReset(){ return window.confirm("¿Empezar una sesión nueva? Se borrarán las lecturas actuales (descarga el CSV antes si las necesitas)."); }
-$("inK2").oninput = () => { $("inK2").dataset.auto = "0"; };
-$("btnK2").onclick = async () => {
-  const v = parseFloat($("inK2").value);
-  if (!(v > 1 && v < 5000)) { say("Escribe un K2 válido (por ejemplo 236)."); return; }
-  const ok = await send("K2=" + v.toFixed(1));
-  say(ok ? `K2 = ${v.toFixed(1)} enviado a la placa. Inicia una <b>Nueva sesión</b> para medir con el valor nuevo.` : "No se pudo enviar el valor a la placa.");
-  if (ok) addEvent("INFO", `K2 cambiado a ${v.toFixed(1)} pulsos/L.`);
-};
 setInterval(render, 1000);
 if (hasSerial) navigator.serial.addEventListener("disconnect", () => { if (source==="USB") disconnect(true); });
 $("thrA").textContent = CFG.AMARILLO; $("thrR").textContent = CFG.ROJO; $("thrR2").textContent = CFG.ROJO; $("thrQ").textContent = fmt(CFG.Q_MIN,1);
