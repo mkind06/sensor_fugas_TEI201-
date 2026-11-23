@@ -1,4 +1,45 @@
-# Documentación de Software - Avance 2
+# Manual de instalación y operación - Avance 3
+
+## Cargar el firmware
+
+1. Instalar Arduino IDE y el soporte para ESP32 (Gestor de tarjetas → *esp32* de Espressif).
+2. Abrir `software/src/RiegoMonitor_WiFi/RiegoMonitor_WiFi.ino`.
+3. Herramientas → Placa **ESP32S3 Dev Module**, **USB CDC On Boot: Enabled**, elegir el puerto COM.
+4. Cerrar el Monitor Serie y pulsar **Subir**. Si no conecta: mantener **BOOT** mientras se enchufa el USB y volver a subir.
+5. Abrir el Monitor Serie a 115200: debe aparecer `WiFi: red propia "RiegoMonitor" ... Abre http://192.168.4.1` y luego una línea JSON por segundo.
+
+Opcional: completar `HOTSPOT_SSID` y `HOTSPOT_PASS` con un hotspot de 2,4 GHz para que la ESP32 se una a esa red; la IP aparece en el Monitor Serie.
+
+## Operar con WiFi (sin computador)
+
+1. Alimentar la ESP32 con su fuente por los pines **5V** y **GND** (no conectar fuente y USB a la vez). La bomba usa su propia fuente.
+2. Conectar los sensores al conector de la placa: **amarillo** (señal, a la altura de la resistencia de 10 kΩ), **rojo** (5 V) y **negro** (GND).
+3. Desde un celular o PC conectarse a la red **RiegoMonitor** (clave `riego1234`) y abrir **http://192.168.4.1**. Varias personas pueden verlo a la vez.
+4. Pulsar **Nueva sesión**, encender la bomba con la llave de fuga cerrada y comprobar que ambos caudales suben.
+5. Abrir la llave de fuga gradualmente y observar diferencia, estado y LED.
+6. Al terminar pulsar **Descargar CSV**.
+
+## Operar por cable USB (respaldo o GitHub Pages)
+
+Conectar la ESP32 al computador, abrir [docs/index.html](../../docs/index.html) (o la página de GitHub Pages) en Chrome o Edge y pulsar **Conectar ESP32 por USB**. Funciona con el mismo firmware.
+
+## Modo demo
+
+Los botones **Normal / Advertencia / Fuga** fijan caudales simulados en la placa (3,80 → 3,75 / 3,30 / 2,60 L/min), mueven los LED físicos y el dashboard, y quedan marcados como `DEMO SIMULADO` en pantalla y en el CSV. **Datos reales** vuelve a los sensores.
+
+## Diagnóstico rápido
+
+| Síntoma | Acción |
+|---|---|
+| No aparece la red RiegoMonitor | Revisar alimentación (LED rojo de la placa) y reiniciar |
+| 192.168.4.1 no carga | El celular se cambió a otra red: volver a RiegoMonitor y escribir `http://` completo |
+| Caudal 0 con bomba encendida | Aire en la bomba, flecha del sensor al revés o caudal bajo el mínimo del FS400A |
+| La ESP32 se reinicia al encender la bomba (`rst:0x7 TG0WDT`) | Alimentar la bomba con fuente independiente y alejar sus cables de la placa |
+| Un sensor no cuenta ni al soplarlo | Enchufarlo en el conector del otro sensor: si allí cuenta, la falla está en la placa (divisor o cable de señal) |
+
+---
+
+# Documentación de Software - Avance 2 (antecedente)
 
 ## Funciones
 
