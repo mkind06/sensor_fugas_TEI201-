@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Riego Monitor · Dashboard</title>
+<style>
+:root{
+  --ink:#173b35;--muted:#61756e;--line:#dde6e0;--paper:#f2f5f1;--card:#fff;
+  --green:#157a63;--green-bg:#e9f6ef;--amber:#a76a09;--amber-bg:#fff6e3;--red:#b73a3a;--red-bg:#fdeeed;
+  --gray:#7e928a;--gray-bg:#f1f4f2;--blue:#3f7fc4;--purple:#6b4aa0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 system-ui,"Segoe UI",sans-serif}
+main{max-width:1280px;margin:auto;padding:26px 24px 40px}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--green)}
+h1{font-size:30px;letter-spacing:-1px;margin:2px 0 0}
+h2{font-size:15px;margin:0 0 10px;font-weight:650}
+.muted{color:var(--muted)}
+.tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tag{padding:6px 11px;border-radius:20px;background:#e5ebe7;font-size:12px;font-weight:650;white-space:nowrap}
+.tag.real{background:var(--green-bg);color:var(--green)}
+.tag.sim{background:#efe9fa;color:var(--purple)}
+.tag.off{background:#e5ebe7;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button,select,input{font:inherit;font-size:13px}
+button{font-weight:600;cursor:pointer;border:1px solid #c8d7cf;border-radius:8px;background:#fff;padding:8px 13px;color:var(--ink)}
+button:hover:enabled{background:#eff5f1}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.primary{background:var(--green);border-color:var(--green);color:#fff}
+button.primary:hover:enabled{background:#0f6552}
+button.sel,button.sel:hover:enabled{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sep{width:1px;height:26px;background:var(--line);margin:0 4px}
+#msg{font-size:12px;color:var(--muted);margin-top:8px}
+.notice{background:#fff4dc;color:#6f4c0f;border:1px solid #ecd59c;padding:10px 13px;border-radius:9px;margin-top:10px;font-size:13px}
+.hidden{display:none!important}
+.row{display:grid;gap:14px;margin-top:14px}
+.status{display:flex;align-items:center;gap:18px;border-left:6px solid var(--gray);background:var(--gray-bg)}
+.status .lamp{display:flex;gap:7px}
+.status .lamp span{width:20px;height:20px;border-radius:50%;background:#d6ddd9;border:1px solid #c4cdc8}
+.status.normal{border-color:var(--green);background:var(--green-bg)}
+.status.warn{border-color:var(--amber);background:var(--amber-bg)}
+.status.leak{border-color:var(--red);background:var(--red-bg)}
+.lamp .g.on{background:#2ea36f;border-color:#1f8a5a;box-shadow:0 0 10px #2ea36f99}
+.lamp .y.on{background:#e8a92a;border-color:#c98b12;box-shadow:0 0 10px #e8a92a99}
+.lamp .r.on{background:#d84c4c;border-color:#b83535;box-shadow:0 0 10px #d84c4c99}
+.status strong{font-size:22px;letter-spacing:-.4px;display:block}
+.status .right{margin-left:auto;text-align:right;font-size:12px;color:var(--muted)}
+.kpis{grid-template-columns:repeat(4,1fr)}
+.kpi .label{font-size:12px;color:var(--muted)}
+.kpi .val{font-size:30px;font-weight:650;letter-spacing:-1px;font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi .val small{font-size:13px;letter-spacing:0;color:var(--muted);font-weight:450;margin-left:3px}
+.kpi .sub{font-size:12px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
+.two{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+canvas{width:100%;display:block}
+.c-flow{height:260px}.c-diff{height:200px}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-bottom:6px;flex-wrap:wrap}
+.legend b{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.chead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.range button{padding:4px 9px;font-size:12px}
+.bar{display:flex;height:16px;border-radius:8px;overflow:hidden;background:#eef2ef;margin:6px 0 10px}
+.bar div{height:100%}
+.stlist{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;font-size:13px;font-variant-numeric:tabular-nums}
+.sw{width:10px;height:10px;border-radius:3px;display:inline-block;margin-top:5px}
+.events{list-style:none;margin:0;padding:0;max-height:230px;overflow:auto;font-size:12.5px}
+.events li{padding:6px 0;border-bottom:1px solid #eef2ef;display:flex;gap:8px}
+.events time{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{font-size:11px;font-weight:700;padding:1px 7px;border-radius:10px;white-space:nowrap}
+.p-NORMAL{background:var(--green-bg);color:var(--green)}.p-ADVERTENCIA{background:var(--amber-bg);color:var(--amber)}
+.p-FUGA{background:var(--red-bg);color:var(--red)}.p-SIN_FLUJO,.p-SIN_DATOS,.p-INFO{background:var(--gray-bg);color:var(--muted)}
+.calib{font-size:13px}
+.calib .big{font-size:24px;font-weight:650;font-variant-numeric:tabular-nums}
+.calib .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin:8px 0 12px}
+.calib input{width:80px;padding:6px 8px;border:1px solid #c8d7cf;border-radius:7px}
+pre{background:#f3f6f3;border-radius:8px;padding:10px;font-size:11.5px;max-height:180px;overflow:auto;white-space:pre-wrap;margin:8px 0 0}
+details summary{cursor:pointer;font-weight:600;font-size:13px}
+footer{font-size:12px;color:var(--muted);margin-top:16px}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.two,.three{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div>
+    <div class="eyebrow">Taller de Diseño en Ingeniería · UAI</div>
+    <h1>Riego Monitor · Dashboard</h1>
+    <div class="muted">Balance de caudal entrada − salida para detectar fugas en el tramo.</div>
+  </div>
+  <div class="tags">
+    <span id="tagOrigin" class="tag off">SIN FUENTE</span>
+    <span id="tagSession" class="tag off">Sesión 00:00:00</span>
+    <span id="tagLast" class="tag off">Sin lecturas</span>
+  </div>
+</header>
+
+<section class="card">
+  <div class="toolbar">
+    <span id="boardDemo" class="toolbar">
+      <span class="muted" style="font-size:12px">Demo en la placa:</span>
+      <button data-cmd="x" class="sel">Datos reales</button>
+      <button data-cmd="n">Normal</button>
+      <button data-cmd="a">Advertencia</button>
+      <button data-cmd="f">Fuga</button>
+    </span>
+    <span class="sep"></span>
+    <button id="btnCsv">Descargar CSV</button>
+    <button id="btnReset">Nueva sesión</button>
+  </div>
+  <div id="msg">Conectando con la ESP32 por WiFi…</div>
+</section>
+
+<section id="statusCard" class="card status row" style="margin-top:14px" aria-live="polite">
+  <div class="lamp"><span class="g"></span><span class="y"></span><span class="r"></span></div>
+  <div>
+    <strong id="stateTitle">Desconectado</strong>
+    <span id="stateDetail" class="muted">Esperando la primera lectura de la ESP32.</span>
+  </div>
+  <div class="right">Criterio: diferencia &lt; <b id="thrA">10</b>% normal · &lt; <b id="thrR">25</b>% advertencia · ≥ <b id="thrR2">25</b>% fuga<br>Bajo <b id="thrQ">0,5</b> L/min en la entrada = sin flujo</div>
+</section>
+
+<div class="row kpis">
+  <section class="card kpi"><div class="label">Caudal entrada · Sensor 1</div><div class="val"><span id="kQ1">—</span><small>L/min</small></div><div class="sub" id="kQ1s">promedio ventana —</div></section>
+  <section class="card kpi"><div class="label">Caudal salida · Sensor 2</div><div class="val"><span id="kQ2">—</span><small>L/min</small></div><div class="sub" id="kQ2s">promedio ventana —</div></section>
+  <section class="card kpi"><div class="label">Diferencia entrada − salida</div><div class="val"><span id="kPct">—</span><small>%</small></div><div class="sub" id="kDq">— L/min</div></section>
+  <section class="card kpi"><div class="label">Agua perdida estimada (sesión)</div><div class="val"><span id="kLost">—</span><small>L</small></div><div class="sub" id="kVol">Entró — L · salió — L</div></section>
+</div>
+
+<div class="row two">
+  <section class="card">
+    <div class="chead">
+      <h2>Caudal en el tiempo</h2>
+      <div class="range toolbar"><span class="muted" style="font-size:12px">Ventana:</span>
+        <button data-range="60">1 min</button><button data-range="300" class="sel">5 min</button><button data-range="900">15 min</button><button data-range="0">Todo</button>
+      </div>
+    </div>
+    <div class="legend"><span><b style="background:var(--green)"></b>Entrada (S1)</span><span><b style="background:var(--blue)"></b>Salida (S2)</span></div>
+    <canvas id="cFlow" class="c-flow" aria-label="Caudal de entrada y salida en el tiempo"></canvas>
+  </section>
+  <section class="card">
+    <h2>Diferencia porcentual</h2>
+    <div class="legend"><span><b style="background:var(--ink)"></b>Diferencia %</span><span><b style="background:#e8a92a"></b>Umbral advertencia</span><span><b style="background:#d84c4c"></b>Umbral fuga</span></div>
+    <canvas id="cDiff" class="c-diff" aria-label="Diferencia porcentual entre sensores"></canvas>
+    <div class="muted" style="font-size:12px;margin-top:6px">Solo se grafica cuando hay flujo en la entrada.</div>
+  </section>
+</div>
+
+<div class="row three">
+  <section class="card">
+    <h2>Tiempo en cada estado</h2>
+    <div class="bar" id="stBar"></div>
+    <div class="stlist" id="stList"></div>
+  </section>
+  <section class="card">
+    <h2>Eventos</h2>
+    <ul class="events" id="events"></ul>
+  </section>
+  <section class="card calib">
+    <h2>Calibración del sensor 2</h2>
+    <div class="muted">Con la llave de fuga <b>cerrada</b>, ambos sensores ven el mismo caudal. Deja correr agua 1–2 min y usa el K2 sugerido.</div>
+    <div class="grid2">
+      <div><div class="muted">Pulsos S1 / S2 (sesión)</div><div class="big" id="cTot">— / —</div></div>
+      <div><div class="muted">Razón T2/T1</div><div class="big" id="cRatio">—</div></div>
+      <div><div class="muted">K1 · K2 en la placa</div><div class="big" id="cK">— · —</div></div>
+      <div><div class="muted">K2 sugerido</div><div class="big" id="cSug">—</div></div>
+    </div>
+    <div class="toolbar"><input id="inK2" type="number" step="0.1" placeholder="K2"><button id="btnK2" disabled>Enviar K2 a la placa</button></div>
+    <div class="muted" style="font-size:12px;margin-top:6px">El valor enviado dura hasta que la placa se reinicia. Para dejarlo fijo, cámbialo también en el código (<code>float K2 = ...</code>).</div>
+  </section>
+</div>
+
+<section class="card row" style="margin-top:14px">
+  <details><summary>Datos crudos recibidos de la ESP32</summary><pre id="raw">—</pre></details>
+</section>
+
+<footer>Página servida por la ESP32 por WiFi. Los datos de la sesión se guardan solo en esta pestaña; descarga el CSV antes de cerrarla. En demo los valores son SIMULADOS y se marcan así en el CSV.</footer>
+</main>
+
+<script>
+"use strict";
+// ---------- Configuración (debe coincidir con el firmware) ----------
+const CFG = {Q_MIN:0.5, AMARILLO:10, ROJO:25};
+const STATE_INFO = {
+  NORMAL:      {title:"Normal", detail:"La salida coincide con la entrada. No se detecta fuga.", cls:"normal", lamp:"g", color:"#2ea36f"},
+  ADVERTENCIA: {title:"Advertencia · posible fuga leve", detail:"La salida es menor que la entrada. Revisa uniones y la llave.", cls:"warn", lamp:"y", color:"#e8a92a"},
+  FUGA:        {title:"Fuga detectada", detail:"Se pierde una parte importante del agua en el tramo.", cls:"leak", lamp:"r", color:"#d84c4c"},
+  SIN_FLUJO:   {title:"Sin flujo", detail:"No circula agua por la entrada (bomba apagada o caudal muy bajo).", cls:"", lamp:"", color:"#9aaba4"},
+  SIN_DATOS:   {title:"Sin datos", detail:"No llegan lecturas desde hace más de 5 s. Revisa el cable USB.", cls:"", lamp:"", color:"#c9d3ce"},
+};
+const $ = id => document.getElementById(id);
+const fmt = (v,d=2) => Number.isFinite(v) ? v.toLocaleString("es-CL",{minimumFractionDigits:d,maximumFractionDigits:d}) : "—";
+
+// ---------- Estado de la sesión ----------
+let rows = [];            // lecturas de la sesión
+let events = [];
+let source = null;        // "USB" | "SIMULADO" | null
+let port = null, reader = null, writer = null, keepReading = false;
+let demoTimer = null, demoLeak = 0, demoTot1 = 0, demoTot2 = 0, demoSeq = 0, demoStart = 0;
+let sessionStart = null, lastRx = 0, lastState = null;
+let stateTime = {NORMAL:0, ADVERTENCIA:0, FUGA:0, SIN_FLUJO:0};
+let volIn = 0, volOut = 0, lastK = {k1:null,k2:null};
+let baseTot = null;       // totales al iniciar sesión (para calibración)
+let rangeS = 300;
+let rawLines = [];
+
+function say(t){ $("msg").innerHTML = t; }
+function addEvent(kind, text){
+  const t = new Date();
+  events.unshift({t, kind, text});
+  if (events.length > 200) events.pop();
+  $("events").innerHTML = events.map(e =>
+    `<li><time>${e.t.toLocaleTimeString("es-CL")}</time><span class="pill p-${e.kind}">${e.kind.replace("_"," ")}</span><span>${e.text}</span></li>`).join("");
+}
+
+function resetSession(keepSource=true){
+  rows = []; volIn = 0; volOut = 0; baseTot = null; lastState = null;
+  stateTime = {NORMAL:0, ADVERTENCIA:0, FUGA:0, SIN_FLUJO:0};
+  sessionStart = (keepSource && source) ? Date.now() : null;
+  render(); drawAll();
+}
+
+// ---------- Parseo de líneas ----------
+function parseLine(line){
+  line = line.trim();
+  if (!line) return null;
+  if (line[0] === "{") {
+    try {
+      const o = JSON.parse(line);
+      if (!Number.isFinite(o.q1) || !Number.isFinite(o.q2)) return null;
+      return {
+        seq:o.seq, t_ms:o.t_ms, p1:o.p1, p2:o.p2, tot1:o.tot1, tot2:o.tot2,
+        q1:o.q1, q2:o.q2, q1v:o.q1v ?? o.q1, q2v:o.q2v ?? o.q2,
+        pct:o.pct, k1:o.k1, k2:o.k2, estado:o.estado, modo:o.modo || "REAL"
+      };
+    } catch { return null; }
+  }
+  // Compatibilidad con el código anterior del proyecto:
+  // "Q1: 3.80 | Q2: 3.70 L/min | Dif: 2.6 % | Tot1: 123 | Tot2: 120 | Razon T2/T1: 0.976"
+  const m = line.match(/Q1:\s*([\d.]+)\s*\|\s*Q2:\s*([\d.]+).*?Dif:\s*(-?[\d.]+)\s*%\s*\|\s*Tot1:\s*(\d+)\s*\|\s*Tot2:\s*(\d+)/);
+  if (m) {
+    const q1=+m[1], q2=+m[2];
+    return {q1, q2, q1v:q1, q2v:q2, pct:+m[3], tot1:+m[4], tot2:+m[5], estado:null, interval:10};
+  }
+  return null;
+}
+
+function classify(q1v, pct){
+  if (!(q1v >= CFG.Q_MIN)) return "SIN_FLUJO";
+  if (pct < CFG.AMARILLO) return "NORMAL";
+  if (pct < CFG.ROJO) return "ADVERTENCIA";
+  return "FUGA";
+}
+
+function ingest(r){
+  const now = Date.now();
+  if (!sessionStart) sessionStart = now;
+  const prev = rows[rows.length-1];
+  let dt = r.interval || 1;
+  if (prev) dt = Math.min(Math.max((now - prev.time)/1000, 0.2), 5);
+  if (!Number.isFinite(r.pct) || r.q1v < CFG.Q_MIN) r.pct = r.q1v >= CFG.Q_MIN ? (r.q1v - r.q2v)/r.q1v*100 : 0;
+  r.estado = STATE_INFO[r.estado] ? r.estado : classify(r.q1v, r.pct);
+  r.time = now; r.source = (source === "USB" && r.modo === "DEMO") ? "ESP32_DEMO_SIMULADO" : source === "USB" ? "ESP32_REAL" : "SIMULADO";
+  if (baseTot === null && Number.isFinite(r.tot1)) baseTot = {t1:r.tot1 - (r.p1||0), t2:r.tot2 - (r.p2||0)};
+  volIn += r.q1 * dt / 60; volOut += r.q2 * dt / 60;
+  r.volIn = volIn; r.volOut = volOut;
+  if (stateTime[r.estado] !== undefined) stateTime[r.estado] += dt;
+  if (Number.isFinite(r.k1)) lastK = {k1:r.k1, k2:r.k2};
+  if (r.estado !== lastState) {
+    if (lastState !== null) addEvent(r.estado, `Cambio de ${STATE_INFO[lastState].title.toLowerCase()} a ${STATE_INFO[r.estado].title.toLowerCase()} (dif. ${fmt(r.pct,1)} %)`);
+    lastState = r.estado;
+  }
+  rows.push(r);
+  if (rows.length > 20000) rows.shift();
+  lastRx = now;
+  render(); drawAll();
+}
+
+// ---------- Render ----------
+function setStatus(key){
+  const s = STATE_INFO[key] || STATE_INFO.SIN_DATOS;
+  const card = $("statusCard");
+  card.className = "card status row " + s.cls;
+  $("stateTitle").textContent = key ? s.title : "Desconectado";
+  $("stateDetail").textContent = key ? s.detail : "Conecta la placa o prueba el modo demo.";
+  card.querySelectorAll(".lamp span").forEach(el => el.classList.toggle("on", !!s.lamp && el.classList.contains(s.lamp) && !!key));
+}
+
+function render(){
+  const r = rows[rows.length-1];
+  const stale = (source && lastRx && Date.now() - lastRx > 5000) || (!lastRx && fails > 2);
+  setStatus(!source && !r ? null : stale ? "SIN_DATOS" : r ? r.estado : "SIN_DATOS");
+  $("kQ1").textContent = r ? fmt(r.q1) : "—";
+  $("kQ2").textContent = r ? fmt(r.q2) : "—";
+  $("kQ1s").textContent = r ? `promedio ventana ${fmt(r.q1v)} L/min` : "promedio ventana —";
+  $("kQ2s").textContent = r ? `promedio ventana ${fmt(r.q2v)} L/min` : "promedio ventana —";
+  const flowing = r && r.q1v >= CFG.Q_MIN;
+  $("kPct").textContent = flowing ? fmt(r.pct,1) : "—";
+  $("kDq").textContent = flowing ? `${fmt(r.q1v - r.q2v)} L/min perdidos` : "— L/min";
+  $("kLost").textContent = rows.length ? fmt(Math.max(volIn - volOut, 0)) : "—";
+  $("kVol").textContent = rows.length ? `Entró ${fmt(volIn)} L · salió ${fmt(volOut)} L` : "Entró — L · salió — L";
+
+  // estados
+  const keys = ["NORMAL","ADVERTENCIA","FUGA","SIN_FLUJO"];
+  const total = keys.reduce((a,k)=>a+stateTime[k],0);
+  $("stBar").innerHTML = total ? keys.map(k=>`<div style="width:${stateTime[k]/total*100}%;background:${STATE_INFO[k].color}" title="${STATE_INFO[k].title}"></div>`).join("") : "";
+  $("stList").innerHTML = keys.map(k=>`<span class="sw" style="background:${STATE_INFO[k].color}"></span><span>${STATE_INFO[k].title.split(" ·")[0]}</span><span>${hms(stateTime[k])} · ${total?fmt(stateTime[k]/total*100,0):"0"}%</span>`).join("");
+
+  // calibración
+  if (r && baseTot && Number.isFinite(r.tot1)) {
+    const t1 = r.tot1 - baseTot.t1, t2 = r.tot2 - baseTot.t2;
+    $("cTot").textContent = `${t1} / ${t2}`;
+    if (t1 > 50) {
+      const ratio = t2 / t1;
+      $("cRatio").textContent = fmt(ratio,3);
+      const k1 = lastK.k1 || 288;
+      $("cSug").textContent = r.estado === "NORMAL" || r.estado === "SIN_FLUJO" ? fmt(k1 * ratio,1) : fmt(k1 * ratio,1) + " ⚠";
+      $("cSug").title = "Si la llave de fuga está abierta, este valor no sirve para calibrar.";
+      if (!$("inK2").value || $("inK2").dataset.auto === "1") { $("inK2").value = (k1*ratio).toFixed(1); $("inK2").dataset.auto="1"; }
+    } else { $("cRatio").textContent = "—"; $("cSug").textContent = "faltan pulsos"; }
+  } else { $("cTot").textContent = "— / —"; $("cRatio").textContent = "—"; $("cSug").textContent = "—"; }
+  $("cK").textContent = lastK.k1 ? `${fmt(lastK.k1,1)} · ${fmt(lastK.k2,1)}` : "— · —";
+  $("btnK2").disabled = source !== "USB";
+
+  // tags
+  const to = $("tagOrigin");
+  const boardDemo = source==="USB" && r && r.modo==="DEMO";
+  to.className = "tag " + (source==="USB" && !boardDemo ? "real" : source ? "sim" : "off");
+  to.textContent = boardDemo ? "ESP32 WIFI · DEMO SIMULADO" : source==="USB" ? "ESP32 WIFI · DATOS REALES" : source==="SIMULADO" ? "MODO DEMO · SIMULADO" : "SIN FUENTE";
+  $("tagSession").textContent = "Sesión " + (sessionStart ? hms((Date.now()-sessionStart)/1000) : "00:00:00");
+  $("tagLast").textContent = lastRx ? `Última lectura hace ${Math.round((Date.now()-lastRx)/1000)} s` : "Sin lecturas";
+}
+function hms(s){ s=Math.round(s); return [Math.floor(s/3600),Math.floor(s/60)%60,s%60].map(v=>String(v).padStart(2,"0")).join(":"); }
+
+// ---------- Gráficos (canvas, sin librerías) ----------
+function prepCanvas(c){
+  const dpr = window.devicePixelRatio || 1, w = c.clientWidth, h = c.clientHeight;
+  if (c.width !== Math.round(w*dpr) || c.height !== Math.round(h*dpr)) { c.width = Math.round(w*dpr); c.height = Math.round(h*dpr); }
+  const ctx = c.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,h);
+  return {ctx,w,h};
+}
+function visibleRows(){
+  if (!rows.length) return [];
+  if (!rangeS) return rows;
+  const from = rows[rows.length-1].time - rangeS*1000;
+  return rows.filter(r => r.time >= from);
+}
+function axes(ctx, w, h, L, T, R, B, ymin, ymax, t0, t1, ylab, ticks){
+  ctx.font = "11px system-ui,Segoe UI,sans-serif"; ctx.fillStyle = "#61756e"; ctx.strokeStyle = "#e6ece8"; ctx.lineWidth = 1;
+  for (const v of ticks){
+    const y = T + (1-(v-ymin)/(ymax-ymin))*(h-T-B);
+    ctx.beginPath(); ctx.moveTo(L,y); ctx.lineTo(w-R,y); ctx.stroke();
+    ctx.textAlign="right"; ctx.textBaseline="middle"; ctx.fillText(ylab(v), L-6, y);
+  }
+  const span = Math.max(t1-t0,1);
+  ctx.textAlign="center"; ctx.textBaseline="top";
+  for (let i=0;i<=4;i++){
+    const t = t0 + span*i/4, x = L + (w-L-R)*i/4;
+    ctx.fillText(new Date(t).toLocaleTimeString("es-CL",{hour:"2-digit",minute:"2-digit",second:"2-digit"}), x, h-B+6);
+  }
+}
+function niceMax(v){ if (v<=0) return 1; const p=Math.pow(10,Math.floor(Math.log10(v))); for (const m of [1,2,2.5,5,10]) if (m*p>=v) return m*p; return 10*p; }
+function line(ctx, data, key, color, L,T,R,B,w,h,ymin,ymax,t0,t1, filter){
+  ctx.strokeStyle=color; ctx.lineWidth=2; ctx.lineJoin="round"; ctx.beginPath();
+  let prev=null, started=false;
+  for (const r of data){
+    if (filter && !filter(r)) { started=false; prev=null; continue; }
+    const x = L + (r.time-t0)/Math.max(t1-t0,1)*(w-L-R);
+    const v = Math.max(ymin, Math.min(ymax, r[key]));
+    const y = T + (1-(v-ymin)/(ymax-ymin))*(h-T-B);
+    if (!started || (prev && r.time-prev>6000)) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    started=true; prev=r.time;
+  }
+  ctx.stroke();
+}
+function empty(ctx,w,h,text){ ctx.fillStyle="#9aaba4"; ctx.font="13px system-ui,Segoe UI,sans-serif"; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(text,w/2,h/2); }
+
+function drawFlow(){
+  const {ctx,w,h} = prepCanvas($("cFlow")); const data = visibleRows();
+  if (data.length < 2) return empty(ctx,w,h,"El gráfico aparecerá al recibir lecturas");
+  const L=44,T=8,R=10,B=24, t0=data[0].time, t1=data[data.length-1].time;
+  const ymax = niceMax(Math.max(1, ...data.map(r=>Math.max(r.q1,r.q2)))*1.1);
+  axes(ctx,w,h,L,T,R,B,0,ymax,t0,t1,v=>fmt(v,1),[0,ymax/4,ymax/2,ymax*3/4,ymax]);
+  line(ctx,data,"q1","#157a63",L,T,R,B,w,h,0,ymax,t0,t1);
+  line(ctx,data,"q2","#3f7fc4",L,T,R,B,w,h,0,ymax,t0,t1);
+}
+function drawDiff(){
+  const {ctx,w,h} = prepCanvas($("cDiff")); const data = visibleRows();
+  if (data.length < 2) return empty(ctx,w,h,"Sin datos todavía");
+  const L=40,T=8,R=10,B=24, t0=data[0].time, t1=data[data.length-1].time;
+  const ymin=-10, ymax=Math.max(50, niceMax(Math.max(...data.filter(r=>r.q1v>=CFG.Q_MIN).map(r=>r.pct),0)*1.1));
+  const Y = v => T + (1-(v-ymin)/(ymax-ymin))*(h-T-B);
+  ctx.fillStyle="#fff6e3"; ctx.fillRect(L,Y(CFG.ROJO),w-L-R,Y(CFG.AMARILLO)-Y(CFG.ROJO));
+  ctx.fillStyle="#fdeeed"; ctx.fillRect(L,Y(ymax),w-L-R,Y(CFG.ROJO)-Y(ymax));
+  axes(ctx,w,h,L,T,R,B,ymin,ymax,t0,t1,v=>fmt(v,0)+"%",[0,CFG.AMARILLO,CFG.ROJO,ymax]);
+  for (const [v,c] of [[CFG.AMARILLO,"#e8a92a"],[CFG.ROJO,"#d84c4c"]]){ ctx.strokeStyle=c; ctx.setLineDash([5,4]); ctx.beginPath(); ctx.moveTo(L,Y(v)); ctx.lineTo(w-R,Y(v)); ctx.stroke(); ctx.setLineDash([]); }
+  line(ctx,data,"pct","#173b35",L,T,R,B,w,h,ymin,ymax,t0,t1,r=>r.q1v>=CFG.Q_MIN);
+}
+function drawAll(){ drawFlow(); drawDiff(); }
+window.addEventListener("resize", drawAll);
+
+// ---------- WiFi: la página pide /data a la ESP32 cada segundo ----------
+source = "USB";
+let fails = 0, wasOnline = false, lastSeq = null;
+async function poll(){
+  try {
+    const r = await fetch("/data", {cache:"no-store"});
+    const txt = (await r.text()).trim();
+    rawLines.push(txt); if (rawLines.length>40) rawLines.shift();
+    $("raw").textContent = rawLines.join("\n");
+    const d = parseLine(txt);
+    if (d && d.seq !== lastSeq) { lastSeq = d.seq; ingest(d); }
+    fails = 0;
+    if (!wasOnline) { wasOnline = true; addEvent("INFO","Conectado a la ESP32 por WiFi."); say("Conectado a la ESP32 por WiFi. Llega una lectura por segundo."); }
+  } catch (e) {
+    fails++;
+    if (wasOnline && fails === 3) { wasOnline = false; addEvent("INFO","Se perdió la conexión WiFi con la ESP32."); say("Sin conexión con la ESP32. Revisa que sigas conectado a su red WiFi."); }
+  }
+}
+setInterval(poll, 1000); poll();
+async function send(text){
+  try { const r = await fetch("/cmd?c=" + encodeURIComponent(text), {cache:"no-store"}); return r.ok; } catch { return false; }
+}
+
+// ---------- CSV ----------
+function downloadCsv(){
+  if (!rows.length) { say("Todavía no hay lecturas para descargar."); return; }
+  const head = ["fecha_hora","origen","q1_Lmin","q2_Lmin","q1_prom_Lmin","q2_prom_Lmin","diferencia_pct","pulsos1","pulsos2","total1","total2","vol_entrada_L","vol_salida_L","k1","k2","estado"];
+  const n = v => Number.isFinite(v) ? String(+v.toFixed(4)).replace(".",",") : "";
+  const lines = [head.join(";")].concat(rows.map(r => [
+    new Date(r.time).toLocaleString("es-CL"), r.source, n(r.q1), n(r.q2), n(r.q1v), n(r.q2v), n(r.pct),
+    r.p1 ?? "", r.p2 ?? "", r.tot1 ?? "", r.tot2 ?? "", n(r.volIn), n(r.volOut), n(r.k1), n(r.k2), r.estado
+  ].join(";")));
+  const blob = new Blob(["﻿" + lines.join("\r\n")], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a");
+  const stamp = new Date().toISOString().slice(0,19).replace(/[:T]/g,"-");
+  a.href = URL.createObjectURL(blob); a.download = `RiegoMonitor_${rows.some(r=>r.source!=="ESP32_REAL")?"CON_SIMULADO":"REAL"}_${stamp}.csv`;
+  a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+  say(`CSV descargado con ${rows.length} lecturas.`);
+}
+
+// ---------- Botones ----------
+document.querySelectorAll(".range button").forEach(b => b.onclick = () => {
+  rangeS = +b.dataset.range;
+  document.querySelectorAll(".range button").forEach(x => x.classList.toggle("sel", x===b));
+  drawAll();
+});
+document.querySelectorAll("#boardDemo button").forEach(b => b.onclick = async () => {
+  const ok = await send(b.dataset.cmd);
+  if (!ok) { say("No se pudo enviar el comando a la placa."); return; }
+  document.querySelectorAll("#boardDemo button").forEach(x => x.classList.toggle("sel", x===b));
+  addEvent("INFO", b.dataset.cmd === "x" ? "Placa en datos reales." : "Placa en demo simulado: " + b.textContent + ".");
+  say(b.dataset.cmd === "x" ? "La placa volvió a medir con los sensores." : "La placa muestra un escenario <b>simulado</b> (LED y dashboard). Pulsa «Datos reales» para volver.");
+});
+$("btnCsv").onclick = downloadCsv;
+$("btnReset").onclick = () => { if (!rows.length || confirmReset()) { resetSession(); addEvent("INFO","Nueva sesión iniciada."); } };
+function confirmReset(){ return window.confirm("¿Empezar una sesión nueva? Se borrarán las lecturas actuales (descarga el CSV antes si las necesitas)."); }
+$("inK2").oninput = () => { $("inK2").dataset.auto = "0"; };
+$("btnK2").onclick = async () => {
+  const v = parseFloat($("inK2").value);
+  if (!(v > 1 && v < 5000)) { say("Escribe un K2 válido (por ejemplo 236)."); return; }
+  const ok = await send("K2=" + v.toFixed(1));
+  say(ok ? `K2 = ${v.toFixed(1)} enviado a la placa. Inicia una <b>Nueva sesión</b> para medir con el valor nuevo.` : "No se pudo enviar el valor a la placa.");
+  if (ok) addEvent("INFO", `K2 cambiado a ${v.toFixed(1)} pulsos/L.`);
+};
+setInterval(render, 1000);
+$("thrA").textContent = CFG.AMARILLO; $("thrR").textContent = CFG.ROJO; $("thrR2").textContent = CFG.ROJO; $("thrQ").textContent = fmt(CFG.Q_MIN,1);
+render(); drawAll();
+</script>
+</body>
+</html>
