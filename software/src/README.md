@@ -1,4 +1,32 @@
-# Código Fuente - Avance 2
+# Código Fuente - Avance 3
+
+| Archivo | Uso |
+|---|---|
+| [RiegoMonitor_WiFi/RiegoMonitor_WiFi.ino](RiegoMonitor_WiFi/RiegoMonitor_WiFi.ino) | Firmware final cargado en la ESP32 para Avance 3 |
+| [web/Dashboard_USB.html](web/Dashboard_USB.html) | Dashboard por cable USB; también publicado como [docs/index.html](../../docs/index.html) |
+| [web/dashboard_wifi_fuente.html](web/dashboard_wifi_fuente.html) | Dashboard que el firmware sirve por WiFi (va incrustado en el `.ino`) |
+
+## Estructura de `RiegoMonitor_WiFi.ino`
+
+| Bloque / función | Responsabilidad |
+|---|---|
+| Constantes iniciales | WiFi (red propia y hotspot opcional), pines, calibración K1/K2, umbrales y ventana |
+| `PAGINA[]` | Dashboard HTML incrustado en la memoria flash (`PROGMEM`) |
+| `isr1()`, `isr2()` | Interrupciones de cada sensor: cuentan un pulso si pasaron ≥ 2 ms desde el anterior |
+| `luces(v, a, r)` | Enciende el LED que corresponde al estado |
+| `aplicarComando()` | Interpreta `n/a/f/x/R/K1=/K2=` recibidos por USB o por la web |
+| `leerSerie()` | Junta caracteres del USB hasta un salto de línea |
+| `iniciarWiFi()` | Intenta unirse al hotspot configurado (10 s); si no, crea la red `RiegoMonitor` |
+| `setup()` | Configura pines, interrupciones, WiFi y las rutas `/`, `/data` y `/cmd` del servidor web |
+| `loop()` | Atiende el servidor web y el USB; cada 1 s calcula caudales, promedio de 5 s, diferencia y estado, actualiza LED y publica el JSON |
+
+Para cargarlo: abrir la carpeta `RiegoMonitor_WiFi` en Arduino IDE, placa **ESP32S3 Dev Module**, **USB CDC On Boot: Enabled**, 115200 baudios. No requiere librerías externas.
+
+Prueba realizada el 23-11-2026: el firmware compiló, se cargó y el Monitor Serie mostró una lectura JSON por segundo (`seq` correlativo, `estado: SIN_FLUJO` sin agua). Registro en [testing/resultados_avance3.md](../../testing/resultados_avance3.md).
+
+---
+
+# Código Fuente - Avance 2 (antecedente)
 
 ## Archivos disponibles
 
