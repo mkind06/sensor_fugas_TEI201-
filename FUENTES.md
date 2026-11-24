@@ -6,7 +6,7 @@ Declaración de todo lo que el proyecto usa y que no fue escrito desde cero por 
 
 | Librería / herramienta | Versión | Uso en el proyecto | Fuente |
 |---|---|---|---|
-| Núcleo Arduino-ESP32 (Espressif) | [completar: Herramientas → Placa → Gestor de tarjetas] | Soporte de la ESP32-S3 en Arduino IDE: `digitalRead`, `millis`, `micros`, `Serial` | https://github.com/espressif/arduino-esp32 |
+| Núcleo Arduino-ESP32 (Espressif) | 2.x o 3.x (el firmware solo usa `attachInterrupt`, `WiFi.softAP` y `WebServer`, presentes en ambas) | Soporte de la ESP32-S3 en Arduino IDE: `digitalRead`, `millis`, `micros`, `Serial` | https://github.com/espressif/arduino-esp32 |
 | Arduino IDE | 1.8.19 | Compilar y cargar el firmware | https://www.arduino.cc/en/software |
 | Web Serial API del navegador | Incluida en Chrome/Edge | `Panel_USB_Real.html` lee por USB las líneas que envía la ESP32 | https://developer.mozilla.org/es/docs/Web/API/Web_Serial_API |
 | `WiFi.h` (núcleo ESP32) | Incluida en el núcleo | Red WiFi propia (modo AP) o conexión a hotspot | https://github.com/espressif/arduino-esp32/tree/master/libraries/WiFi |
@@ -30,7 +30,7 @@ No se copió código de tutoriales, foros ni otros repositorios. El firmware y l
 ### Panel web por USB (`software/src/web/Panel_USB_Real.html`)
 - **Herramienta:** Claude (Anthropic), noviembre de 2026.
 - **Uso:** página que se conecta a la ESP32 por USB, muestra Q1, Q2, diferencia y estado, guarda las últimas lecturas y exporta CSV.
-- **Adaptación del equipo:** [completar: qué cambiaron o cómo lo probaron con el prototipo].
+- **Adaptación del equipo:** se usó como monitor por USB en el Avance 2. En el Avance 3 se reemplazó por `Dashboard_USB.html` y el dashboard por WiFi (ver "Dashboards"); se conserva como antecedente.
 - **Comprensión:** el navegador abre el puerto serie a 115200 baudios, lee cada línea que imprime la ESP32, extrae los números con una expresión regular y clasifica el estado con los mismos umbrales del firmware.
 
 ### Firmware final (`software/src/RiegoMonitor_WiFi/RiegoMonitor_WiFi.ino`)
@@ -53,8 +53,14 @@ No se copió código de tutoriales, foros ni otros repositorios. El firmware y l
 ### Encapsulado y gemelo 3D (`diseno_3d/`)
 - **Herramienta:** Claude (Anthropic), noviembre de 2026, con CadQuery (Python).
 - **Uso:** modelo de la caja (STEP), planos DXF, ensamble con volúmenes referenciales de los componentes, gemelo de la demo completa, renders y visor web. Los scripts están en `diseno_3d/cad/fuente/`.
-- **Adaptación del equipo:** se definieron los requisitos: tapa atornillada para reparar, ventana USB-C, prensaestopas para los sensores y LED visibles en la tapa. [Completar: cambios hechos en Fusion 360].
+- **Adaptación del equipo:** se definieron los requisitos: tapa atornillada para reparar, ventana USB-C, prensaestopas para los sensores y LED visibles en la tapa. El `.f3d` se obtiene importando en Fusion 360 el STEP del ensamble, sin cambiar su geometría.
 - **Comprensión:** la caja mide 120 × 85 × 43 mm. La tapa se fija con 4 tornillos M3 en torretas, así se abre sin romper nada. La ESP32 va en cabezales hembra sobre la placa perforada y se reemplaza sin desoldar.
+
+### Esquemático (`hardware/esquemas/esquematico_v3.pdf`, `hardware/esquemas/esquematico.py`)
+- **Herramienta:** Claude (Anthropic), 23 de noviembre de 2026, con schemdraw (https://schemdraw.readthedocs.io).
+- **Uso:** dibujar el esquema eléctrico de la placa soldada.
+- **Adaptación del equipo:** las conexiones salen del cableado real documentado en `hardware/esquemas/README.md` y de los pines del firmware final (S1 en GPIO 8, S2 en GPIO 2, LED en GPIO 4, 5 y 6).
+- **Comprensión:** cada FS400A recibe 5 V; su señal pasa por un divisor 10 kΩ / 20 kΩ que la baja a ~3,3 V antes de entrar a la ESP32. Cada LED va del GPIO a tierra con una resistencia de 330 Ω. La bomba tiene su propia fuente, sin conexión con la ESP32.
 
 ### Documentación y presentación
 - **Herramienta:** Claude (Anthropic), octubre y noviembre de 2026.

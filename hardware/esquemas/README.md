@@ -1,5 +1,14 @@
 # Esquemas de Circuito - Avance 3 (placa perforada soldada)
 
+## Esquemático
+
+**Archivo:** [esquematico_v3.pdf](esquematico_v3.pdf) · también en [PNG](esquematico_v3.png) y [SVG](esquematico_v3.svg).
+
+![Esquemático del Riego Monitor v3](esquematico_v3.png)
+
+Dibujado con [schemdraw](https://schemdraw.readthedocs.io) a partir de los pines del firmware final (`RiegoMonitor_WiFi.ino`). Para regenerarlo: `pip install schemdraw matplotlib` y `python esquematico.py`.
+
+
 ## Esquema eléctrico
 
 ```mermaid

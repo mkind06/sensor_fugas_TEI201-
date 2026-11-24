@@ -51,13 +51,14 @@ Manual completo y diagnóstico: [software/docs](software/docs/README.md).
 |---|---|---|
 | Software | Firmware final, formato de datos, dashboard, información generada, persistencia CSV | [software/](software/README.md) |
 | Hardware | Cambios v2→v3, justificación de componentes, alimentación, diseño para la reparación | [hardware/](hardware/README.md) |
-| Esquema | Esquema eléctrico y coordenadas de la placa soldada | [hardware/esquemas](hardware/esquemas/README.md) |
+| Esquemático | [Esquemático en PDF](hardware/esquemas/esquematico_v3.pdf) y coordenadas de la placa soldada | [hardware/esquemas](hardware/esquemas/README.md) |
 | BOM | Componentes, cantidades y costos | [hardware/bom](hardware/bom/README.md) |
 | Fotos | Banco de PVC y montaje | [hardware/fotos](hardware/fotos/README.md) |
 | Diseño 3D | Caja v3 (STEP), ensamble con electrónica, gemelo de la demo, renders, visor | [diseno_3d/](diseno_3d/README.md) |
 | Testing | Protocolo, resultados, fallas y validación contra el problema | [testing/](testing/README.md) |
 | Iteraciones | Evolución v1 → v3 | [iteraciones/](iteraciones/README.md) |
-| Presentación | Guion de la demo en vivo | [documentacion/presentacion](documentacion/presentacion/guion_demo.md) |
+| Presentación | Guion de la demo en vivo | [documentacion/presentacion](documentacion/presentacion/README.md) |
+| Reporte | Índice del reporte final, sección por documento | [documentacion/reporte_final](documentacion/reporte_final/README.md) |
 | Fuentes e IA | Librerías, código externo y uso de IA | [FUENTES.md](FUENTES.md) |
 
 **Estado honesto:** el sensor 1 quedó sin lectura por una falla en su divisor de la placa soldada (diagnóstico en [testing](testing/resultados_avance3.md)). El sensor 2, los LED, la red WiFi y el dashboard funcionan; mientras se repara el sensor 1, los tres estados se muestran con un modo demo identificado como simulado.
@@ -66,6 +67,7 @@ Manual completo y diagnóstico: [software/docs](software/docs/README.md).
 
 ```text
 ├── README.md · FUENTES.md
+├── firmware/      acceso directo al código de la ESP32 (en software/src/)
 ├── software/      firmware (src/), dashboards (src/web/), manual (docs/), librerías
 ├── hardware/      esquemas/, bom/, fotos/
 ├── diseno_3d/     cad/ (STEP, DXF, scripts), renders/, visor/, fusion360/, planos/
@@ -114,6 +116,7 @@ El equipo acotó el desarrollo a un tramo agrícola con recorrido conocido para 
 
 El logro de Avance 2 es la detección y señalización en banco. Aún no se midieron ahorro de agua, rendimiento agrícola ni cambios en los indicadores oficiales de estas metas.
 
-## Plantillas pendientes
+## Pendiente
 
-Las carpetas de [Fusion 360 nativo](diseno_3d/fusion360/README.md), [planos finales](diseno_3d/planos/README.md), [reporte final](documentacion/reporte_final/README.md) y [reportes de usuarios](testing/reportes/README.md) conservan contenido de referencia de la plantilla del curso; sus cifras de ejemplo no son resultados del proyecto.
+- [Archivo nativo Fusion 360 (.f3d)](diseno_3d/fusion360/README.md): se genera importando en Fusion 360 el STEP del ensamble.
+- Reparar el divisor del sensor 1 y completar las pruebas P6 (fuga controlada) y P8 (estabilidad 5 min): ver [resultados](testing/resultados_avance3.md).

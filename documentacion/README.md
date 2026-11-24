@@ -10,7 +10,7 @@ Revisión frente al checklist de la guía del Avance 3 (23-11-2026).
 | Información útil (alertas, indicadores) | ✅ Semáforo, % de diferencia, agua perdida, eventos, tiempo por estado | [software](../software/README.md#información-que-genera-el-dashboard) |
 | Código comentado en GitHub | ✅ | [software/src](../software/src/README.md) |
 | Justificación de componentes | ✅ | [hardware](../hardware/README.md#justificación-de-componentes) |
-| Esquemático actualizado | ✅ Esquema y coordenadas de la placa soldada | [esquemas](../hardware/esquemas/README.md) |
+| Esquemático actualizado | ✅ [Esquemático en PDF](../hardware/esquemas/esquematico_v3.pdf) y coordenadas de la placa soldada | [esquemas](../hardware/esquemas/README.md) |
 | BOM con costos | ✅ | [bom](../hardware/bom/README.md) |
 | Fotos del prototipo (3 ángulos) | ✅ Banco, sistema integrado y placa soldada (ambas caras) | [fotos](../hardware/fotos/README.md) |
 | Encapsulado reparable | ✅ Tapa con 4 tornillos, ESP32 en cabezales, conectores | [diseño 3D](../diseno_3d/README.md) |
@@ -23,6 +23,8 @@ Revisión frente al checklist de la guía del Avance 3 (23-11-2026).
 | FUENTES.md | ✅ | [FUENTES.md](../FUENTES.md) |
 | README completo | ✅ | [README](../README.md) |
 | Guion de la demo | ✅ | [guion](presentacion/guion_demo.md) |
+| Estructura de carpetas (firmware, hardware, 3D, testing, docs) | ✅ `firmware/` enlaza al código en `software/src/` | [README](../README.md#estructura-del-repositorio) |
+| URL del repositorio en los slides | ✅ Slide final | — |
 
 ---
 

@@ -1,4 +1,15 @@
-# Evidencias de Testeo - Avance 2
+# Evidencias de testeo
+
+## Avance 3
+
+| Evidencia | Qué respalda |
+|---|---|
+| [Resultados de pruebas P1–P9](../resultados_avance3.md) | Registros del Monitor Serie: LED, lectura de sensores, publicación JSON cada 1 s, caudal ≈ 3,5 L/min con la bomba, reinicios por la bomba y su solución |
+| [Fotos del banco y de la placa soldada](../../hardware/fotos/README.md) | Montaje del banco de PVC, sistema integrado y ambas caras de la placa |
+| [Esquemático](../../hardware/esquemas/README.md) | Conexiones probadas, incluidas las correcciones del soldado |
+| Dashboard y CSV | Se muestran en vivo en la presentación; el CSV se descarga desde el dashboard |
+
+# Evidencias de testeo - Avance 2 (antecedente)
 
 ## Evidencia incorporada
 
