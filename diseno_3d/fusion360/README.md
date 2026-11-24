@@ -1,62 +1,13 @@
 # Archivos Fusion 360
 
-> **Plantilla para una etapa posterior: no corresponde rellenarla en Avance 2.** Archivo nativo v3 e historial. El contenido siguiente se conserva como referencia; sus cifras, componentes de ejemplo, marcas de verificación y frases de logro no son resultados del Alpha ni requisitos adicionales de la guía actual. Ver la [documentación de esta entrega](../README.md).
+**Estado:** pendiente de subir `caja_v3.f3d` (lo exporta el equipo desde Fusion 360; no se puede generar fuera del programa).
 
-## Archivos Requeridos
+## Cómo generarlo (≈ 5 minutos)
 
-### `modelo_completo_v3.f3d`
-Archivo principal con **historial de cambios completo**
+1. En Fusion 360: **Archivo → Abrir → Abrir desde mi equipo** y elegir [`../cad/caja_v3_ensamble_electronica.step`](../cad/caja_v3_ensamble_electronica.step).
+2. Revisar que aparezcan base, tapa, placa, ESP32, LED, prensaestopas y tornillos como componentes.
+3. Asignar material: base y tapa **PETG** (Modificar → Administrar materiales).
+4. **Archivo → Exportar → Tipo: Archivos de archivado de Fusion 360 (.f3d)** y guardar como `caja_v3.f3d`.
+5. Subirlo a esta carpeta (`diseno_3d/fusion360/`) desde GitHub: **Add file → Upload files**.
 
-**DEBE INCLUIR:**
--  Todos los componentes modelados
--  Ensamble completo funcional
--  Historial de diseño (timeline)
--  Materiales asignados
--  Constraints y relaciones
-
----
-
-## Estructura del Modelo
-
-### Componentes (Components)
-```
-Ensamble_Principal
-├── Encapsulado_Inferior
-├── Encapsulado_Superior
-├── ESP32_DevKit
-├── Sensor_DHT22
-├── LED_Indicador
-├── Soporte_Bateria
-├── Bracket_Montaje
-└── Tornilleria
-```
-
-### Uniones (Joints)
-Documentar las juntas principales y sus restricciones
-
-### Parámetros
-Listar parámetros principales utilizados:
-- `ancho_total = 120mm`
-- `alto_total = 80mm`
-- `grosor_pared = 2mm`
-
----
-
-## Instrucciones de Apertura
-
-1. Abrir Fusion 360
-2. File > Open > Seleccionar archivo `.f3d`
-3. Verificar que todas las referencias están cargadas
-4. Revisar timeline para ver historial
-
----
-
-## Versiones
-
-| Versión | Fecha | Cambios Principales |
-|---------|-------|---------------------|
-| v3.0 | [Fecha] | Versión final para Avance #3 |
-| v2.1 | [Fecha] | Ajustes post Avance #2 |
-| v1.0 | [Fecha] | Primera versión funcional |
-
----
+El modelo proviene de los scripts CadQuery en [`../cad/fuente/`](../cad/fuente), por lo que el `.f3d` importado no trae historial paramétrico de Fusion; las medidas de origen están en `modelo_caja.py` y en los [planos](../planos/README.md).
