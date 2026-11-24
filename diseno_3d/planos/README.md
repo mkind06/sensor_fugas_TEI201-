@@ -1,88 +1,13 @@
-# Planos Técnicos
+# Planos Técnicos - Caja v3
 
-> **Plantilla para una etapa posterior: no corresponde rellenarla en Avance 2.** Planos de fabricación v3. El contenido siguiente se conserva como referencia; sus cifras, componentes de ejemplo, marcas de verificación y frases de logro no son resultados del Alpha ni requisitos adicionales de la guía actual. Ver la [documentación de esta entrega](../README.md).
+**Archivo:** [planos_caja_v3.pdf](planos_caja_v3.pdf) (3 hojas A3)
 
-## Planos Requeridos
+| Hoja | Contenido |
+|---|---|
+| 1 · Conjunto | Vista explosionada e isométrica de referencia, lista de piezas, dimensiones generales (120 × 85 × 43 mm) y cómo se desarma para reparar |
+| 2 · Base | Planta, vistas laterales izquierda (ventana USB-C 12 × 7 a 20,5 mm) y derecha (2 × Ø12,5 para PG7), alzado frontal; cotas de torretas M3, postes de la placa y paredes de 2,5 mm. Escala 1:1 |
+| 3 · Tapa | Planta con 4 pasantes Ø3,4 y 3 agujeros Ø5 para LED, sección A-A del labio (holgura 0,3 mm por lado) y detalle del agujero de LED. Escala 1:1 |
 
-### 1. Plano de Conjunto
-`plano_conjunto_v3.pdf`
+Unidades en mm, tolerancia general ±0,2 mm, material PETG, proyección ISO (primer diedro).
 
-Incluir:
-- Vistas principales (frontal, lateral, superior)
-- Escala apropiada
-- Cotas principales externas
-- Tabla de piezas
-
-### 2. Planos de Detalle
-Para cada componente crítico del encapsulado:
-- Cotas completas
-- Tolerancias importantes
-- Notas de fabricación
-
----
-
-## Estándares de Planos
-
-### Vistas Ortogonales Requeridas
-- Vista Frontal
-- Vista Superior
-- Vista Lateral Derecha
-- Vista Isométrica (referencia)
-
-### Cortes
-- Corte A-A: Sección transversal mostrando interior
-- Corte B-B: (si es necesario para claridad)
-
----
-
-## Formato de Planos
-
-**Tamaño de hoja:** A4 o A3  
-**Orientación:** Según convenga  
-**Escala:** 1:1, 1:2, o según sea necesario  
-**Unidades:** Milímetros (mm)
-
-### Información en Cajetín
-- Título del proyecto
-- Nombre de la pieza/ensamble
-- Escala
-- Material
-- Fecha
-- Versión
-- Integrantes del equipo
-
----
-
-## Acotación
-
-### Reglas Generales
-- Cotas en milímetros sin unidad
-- Líneas de cota finas
-- Texto legible (mín. 2.5mm de altura)
-- Cotas críticas resaltadas
-
-### Tolerancias
-Indicar tolerancias para:
-- Orificios de tornillos: ±0.1mm
-- Encajes: +0.2mm / +0.0mm
-- Dimensiones generales: ±0.5mm
-
----
-
-## Exportación desde Fusion 360
-
-```
-Opción 1: Drawing (Plano tradicional)
-1. Create Drawing
-2. Configurar vistas y cotas
-3. Export como PDF
-
-Opción 2: Export directo
-File > Export > Formato PDF/DWG
-```
-
----
-
-## Archivos a Entregar
-
-- `plano_conjunto_v3.pdf` - Plano principal
+**Procedencia:** las cotas salen de los parámetros de [`modelo_caja.py`](../cad/fuente/modelo_caja.py), el mismo script que genera los STEP. El PDF se regenera con [`planos.py`](../cad/fuente/planos.py) (`python planos.py`, requiere matplotlib). Las medidas de la electrónica son referenciales; verificar el ajuste con una impresión de prueba antes de fabricar.
