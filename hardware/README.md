@@ -75,4 +75,4 @@ Se corrigieron el retorno de un LED conectado a 3V3 y la polaridad del rojo. Se 
 
 Los FS400A se identifican por el modelo real del montaje. Su ficha comercial anuncia 1–60 L/min y precisión ±5 %; esas cifras son del vendedor, no desempeño verificado. El banco opera cerca del límite inferior anunciado: una turbina detenida puede producir Q2=0 aunque siga circulando agua.
 
-Consumo, potencia, peso, corriente de la fuente y dimensiones físicas finales están pendientes de medición. El [encapsulado](../diseno_3d/README.md) es conceptual; no se declara fabricado ni estanco.
+No se midieron consumo, potencia ni peso. El [encapsulado v3](../diseno_3d/README.md) está modelado y acotado en planos; no se declara estanco.

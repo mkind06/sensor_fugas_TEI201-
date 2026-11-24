@@ -44,7 +44,7 @@ Se revisó la guía completa de nueve páginas, fechada 19-10-2026. La entrega e
 | Integración y estabilidad ≥5 min | Demostración informada como exitosa; falta registro continuo final de cinco minutos |
 | Encapsulado conceptual | [STEP, DXF y justificación](../diseno_3d/README.md); modelo conceptual disponible; distribución interna visual y dimensiones reales por contrastar. La impresión no es obligatoria |
 | Iteración y resolución parcial | [Cambios y aprendizajes](../iteraciones/README.md); alerta local de posible pérdida, sin ahorro medido |
-| Código y dependencias | [Fuentes y procedencia](../software/src/README.md); código aportado por el equipo como el utilizado; versión exacta del núcleo pendiente |
+| Código y dependencias | [Fuentes y procedencia](../software/src/README.md); código aportado por el equipo como el utilizado; núcleo ESP32 2.x o 3.x |
 | Circuito completo | [Diagrama y coordenadas](../hardware/esquemas/README.md) |
 
 ## Fuentes y trazabilidad

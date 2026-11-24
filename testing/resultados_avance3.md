@@ -12,9 +12,9 @@ Pruebas realizadas por el equipo los días 22 y 23 de noviembre de 2026 durante 
 | P4 | Ruido de la bomba | ✅ con fuente separada | Con alimentación compartida la ESP32 se reinició (`rst:0x7 (TG0WDT_SYS_RST)`). Con la bomba en su propia fuente no hubo reinicios (falla F2) |
 | P5 | Caudal con bomba | ⚠️ Parcial | Con agua circulando, el sensor 1 sumó de 1.788 a 1.972 pulsos en 11 s (≈ 16,7 pulsos/s → **≈ 3,5 L/min** con K1 = 288; en segundos individuales 9–20 pulsos/s, 1,9–4,2 L/min). En esa misma prueba el sensor 2 se quedó en 29 pulsos; luego volvió a contar al revisar sus conexiones, por lo que no se obtuvo una medición simultánea de ambos |
 | P6 | Fuga controlada | Pendiente | Requiere ambos sensores operativos |
-| P7 | Dashboard en otro dispositivo | Por registrar en la presentación | Dashboard probado contra una ESP32 simulada: estados y botones de demo responden |
-| P8 | Estabilidad 5 min | Pendiente | |
-| P9 | Modo demo | Por registrar en la presentación | |
+| P7 | Dashboard en otro dispositivo | Se muestra en vivo en la presentación | Dashboard probado contra una ESP32 simulada: estados y botones de demo responden |
+| P8 | Estabilidad 5 min | No ejecutada | Se hará con ambos sensores operativos, después de reparar F3 |
+| P9 | Modo demo | ✅ | Los tres estados se muestran con datos marcados como simulados en pantalla y en el CSV |
 
 ## Fallas encontradas y cómo se resolvieron
 
