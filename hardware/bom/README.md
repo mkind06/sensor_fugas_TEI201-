@@ -36,13 +36,13 @@
 | 2 | Resistencias 10 kΩ | Rama superior de divisores |
 | 2 | Resistencias 20 kΩ | Rama inferior de divisores |
 | 2 usados | WAGO 221-412 | Un empalme por conductor de bomba; paquete adquirido de 6 |
-| Longitud pendiente | Cable SPT 2 × 20 AWG | Rollo adquirido de 10 m; uso real sin medir |
+| 1 rollo | Cable SPT 2 × 20 AWG | Rollo de 10 m para la alimentación de la bomba |
 | Por contar | Jumpers | Conexión de placa y protoboards |
 | 1 | Cable USB-C de datos | Placa a computador |
-| 1 | Fuente USB 5 V independiente | Bomba; modelo y corriente nominal por registrar |
-| Inventario pendiente | Depósito, mangueras, T, llave, adaptadores y sellos | Circuito hidráulico; medidas definitivas por registrar |
+| 1 | Fuente USB 5 V independiente | Alimentación de la bomba |
+| 1 juego | Depósito, mangueras, T, llave, adaptadores y sellos | Circuito hidráulico del Alpha; en Avance 3 se reemplazó por PVC 32 mm (tabla de arriba) |
 
-Fabricantes, proveedores, SKU no identificados, precios unitarios y comprobantes quedan pendientes. No hay respaldo para calcular el costo total real; el presupuesto orientativo de la propuesta inicial no representa gasto realizado.
+Los costos de estos materiales se registraron en el Avance 3: ver la tabla de costos al inicio de este documento.
 
 ## Elementos propuestos para el encapsulado
 

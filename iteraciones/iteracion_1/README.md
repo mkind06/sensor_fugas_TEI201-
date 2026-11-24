@@ -37,8 +37,7 @@ Primer montaje del detector: dos sensores de flujo en serie con una llave de pas
 ---
 
 ## Fotos del Prototipo
-- `v1_circuito_protoboard.jpg` – pendiente
-- `v1_vista_general.jpg` – pendiente
+De esta versión no se conservaron fotos; las del montaje en protoboard (v2) están en [hardware/fotos](../../hardware/fotos/README.md).
 
 ---
 
@@ -103,5 +102,4 @@ Primer montaje del detector: dos sensores de flujo en serie con una llave de pas
 ---
 
 ## Archivos en esta Carpeta
-- `v1_codigo.ino` – pendiente (si se conserva la versión sin filtro)
-- `v1_fotos/` – pendiente
+Solo este README. El código de la v1 no se conservó por separado; la versión siguiente está en [software/src/historico](../../software/src/historico/PruebaSensor_historico.ino.txt).
