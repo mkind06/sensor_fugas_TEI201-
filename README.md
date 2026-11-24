@@ -54,7 +54,7 @@ Manual completo y diagnóstico: [software/docs](software/docs/README.md).
 | Esquemático | [Esquemático en PDF](hardware/esquemas/esquematico_v3.pdf) y coordenadas de la placa soldada | [hardware/esquemas](hardware/esquemas/README.md) |
 | BOM | Componentes, cantidades y costos | [hardware/bom](hardware/bom/README.md) |
 | Fotos | Banco de PVC y montaje | [hardware/fotos](hardware/fotos/README.md) |
-| Diseño 3D | Caja v3 (STEP), ensamble con electrónica, gemelo de la demo, renders, visor | [diseno_3d/](diseno_3d/README.md) |
+| Diseño 3D | Caja v3 en Fusion 360 ([.f3d](diseno_3d/fusion360/caja_v3.f3d)) y STEP, ensamble con electrónica, gemelo de la demo, renders, planos PDF, visor | [diseno_3d/](diseno_3d/README.md) |
 | Testing | Protocolo, resultados, fallas y validación contra el problema | [testing/](testing/README.md) |
 | Iteraciones | Evolución v1 → v3 | [iteraciones/](iteraciones/README.md) |
 | Presentación | Guion de la demo en vivo | [documentacion/presentacion](documentacion/presentacion/README.md) |
@@ -118,5 +118,4 @@ El logro de Avance 2 es la detección y señalización en banco. Aún no se midi
 
 ## Pendiente
 
-- [Archivo nativo Fusion 360 (.f3d)](diseno_3d/fusion360/README.md): se genera importando en Fusion 360 el STEP del ensamble.
 - Reparar el divisor del sensor 1 y completar las pruebas P6 (fuga controlada) y P8 (estabilidad 5 min): ver [resultados](testing/resultados_avance3.md).

@@ -14,7 +14,7 @@ Revisión frente al checklist de la guía del Avance 3 (23-11-2026).
 | BOM con costos | ✅ | [bom](../hardware/bom/README.md) |
 | Fotos del prototipo (3 ángulos) | ✅ Banco, sistema integrado y placa soldada (ambas caras) | [fotos](../hardware/fotos/README.md) |
 | Encapsulado reparable | ✅ Tapa con 4 tornillos, ESP32 en cabezales, conectores | [diseño 3D](../diseno_3d/README.md) |
-| Archivo Fusion 360 (.f3d) | ⚠️ Pendiente: abrir `caja_v3_ensamble_electronica.step` en Fusion y guardar como `.f3d` en `diseno_3d/fusion360/` | [diseño 3D](../diseno_3d/README.md) |
+| Archivo Fusion 360 (.f3d) | ✅ `caja_v3.f3d` con caja, placa, ESP32, LED, prensaestopas y tornillos | [fusion360](../diseno_3d/fusion360/README.md) |
 | Renders | ✅ 4 renders | [renders](../diseno_3d/renders/README.md) |
 | Planos en PDF | ✅ 3 hojas A3: conjunto, base y tapa con cotas | [planos](../diseno_3d/planos/README.md) |
 | Protocolo y resultados de pruebas | ✅ | [testing](../testing/README.md) |
@@ -62,4 +62,4 @@ Registro continuo de cinco minutos, feedback, versión Arduino-ESP32, medidas re
 
 ## Etapas posteriores
 
-El [reporte final](reporte_final/README.md) conserva su contenido anterior sin rellenar; la [presentación final](presentacion/README.md) ya incluye los slides y el guion. Tampoco se completan pruebas de usuarios, instalación en terreno, métricas de impacto, renders finales ni historial nativo Fusion 360. Los ejemplos numéricos de sus plantillas no son resultados de esta entrega.
+El [reporte final](reporte_final/README.md) es un índice de las secciones del repositorio y la [presentación final](presentacion/README.md) incluye los slides y el guion. No se hicieron pruebas con usuarios, instalación en terreno ni métricas de impacto.
