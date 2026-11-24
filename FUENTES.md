@@ -39,6 +39,11 @@ No se copió código de tutoriales, foros ni otros repositorios. El firmware y l
 - **Adaptación del equipo:** se definieron los pines según la placa soldada (S1 movido a GPIO 8 durante el diagnóstico, S2 en GPIO 2, LED 4/5/6), se mantuvieron K1/K2 y umbrales de Avance 2, y se probó en la placa real: compiló y publicó una lectura por segundo. El reinicio `TG0WDT` al encender la bomba se resolvió separando su alimentación.
 - **Comprensión:** cada pulso del sensor dispara una interrupción que suma 1 si pasaron al menos 2 ms desde el anterior. Cada segundo se guardan los pulsos del segundo en un arreglo circular de 5 posiciones; con su suma se calcula `Q = pulsos × 60 / (K × segundos)` y `Dif = (Q1 − Q2)/Q1 × 100`, que define el estado y el LED. La lectura se guarda como texto JSON que se imprime por USB y se entrega en `GET /data`; la página la pide cada segundo con `fetch`.
 
+### Planos técnicos (`diseno_3d/planos/planos_caja_v3.pdf`, `diseno_3d/cad/fuente/planos.py`)
+- **Herramienta:** Claude (Anthropic), 23 de noviembre de 2026, con matplotlib.
+- **Uso:** dibujar vistas, cotas, cajetín y lista de piezas a partir de los parámetros de `modelo_caja.py`.
+- **Comprensión:** el script no mide el modelo 3D: usa las mismas constantes (largo, ancho, alto, pared, posiciones de torretas, postes, LED y agujeros) que generan el STEP, por lo que plano y modelo coinciden si esas constantes no cambian.
+
 ### Dashboards (`software/src/web/`, `docs/index.html`)
 - **Herramienta:** Claude (Anthropic), 22 y 23 de noviembre de 2026.
 - **Uso:** semáforo de estado, indicadores (caudales, diferencia, agua perdida), gráficos en `<canvas>`, tiempo por estado, eventos, exportación CSV y conexión por WiFi (`fetch`) o USB (Web Serial).
