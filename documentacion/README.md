@@ -22,6 +22,7 @@ Revisión frente al checklist de la guía del Avance 3 (23-11-2026).
 | Conexión con el problema | ✅ | [resultados](../testing/resultados_avance3.md#validación-contra-el-problema) |
 | FUENTES.md | ✅ | [FUENTES.md](../FUENTES.md) |
 | README completo | ✅ | [README](../README.md) |
+| Slides de la presentación | ✅ 14 diapositivas | [presentacion_avance3.pptx](presentacion/presentacion_avance3.pptx) |
 | Guion de la demo | ✅ | [guion](presentacion/guion_demo.md) |
 | Estructura de carpetas (firmware, hardware, 3D, testing, docs) | ✅ `firmware/` enlaza al código en `software/src/` | [README](../README.md#estructura-del-repositorio) |
 | URL del repositorio en los slides | ✅ Slide final | — |
@@ -44,7 +45,7 @@ Se revisó la guía completa de nueve páginas, fechada 19-10-2026. La entrega e
 | Integración y estabilidad ≥5 min | Demostración informada como exitosa; falta registro continuo final de cinco minutos |
 | Encapsulado conceptual | [STEP, DXF y justificación](../diseno_3d/README.md); modelo conceptual disponible; distribución interna visual y dimensiones reales por contrastar. La impresión no es obligatoria |
 | Iteración y resolución parcial | [Cambios y aprendizajes](../iteraciones/README.md); alerta local de posible pérdida, sin ahorro medido |
-| Código y dependencias | [Fuentes y procedencia](../software/src/README.md); código aportado por el equipo como el utilizado; núcleo ESP32 2.x o 3.x |
+| Código y dependencias | [Fuentes y procedencia](../software/src/README.md); código aportado por el equipo como el utilizado; versión exacta del núcleo pendiente |
 | Circuito completo | [Diagrama y coordenadas](../hardware/esquemas/README.md) |
 
 ## Fuentes y trazabilidad
@@ -61,4 +62,4 @@ Registro continuo de cinco minutos, feedback, versión Arduino-ESP32, medidas re
 
 ## Etapas posteriores
 
-[Reporte final](reporte_final/README.md) y [presentación final](presentacion/README.md) corresponden al Avance 3 y conservan su contenido anterior sin rellenar. Tampoco se completan pruebas de usuarios, instalación en terreno, métricas de impacto, renders finales ni historial nativo Fusion 360. Los ejemplos numéricos de sus plantillas no son resultados de esta entrega.
+El [reporte final](reporte_final/README.md) conserva su contenido anterior sin rellenar; la [presentación final](presentacion/README.md) ya incluye los slides y el guion. Tampoco se completan pruebas de usuarios, instalación en terreno, métricas de impacto, renders finales ni historial nativo Fusion 360. Los ejemplos numéricos de sus plantillas no son resultados de esta entrega.
