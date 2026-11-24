@@ -17,7 +17,7 @@ Cambios respecto del concepto del Avance 2:
 - La ventana USB-C sube a 20,5 mm de altura (centro) para alinearse con la ESP32 montada en cabezales.
 - Se mantienen la tapa con 4 tornillos M3 × 10, los 2 prensaestopas PG7 y los 3 LED de 5 mm en la tapa.
 
-Para Fusion 360: abrir el STEP (Archivo → Abrir) y guardarlo como `.f3d` en [`fusion360/`](fusion360/README.md). Las medidas de la ESP32, la placa, las borneras y el banco son referenciales; confirmarlas antes de imprimir.
+**Fusion 360:** [`fusion360/caja_v3.f3d`](fusion360/README.md), el mismo ensamble con la electrónica. Las medidas de la ESP32, la placa, las borneras y el banco son referenciales; confirmarlas antes de imprimir.
 
 ## Avance 2: encapsulado conceptual
 
@@ -53,4 +53,4 @@ Se propone PETG como material de impresión para la caja. Su elección y la nota
 
 La bomba queda fuera y no hay etapa de potencia interna; la necesidad de ventilación y el calentamiento deben comprobarse con el montaje real. Antes de fabricar: medir piezas, revisar tolerancias, paso del conector USB, compatibilidad de fijaciones, mantenimiento y protección frente a salpicaduras.
 
-Las carpetas [Fusion 360](fusion360/README.md), [planos finales](planos/README.md) y [renders finales](renders/README.md) conservan sus plantillas de otras etapas. Esta guía exige el modelo conceptual y su justificación; la impresión no es obligatoria.
+En el Avance 3 estas carpetas ya tienen su contenido final: [Fusion 360](fusion360/README.md), [planos](planos/README.md) y [renders](renders/README.md).
